@@ -1,793 +1,919 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta name="google-site-verification" content="WLovwuDyXDGZh2i6NjlEHMfoo0wqQW55h7A9qVIXzpM" />
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#fff5f8">
+<meta name="google-site-verification" content="WLovwuDyXDGZh2i6NjlEHMfoo0wqQW55h7A9qVIXzpM">
+
 <title>DearlyStudio — Made with Love</title>
+<meta name="description" content="Create beautiful free greeting cards, love notes and invitations with your own photos. Share a magical gift with someone special.">
 
 <style>
 :root {
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  color: #31223c;
-  --pink: #ef548e;
-  --purple: #8a5ad0;
+  --pink: #f25389;
+  --rose: #ff85ad;
+  --purple: #9463d8;
+  --ink: #382640;
+  --muted: #85748a;
+  --line: #f1e0eb;
+  --shadow: 0 18px 55px rgba(127,65,112,.13);
 }
+
 * { box-sizing: border-box; }
+
 html { scroll-behavior: smooth; }
+
 body {
   margin: 0;
-  background: #fffaf9;
+  color: var(--ink);
+  background: #fffafc;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   overflow-x: hidden;
 }
+
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
-a { text-decoration: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+
 button:focus-visible,
+a:focus-visible,
 input:focus-visible,
+textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid #b578df;
+  outline: 3px solid #8e66df;
   outline-offset: 3px;
 }
+
 .wrap {
-  width: min(1160px, calc(100% - 36px));
+  width: min(1240px, calc(100% - 36px));
   margin: auto;
 }
-.strip {
-  background: linear-gradient(90deg,#f65b8e,#9960d7,#68b6fa);
-  padding: 9px;
+
+.topbar {
+  background: linear-gradient(100deg,#f25088,#ac60d5,#6789ee);
+  color: white;
   text-align: center;
-  color: #fff;
-  font-weight: 800;
   font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .04em;
+  padding: 11px;
 }
-.header {
+
+header {
+  position: relative;
+  z-index: 5;
+  background: rgba(255,255,255,.9);
+  border-bottom: 1px solid #f5e6ee;
+}
+
+.header-inner {
+  min-height: 79px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  min-height: 80px;
+  gap: 15px;
 }
+
 .logo {
-  font-size: clamp(19px,2.5vw,26px);
+  font-size: clamp(20px,2.6vw,28px);
   font-weight: 950;
-  letter-spacing: -.055em;
+  letter-spacing: -.065em;
+  white-space: nowrap;
 }
-.logo span { color: #ed5083; }
-.menu {
+
+.logo span { color: var(--pink); }
+
+.nav {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-.menu a { font-size: 13px; font-weight: 800; }
-.lang {
-  border: 1px solid #e6dce5;
-  border-radius: 28px;
-  padding: 10px;
-  background: white;
-  max-width: 150px;
+
+.nav a {
+  font-size: 13px;
+  font-weight: 800;
 }
-.btn {
-  border: 1px solid #e6dce5;
+
+.lang {
+  max-width: 150px;
+  border-radius: 30px;
+  border: 1px solid #eadce8;
   background: white;
-  color: #3b2849;
-  border-radius: 45px;
-  padding: 13px 20px;
-  font-weight: 850;
+  padding: 10px 12px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: transform .2s, box-shadow .2s;
+  border: 1px solid #ebdae6;
+  border-radius: 40px;
+  padding: 13px 20px;
+  background: white;
+  color: #462c4d;
+  font-weight: 850;
+  transition: .2s ease;
 }
+
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 9px 25px #a2538b3a;
+  box-shadow: 0 10px 25px #9c62802d;
 }
+
 .btn.primary {
-  border: 0;
+  background: linear-gradient(115deg,#fa5288,#c158bf,#8265d9);
+  border-color: transparent;
   color: white;
-  background: linear-gradient(110deg,#fa5483,#b45dd0,#756ed9);
-  box-shadow: 0 11px 27px #d769a259;
+  box-shadow: 0 12px 25px #d75c9d40;
 }
-.btn.small { font-size: 12px; padding: 10px 14px; }
-.btn.dark { background: #392447; color: #fff; }
 
-/* ГЛАВНАЯ ЗАСТАВКА */
-
-.tag {
-  display: inline-block;
-  padding: 9px 15px;
-  background: #fff0f5;
-  border-radius: 40px;
-  color: #b64979;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .09em;
+.btn.dark {
+  background: #422d53;
+  border-color: #422d53;
+  color: white;
 }
+
+.btn.small {
+  font-size: 12px;
+  padding: 10px 14px;
+}
+
+.hero-shell {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 18% 45%,#ffd2e2,transparent 45%),
+    radial-gradient(ellipse at 84% 40%,#dac7ff,transparent 42%),
+    radial-gradient(ellipse at 50% 10%,#fff0cd,transparent 40%),
+    #fff8fa;
+}
+
 .hero {
-  min-height: 620px;
   display: grid;
   grid-template-columns: 1.05fr .95fr;
+  gap: 40px;
   align-items: center;
-  gap: 35px;
-  position: relative;
-  padding: 55px 0 80px;
-  isolation: isolate;
-  overflow: clip;
+  min-height: 620px;
+  padding: 75px 0;
 }
-.hero:before {
-  content: '';
-  position: absolute;
-  z-index: -2;
-  inset: 0 -15%;
-  background:
-    radial-gradient(ellipse at 18% 35%,#ffc1d0,transparent 47%),
-    radial-gradient(ellipse at 78% 47%,#cfb8ff,transparent 48%),
-    radial-gradient(ellipse at 50% 9%,#ffedc4,transparent 37%);
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 40px;
+  color: #ac4e7c;
+  background: #fff0f6;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: .09em;
 }
+
 .hero h1 {
-  font-size: clamp(46px,6.1vw,83px);
+  font-size: clamp(46px,6vw,79px);
   letter-spacing: -.075em;
-  line-height: 1.04;
-  margin: 20px 0;
+  line-height: 1.06;
+  margin: 22px 0;
 }
+
 .hero h1 em {
-  font-family: Georgia,serif;
-  background: linear-gradient(100deg,#ef498b,#9b53c4,#596de4);
+  font-family: Georgia, serif;
+  font-weight: 500;
+  background: linear-gradient(90deg,#ef4d91,#aa55c5,#6871e8);
   color: transparent;
   background-clip: text;
-  font-weight: 500;
 }
+
 .hero p {
-  font-size: clamp(16px,1.6vw,19px);
-  line-height: 1.7;
-  color: #6b5c72;
-  max-width: 510px;
+  font-size: clamp(16px,1.7vw,19px);
+  line-height: 1.8;
+  color: #75677d;
+  max-width: 540px;
 }
+
 .actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
-  margin-top: 23px;
-}
-.hero-hint {
-  font-size: 12px;
-  color: #826f85;
   margin-top: 22px;
 }
+
+.hero-hint {
+  font-size: 12px !important;
+  color: #8b788e !important;
+  margin-top: 23px;
+}
+
 .hero-art {
-  height: 480px;
   position: relative;
-  perspective: 1100px;
+  min-height: 475px;
 }
-.glow {
+
+.hero-glow {
   position: absolute;
-  inset: 10% 0;
+  inset: 10%;
+  background: #ffd2e6;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    #ffd1f5,
-    #f7a5c599 38%,
-    #9dc8ff77 62%,
-    transparent 75%
-  );
-  filter: blur(18px);
-  animation: pulse 8s ease-in-out infinite alternate;
+  filter: blur(55px);
+  opacity: .8;
 }
-.portrait {
+
+.hero-photo {
   position: absolute;
-  width: 62%;
-  height: 74%;
-  border: 7px solid white;
-  border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 22px 65px #824c786b;
-  transform: rotate(-8deg);
-  animation: float 7s ease-in-out infinite;
+  border: 7px solid white;
+  border-radius: 26px;
+  box-shadow: 0 30px 65px #865e8770;
 }
-.portrait img {
+
+.hero-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
-.portrait:after {
-  content: '';
+
+.hero-photo:after {
+  content: "";
   position: absolute;
-  inset: 45% 0 0;
-  background: linear-gradient(transparent,#38183a91);
+  inset: 50% 0 0;
+  background: linear-gradient(transparent,#27142e9c);
 }
-.portrait b {
+
+.hero-photo strong {
   position: absolute;
   z-index: 2;
-  bottom: 20px;
+  bottom: 23px;
   left: 0;
   right: 0;
-  text-align: center;
-  font: italic 31px Georgia,serif;
   color: white;
-  text-shadow: 0 3px 10px #35162d;
+  font: italic 29px Georgia, serif;
+  text-align: center;
+  text-shadow: 0 3px 12px #0008;
 }
-.portrait.a { top: 5%; left: 8%; }
-.portrait.b {
-  top: 24%;
-  left: 45%;
-  width: 53%;
-  height: 68%;
-  transform: rotate(8deg);
-  animation-delay: -3s;
+
+.hero-photo.one {
+  left: 6%;
+  top: 4%;
+  width: 61%;
+  height: 75%;
+  transform: rotate(-9deg);
+  animation: float 6s ease-in-out infinite;
 }
-.art-icon {
+
+.hero-photo.two {
+  right: 0;
+  top: 22%;
+  width: 55%;
+  height: 71%;
+  transform: rotate(9deg);
+  animation: float 7s ease-in-out infinite -3s;
+}
+
+.hero-emoji {
   position: absolute;
-  font-size: 69px;
-  filter: drop-shadow(0 10px 10px #4a265f88);
+  z-index: 4;
+  font-size: 65px;
+  filter: drop-shadow(0 10px 13px #71466a66);
   animation: float 5s ease-in-out infinite;
 }
-.art-icon.heart { bottom: 4%; left: -1%; }
-.art-icon.gift { top: 0; right: -1%; animation-delay: -2s; }
+
+.hero-emoji.heart { left: 0; bottom: 0; }
+.hero-emoji.gift { right: 0; top: 0; }
+
 @keyframes float {
-  50% { translate: 0 -15px; }
-}
-@keyframes pulse {
-  to { transform: scale(1.12); opacity: .7; }
+  50% { translate: 0 -14px; }
 }
 
-/* ГАЛЕРЕЯ ШАБЛОНОВ */
+.section { padding: 80px 0; }
 
-.section { padding: 75px 0; }
-.section-title {
+.section-head {
   text-align: center;
-  margin-bottom: 28px;
+  margin: 0 auto 32px;
+  max-width: 760px;
 }
-.section-title h2 {
-  font-size: clamp(30px,4.2vw,49px);
-  line-height: 1.15;
+
+.section-head h2 {
+  font-size: clamp(32px,4.5vw,51px);
+  line-height: 1.13;
   letter-spacing: -.055em;
-  margin: 14px 0;
+  margin: 17px 0;
 }
-.section-title p {
-  color: #827185;
-  line-height: 1.6;
-  max-width: 650px;
-  margin: 0 auto;
+
+.section-head p {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: auto;
 }
+
+.collection-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: #2a8560;
+  background: #eafff4;
+  padding: 9px 15px;
+  border-radius: 30px;
+  font-weight: 850;
+  margin-top: 17px;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 25px;
+  gap: 9px;
+  margin-bottom: 30px;
 }
-.filters button {
-  padding: 10px 18px;
+
+.filter {
+  padding: 11px 18px;
+  border: 1px solid #ebdce8;
   border-radius: 30px;
-  border: 1px solid #eadfe8;
-  background: white;
-  color: #634e68;
+  background: #fff;
+  color: #745c77;
+  font-weight: 850;
   font-size: 13px;
-  font-weight: 800;
 }
-.filters button.active {
-  background: #422b57;
+
+.filter.active {
+  background: #422d53;
   color: white;
+  border-color: #422d53;
 }
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(4,minmax(0,1fr));
-  gap: 16px;
+  gap: 21px;
 }
+
 .tile {
-  padding: 0;
-  background: white;
-  border: 1px solid #eddee7;
-  border-radius: 22px;
-  overflow: hidden;
-  text-align: left;
-  box-shadow: 0 12px 35px #9e65801c;
-  transition: transform .2s;
   min-width: 0;
-}
-.tile:hover { transform: translateY(-5px); }
-.tile.active { outline: 3px solid #f16e9d; }
-.tile-image {
-  height: 215px;
-  position: relative;
+  background: white;
+  border: 1px solid #eee0e9;
+  border-radius: 23px;
   overflow: hidden;
-  background: linear-gradient(130deg,#ff9cbf,#977cd9);
+  padding: 0;
+  text-align: left;
+  box-shadow: 0 13px 35px #9c63811a;
+  transition: transform .24s, box-shadow .24s;
 }
-.tile img {
+
+.tile:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 20px 45px #9c638133;
+}
+
+.tile.active {
+  outline: 3px solid #f26e9e;
+}
+
+.tile-image {
+  position: relative;
+  height: 245px;
+  background: linear-gradient(120deg,#fa87b6,#8b79cf);
+  overflow: hidden;
+}
+
+.tile-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(.8);
+  transition: transform .5s ease;
 }
+
+.tile:hover img { transform: scale(1.08); }
+
 .tile-image:after {
-  content: '';
+  content: "";
   position: absolute;
-  inset: 38% 0 0;
-  background: linear-gradient(transparent,#260f3ba8);
+  inset: 30% 0 0;
+  background: linear-gradient(transparent,#201228b8);
 }
-.tile-icon {
+
+.tile-stamp {
   position: absolute;
-  top: 17%;
-  right: 13%;
-  font-size: 56px;
-  filter: drop-shadow(0 8px 9px #21112c94);
+  top: 13px;
+  left: 13px;
   z-index: 2;
+  background: #ffffffec;
+  color: #4a3955;
+  border-radius: 25px;
+  padding: 7px 10px;
+  font-size: 10px;
+  font-weight: 950;
 }
+
+.tile-emoji {
+  position: absolute;
+  z-index: 2;
+  right: 13px;
+  top: 15px;
+  font-size: 39px;
+  filter: drop-shadow(0 5px 7px #0007);
+}
+
 .tile-word {
   position: absolute;
-  bottom: 16px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color: white;
+  bottom: 22px;
+  left: 12px;
+  right: 12px;
   z-index: 2;
-  font: italic 24px Georgia,serif;
-  text-shadow: 0 3px 11px #140d20;
+  color: white;
+  font: italic 25px Georgia, serif;
+  text-align: center;
+  text-shadow: 0 3px 12px #000b;
 }
-.tile-label {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  z-index: 3;
-  border-radius: 30px;
-  background: #fff8ed;
-  color: #54315d;
-  font-size: 10px;
-  font-weight: 900;
-  padding: 7px 10px;
-}
+
 .tile-bottom {
-  padding: 14px;
-  font-weight: 850;
-  font-size: 14px;
+  padding: 16px;
   display: flex;
   justify-content: space-between;
-  gap: 6px;
+  align-items: center;
+  gap: 8px;
 }
-.tile-bottom i {
-  font-style: normal;
-  color: #a76c96;
-  font-size: 11px;
+
+.tile-title {
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.4;
 }
-.small-note {
+
+.tile-arrow {
+  display: grid;
+  place-items: center;
+  flex: 0 0 29px;
+  height: 29px;
+  border-radius: 50%;
+  color: white;
+  background: linear-gradient(120deg,#ed6597,#9b67d7);
+}
+
+.more-note {
   text-align: center;
-  font-size: 12px;
-  color: #867587;
-  margin-top: 19px;
+  color: #9b718a;
+  font-size: 13px;
+  padding-top: 29px;
 }
 
-/* РЕДАКТОР */
-
-.editor-bg {
-  background: linear-gradient(135deg,#fff0f4,#f5efff,#eafaff);
-  border-block: 1px solid #eedce8;
+.editor-zone {
+  background: linear-gradient(135deg,#fff0f5,#f4eeff,#eaf7ff);
+  border-block: 1px solid #eedee9;
 }
+
 .work {
   display: grid;
-  grid-template-columns: .93fr 1.07fr;
-  gap: 24px;
+  grid-template-columns: .92fr 1.08fr;
+  gap: 25px;
   align-items: start;
 }
+
 .panel {
-  background: #ffffffee;
-  border: 1px solid #eedfea;
-  border-radius: 25px;
-  padding: 25px;
-  box-shadow: 0 22px 65px #8f4a6926;
   min-width: 0;
+  padding: 27px;
+  border: 1px solid #eddfeb;
+  border-radius: 26px;
+  background: #ffffffed;
+  box-shadow: var(--shadow);
 }
-.panel h3 { font-size: 23px; margin: 0 0 19px; }
+
+.panel h3 {
+  margin: 0 0 22px;
+  font-size: 24px;
+  letter-spacing: -.03em;
+}
+
 .label {
   display: block;
+  margin: 17px 0 8px;
   font-size: 13px;
   font-weight: 850;
-  margin: 17px 0 7px;
 }
+
 .control {
-  display: block;
-  border: 1px solid #e8d9e5;
-  border-radius: 12px;
-  background: #fff;
-  padding: 12px 13px;
   width: 100%;
-  color: #342641;
+  border: 1px solid #e9dce8;
+  border-radius: 13px;
+  background: #fff;
+  color: var(--ink);
+  padding: 13px;
 }
-.control::placeholder { color: #ad99ac; }
+
 textarea.control {
-  min-height: 105px;
+  min-height: 112px;
+  line-height: 1.55;
   resize: vertical;
-  line-height: 1.5;
 }
+
 .two {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 13px;
 }
+
 .upload {
   display: block;
-  border: 2px dashed #e1a4bf;
-  background: #fff1f7;
+  background: #fff0f7;
+  border: 2px dashed #e6aac5;
+  padding: 22px;
   text-align: center;
-  padding: 20px;
-  border-radius: 17px;
+  border-radius: 18px;
   cursor: pointer;
 }
+
+.upload strong {
+  display: block;
+  margin: 9px 0;
+}
+
+.upload small { color: #90788e; }
+
 .upload input {
   position: absolute;
-  opacity: 0;
   width: 1px;
   height: 1px;
+  opacity: 0;
 }
-.upload strong { display: block; margin: 6px; }
-.upload small { color: #877381; }
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-}
-.tiny {
-  font-size: 11px;
-  color: #857487;
-  line-height: 1.5;
-}
+
 .check {
   display: flex;
   gap: 9px;
   align-items: center;
-  margin-top: 16px;
-  font-weight: 700;
+  margin-top: 17px;
   font-size: 13px;
+  font-weight: 750;
 }
-.check input { accent-color: #e65185; }
-.status {
-  min-height: 20px;
-  color: #286548;
-  font-size: 13px;
-  line-height: 1.5;
-  margin-top: 12px;
-}
-.preview-panel { position: sticky; top: 18px; }
 
-/* ФОТООТКРЫТКА */
+.check input { accent-color: #ed568d; }
+
+.tiny {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.status {
+  min-height: 23px;
+  margin-top: 17px;
+  color: #29835a;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.preview-panel {
+  position: sticky;
+  top: 15px;
+}
 
 .card {
   position: relative;
   isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   overflow-wrap: anywhere;
-  min-height: 560px;
   border-radius: 23px;
-  background: #aa6c95;
-  color: white;
+  min-height: 560px;
+  padding: 40px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 48px 29px;
-  box-shadow:
-    inset 0 0 75px #25123377,
-    0 15px 35px #5e31664a;
+  background: #ad739c;
+  color: white;
+  box-shadow: inset 0 0 80px #2210307d,0 15px 32px #61396c45;
 }
+
 .card-bg {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-position: center;
   background-size: cover;
-  filter: brightness(.75) saturate(1.1);
+  background-position: center;
+  filter: brightness(.79);
 }
+
 .card-shade {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(#1d163533,#160f3ba3);
+  background: linear-gradient(#28142b40,#21102baa);
 }
+
 .card-emoji {
-  font-size: 69px;
-  filter: drop-shadow(0 8px 12px #21102b99);
-  animation: float 6s ease-in-out infinite;
+  font-size: 65px;
+  filter: drop-shadow(0 7px 10px #0008);
 }
+
 .card-photo {
   display: none;
-  width: 132px;
-  height: 132px;
-  object-fit: cover;
+  width: 142px;
+  height: 142px;
   border: 5px solid white;
   border-radius: 50%;
-  box-shadow: 0 14px 35px #25133c89;
-  margin: 10px auto;
+  object-fit: cover;
+  margin: 13px 0;
+  box-shadow: 0 12px 30px #0007;
 }
-.card-photo.square { border-radius: 16px; }
-.card.has-photo .card-photo { display: block; }
-.card.has-photo .card-emoji { font-size: 37px; }
-.card-kicker {
-  font-size: 12px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  font-weight: 900;
-  text-shadow: 0 2px 6px #0006;
-  margin-top: 13px;
-}
-.card h4 {
-  font: bold clamp(29px,3.4vw,44px) Georgia,serif;
-  line-height: 1.12;
-  margin: 16px 0;
-  text-shadow: 0 4px 13px #20102ed6;
-}
-.card p {
-  font-size: 16px;
-  line-height: 1.65;
-  white-space: pre-wrap;
-  max-width: 410px;
-  text-shadow: 0 2px 9px #1a112c;
-}
-.card-from {
-  font-weight: 800;
-  margin-top: 22px;
-  font-size: 14px;
-}
-.card.premium:after {
-  content: 'PREMIUM · DEMO';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #fffffff0;
-  color: #754e7a;
-  padding: 12px;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: .15em;
-}
-.premium-box {
-  display: none;
-  background: #fff7e3;
-  border: 1px solid #e5cf9a;
-  border-radius: 15px;
-  padding: 14px;
-  margin-top: 15px;
-  color: #755337;
-  font-size: 13px;
-  line-height: 1.5;
-}
-.premium-box.visible { display: block; }
 
-/* БЛОК О САЙТЕ */
+.card-photo.square { border-radius: 17px; }
+.card.has-photo .card-photo { display: block; }
+
+.card-kicker {
+  margin-top: 17px;
+  letter-spacing: .13em;
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px #000b;
+}
+
+.card h4 {
+  margin: 16px 0;
+  font: bold clamp(30px,3.7vw,46px) Georgia,serif;
+  line-height: 1.18;
+  text-shadow: 0 4px 12px #000b;
+}
+
+.card p {
+  max-width: 430px;
+  white-space: pre-wrap;
+  line-height: 1.7;
+  font-size: 16px;
+  text-shadow: 0 2px 9px #000c;
+}
+
+.card-from {
+  font-size: 14px;
+  font-weight: 850;
+  margin-top: 20px;
+  text-shadow: 0 2px 9px #000c;
+}
 
 .steps {
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  gap: 17px;
+  gap: 20px;
 }
+
 .step {
-  padding: 24px;
+  padding: 27px;
   background: white;
-  border: 1px solid #f0e4eb;
-  border-radius: 22px;
+  border-radius: 23px;
+  border: 1px solid #f0e3eb;
+  box-shadow: 0 10px 30px #b26e8c0e;
 }
-.step b { font-size: 30px; }
-.step h3 { margin: 12px 0; }
+
+.step .symbol { font-size: 35px; }
+.step h3 { margin: 16px 0 9px; }
+
 .step p {
-  color: #827185;
-  line-height: 1.6;
+  margin-bottom: 0;
+  color: var(--muted);
   font-size: 14px;
+  line-height: 1.7;
 }
+
 .footer {
-  background: #3d2947;
-  color: #fff2f9;
-  padding: 33px 0;
+  padding: 35px 20px;
   text-align: center;
+  color: #fff0f7;
+  background: #3e2a4b;
   font-size: 13px;
 }
 
-/* ОТКРЫТИЕ ПОДАРКА И PREMIUM */
+.footer p {
+  opacity: .8;
+  font-size: 11px;
+}
+
+/* МОДАЛЬНЫЕ ОКНА */
 
 .overlay {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: #1e143ce6;
-  backdrop-filter: blur(12px);
-  display: none;
   align-items: center;
   justify-content: center;
-  padding: 18px;
+  background: #201533e8;
+  backdrop-filter: blur(11px);
+  padding: 16px;
   overflow: auto;
 }
+
 .overlay.show { display: flex; }
+
 .modal {
   position: relative;
-  width: min(580px,100%);
-  background: white;
-  border-radius: 25px;
+  width: min(650px,100%);
+  max-height: 93vh;
+  overflow: auto;
   padding: 28px;
+  border-radius: 25px;
   text-align: center;
+  background: white;
 }
+
 .modal h2 {
-  font-size: clamp(26px,4vw,38px);
-  letter-spacing: -.04em;
+  font-size: clamp(27px,4vw,38px);
+  margin: 16px 0 8px;
 }
-.modal p { line-height: 1.65; color: #6e5b75; }
+
+.modal p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 .close {
   position: absolute;
-  right: 12px;
   top: 12px;
+  right: 12px;
+  z-index: 5;
+  border: 0;
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 0;
-  background: #f5e6ee;
-  font-size: 24px;
-  z-index: 4;
+  background: #f5e7ef;
+  font-size: 25px;
 }
+
 .gift-modal {
   background: transparent;
   color: white;
-  padding: 15px;
-  box-shadow: none;
 }
+
 .gift-modal p { color: white; }
-.gift-btn {
-  background: none;
-  border: 0;
+
+.gift-big {
   font-size: 140px;
+  border: 0;
+  background: transparent;
   animation: float 4s ease-in-out infinite;
-  filter: drop-shadow(0 12px 18px #9f5c8d80);
+  filter: drop-shadow(0 13px 17px #ffb5e166);
 }
-.gift-card { display: none; }
-.gift-card .card { min-height: 470px; }
+
+.gift-result { display: none; }
 .gift-modal.opened .gift-intro { display: none; }
-.gift-modal.opened .gift-card { display: block; }
-.burst {
+.gift-modal.opened .gift-result { display: block; }
+.gift-result .card { min-height: 450px; }
+
+.sparkle {
   position: fixed;
-  z-index: 120;
   pointer-events: none;
-  animation: burst 1.4s ease-out forwards;
-  font-size: 22px;
+  z-index: 150;
+  font-size: 24px;
+  animation: burst 1.35s ease-out forwards;
 }
+
 @keyframes burst {
   to {
     translate: var(--x) var(--y);
     opacity: 0;
-    scale: .3;
+    scale: .2;
   }
 }
 
-/* КРАСИВОЕ МЕНЮ ПОДЕЛИТЬСЯ */
+/* ОТПРАВКА */
 
-.share-modal {
-  width: min(650px,100%);
-  max-height: 92vh;
-  overflow-y: auto;
-}
-.share-modal h2 { margin: 5px 0 8px; }
 .share-grid {
   display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
+  grid-template-columns: repeat(4,1fr);
   gap: 11px;
-  margin: 20px 0;
+  margin-top: 24px;
 }
-.share-service {
-  border: 1px solid #eddfeb;
-  border-radius: 17px;
-  background: #fff;
-  padding: 14px 6px;
+
+.share-option {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 7px;
+  gap: 9px;
+  padding: 15px 6px;
+  border: 1px solid #f1e3ed;
+  border-radius: 18px;
+  background: #fff;
   font-size: 12px;
   font-weight: 800;
-  color: #342641;
-  transition: transform .2s,box-shadow .2s;
+  transition: .2s;
 }
-.share-service:hover {
+
+.share-option:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px #a2538b22;
+  box-shadow: var(--shadow);
 }
+
 .share-icon {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 15px;
-  background: var(--share-color,#ee6fa7);
   color: white;
+  background: var(--c,#c16ac7);
   font-size: 21px;
   font-weight: 900;
 }
-.share-tools {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+
 .share-warning {
-  font-size: 12px;
-  color: #756477;
-  background: #fff2f7;
-  border-radius: 12px;
   padding: 12px;
+  background: #fff2f7;
+  border-radius: 13px;
+  font-size: 12px !important;
 }
+
 .share-feedback {
-  min-height: 22px;
-  font-weight: 750;
-  color: #286548;
+  color: #238154;
+  min-height: 23px;
   font-size: 13px;
+  font-weight: 800;
 }
-@media (max-width:470px) {
-  .share-grid {
+
+/* АДАПТАЦИЯ */
+
+@media(max-width:900px) {
+  .gallery {
     grid-template-columns: repeat(3,minmax(0,1fr));
-    gap: 7px;
   }
-  .share-service { font-size: 11px; }
 }
 
-/* ТЕЛЕФОНЫ */
-
-@media (max-width:800px) {
+@media(max-width:750px) {
   .hero {
     grid-template-columns: 1fr;
-    padding-top: 20px;
-    gap: 0;
+    padding: 50px 0;
+    gap: 10px;
   }
+
   .hero > div:first-child { text-align: center; }
   .hero p { margin-inline: auto; }
   .actions { justify-content: center; }
+
   .hero-art {
-    width: min(540px,100%);
-    height: 400px;
-    margin: auto;
+    width: min(520px,100%);
+    min-height: 390px;
+    margin: 10px auto 0;
   }
-  .gallery { grid-template-columns: repeat(2,1fr); }
+
   .work { grid-template-columns: 1fr; }
   .preview-panel { position: static; }
   .steps { grid-template-columns: 1fr; }
-  .menu a { display: none; }
+  .nav a { display: none; }
 }
-@media (max-width:470px) {
-  .header { min-height: 69px; }
-  .lang { max-width: 132px; }
-  .hero h1 { font-size: 50px; }
-  .hero-art { height: 320px; }
-  .tile-image { height: 176px; }
-  .tile-word { font-size: 20px; }
-  .tile-icon { font-size: 45px; }
-  .tile-bottom { font-size: 12px; }
-  .panel { padding: 18px; }
-  .two { grid-template-columns: 1fr; }
-  .card {
-    min-height: 485px;
-    padding: 35px 18px;
+
+@media(max-width:560px) {
+  .gallery {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
   }
-  .card h4 { font-size: 32px; }
+
+  .tile-image { height: 195px; }
+  .tile-word { font-size: 20px; }
+  .tile-emoji { font-size: 30px; }
+  .tile-title { font-size: 12px; }
+
+  .hero h1 { font-size: 49px; }
+  .hero-art { min-height: 325px; }
+
+  .panel { padding: 17px; }
+  .two { grid-template-columns: 1fr; }
+  .card { min-height: 480px; padding: 30px 19px; }
+
+  .share-grid {
+    grid-template-columns: repeat(3,1fr);
+    gap: 7px;
+  }
+
+  .share-option {
+    padding: 11px 4px;
+    font-size: 11px;
+  }
 }
-@media (prefers-reduced-motion:reduce) {
+
+@media(prefers-reduced-motion:reduce) {
   *,*:before,*:after {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
   }
 }
+
 @media print {
-  .strip,.header,.hero,#gallery,.form-panel,
-  .actions,.footer,.overlay,.section-title,
-  .premium-box {
+  header,.topbar,.hero-shell,#gallery,
+  .form-panel,.section-head,.actions,
+  .footer,.overlay,.steps,.more-note {
     display: none !important;
   }
-  .editor-bg { padding: 0; }
+
   .work { display: block; }
-  .preview-panel {
-    box-shadow: none;
-    border: 0;
-    padding: 0;
-  }
+  .panel { box-shadow: none; border: 0; }
+
   .card {
     min-height: 95vh;
     print-color-adjust: exact;
@@ -799,347 +925,345 @@ textarea.control {
 
 <body>
 
-<div class="strip" data-t="strip">
-  ✦ Делись любовью и радостью ✦
+<div class="topbar" data-t="top">
+  ✦ Дарите любовь, создавайте воспоминания ✦
 </div>
 
-<header class="header wrap">
-  <a class="logo" href="./">
-    Dearly<span>Studio</span> ✦
-  </a>
+<header>
+  <div class="header-inner wrap">
+    <a href="./" class="logo">Dearly<span>Studio</span> ✦</a>
 
-  <nav class="menu">
-    <a href="#gallery" data-t="nav1">Шаблоны</a>
-    <a href="#editor" data-t="nav2">Редактор</a>
+    <nav class="nav">
+      <a href="#gallery" data-t="navGallery">Открытки</a>
+      <a href="#editor" data-t="navEditor">Редактор</a>
 
-    <select id="lang" class="lang" aria-label="Language">
-      <option value="ru">🇷🇺 Русский</option>
-      <option value="en">🇬🇧 English</option>
-      <option value="de">🇩🇪 Deutsch</option>
-      <option value="es">🇪🇸 Español</option>
-      <option value="fr">🇫🇷 Français</option>
-      <option value="pt">🇧🇷 Português</option>
-      <option value="zh">🇨🇳 中文</option>
-      <option value="hi">🇮🇳 हिन्दी</option>
-      <option value="ar">🇸🇦 العربية</option>
-      <option value="ja">🇯🇵 日本語</option>
-      <option value="ko">🇰🇷 한국어</option>
-      <option value="id">🇮🇩 Indonesia</option>
-      <option value="tr">🇹🇷 Türkçe</option>
-      <option value="it">🇮🇹 Italiano</option>
-    </select>
-  </nav>
+      <select id="language" class="lang" aria-label="Language">
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="pt">🇧🇷 Português</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="hi">🇮🇳 हिन्दी</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="ko">🇰🇷 한국어</option>
+        <option value="id">🇮🇩 Indonesia</option>
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="it">🇮🇹 Italiano</option>
+      </select>
+    </nav>
+  </div>
 </header>
 
 <main>
 
-<section class="hero wrap">
+<section class="hero-shell">
+  <div class="hero wrap">
 
-  <div>
-    <span class="tag">✦ DEARLY CREATIVE STUDIO</span>
+    <div>
+      <span class="tag">✦ DEARLY CREATIVE STUDIO</span>
 
-    <h1 id="heroText">
-      Чувства, которые <em>оживают.</em>
-    </h1>
+      <h1 id="heroTitle">
+        Чувства, которые <em>оживают.</em>
+      </h1>
 
-    <p data-t="intro">
-      Создавай поздравления, признания и приглашения
-      с собственными фотографиями.
-      Красивые подарки, которые хочется сохранить.
-    </p>
+      <p data-t="heroDesc">
+        Создавай невероятно красивые поздравления,
+        признания в любви и приглашения.
+        Добавляй фотографии и дари настоящие эмоции.
+      </p>
 
-    <div class="actions">
-      <a href="#gallery" class="btn primary" data-t="start">
-        💗 Создать подарок
-      </a>
+      <div class="actions">
+        <a href="#gallery" class="btn primary" data-t="start">
+          💗 Создать открытку
+        </a>
 
-      <button class="btn" id="demo" data-t="demo">
-        ✨ Посмотреть чудо
-      </button>
+        <button class="btn" id="demo" data-t="demo">
+          ✨ Посмотреть чудо
+        </button>
+      </div>
+
+      <p class="hero-hint" data-t="hint">
+        ♡ 24 дизайна · Бесплатно · Без регистрации
+      </p>
     </div>
 
-    <p class="hero-hint" data-t="hint">
-      ♡ Без регистрации · Свои фото · Бесплатные шаблоны
-    </p>
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-glow"></div>
+
+      <div class="hero-photo one">
+        <img
+          src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=85"
+          alt="">
+        <strong>With love ♡</strong>
+      </div>
+
+      <div class="hero-photo two">
+        <img
+          src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=85"
+          alt="">
+        <strong>Celebrate ✦</strong>
+      </div>
+
+      <span class="hero-emoji heart">💖</span>
+      <span class="hero-emoji gift">🎁</span>
+    </div>
+
   </div>
-
-  <div class="hero-art" aria-hidden="true">
-    <div class="glow"></div>
-
-    <div class="portrait a">
-      <img
-        src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80"
-        alt="">
-      <b>With love ♡</b>
-    </div>
-
-    <div class="portrait b">
-      <img
-        src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80"
-        alt="">
-      <b>Celebrate ✦</b>
-    </div>
-
-    <span class="art-icon heart">💖</span>
-    <span class="art-icon gift">🎁</span>
-  </div>
-
 </section>
 
 <section class="section wrap" id="gallery">
 
-  <div class="section-title">
+  <div class="section-head">
     <span class="tag">✦ DEARLY COLLECTION</span>
 
-    <h2 data-t="gallery">
-      Маленькие шедевры для больших чувств
+    <h2 data-t="galleryTitle">
+      Открой мир красивых моментов
     </h2>
 
-    <p data-t="gallerySub">
-      Реальные фотографии, объёмные элементы,
-      романтика и праздничные сцены.
+    <p data-t="galleryDesc">
+      Романтические фотографии, роскошные цветы,
+      праздничные торты, свадебные сцены и многое другое.
+      Выбери картинку, которая расскажет твою историю.
     </p>
+
+    <div class="collection-note" data-t="freeNote">
+      ♡ Все 24 открытки совершенно бесплатные
+    </div>
   </div>
 
   <div class="filters">
-    <button data-filter="all" class="active" data-t="all">
-      Все
+    <button class="filter active" data-filter="all" data-t="filterAll">
+      ✨ Все
     </button>
-    <button data-filter="free" data-t="free">
-      Бесплатные
+
+    <button class="filter" data-filter="love" data-t="filterLove">
+      ❤️ Любовь
     </button>
-    <button data-filter="premium">
-      Premium ✦
+
+    <button class="filter" data-filter="birthday" data-t="filterBirthday">
+      🎂 День рождения
+    </button>
+
+    <button class="filter" data-filter="wedding" data-t="filterWedding">
+      💍 Свадьба
+    </button>
+
+    <button class="filter" data-filter="flowers" data-t="filterFlowers">
+      💐 Цветы
+    </button>
+
+    <button class="filter" data-filter="celebrate" data-t="filterCelebrate">
+      🎉 Праздники
     </button>
   </div>
 
   <div class="gallery" id="templates"></div>
 
-  <p class="small-note" data-t="premNote">
-    Premium — пока демонстрация. Оплата ещё не подключена.
-  </p>
+  <div class="more-note" data-t="galleryFoot">
+    ✦ Выбирай любое оформление — ограничений нет ✦
+  </div>
 
 </section>
 
-<section class="section editor-bg" id="editor">
-<div class="wrap">
+<section class="section editor-zone" id="editor">
+  <div class="wrap">
 
-  <div class="section-title">
-    <span class="tag">✦ DEARLY CREATOR</span>
+    <div class="section-head">
+      <span class="tag">✦ DEARLY CREATOR</span>
 
-    <h2 data-t="editor">Сделай подарок личным</h2>
+      <h2 data-t="editorTitle">
+        Создай свою историю любви
+      </h2>
 
-    <p data-t="editorSub">
-      Твои фотографии. Твои слова. Твои чувства.
-    </p>
-  </div>
-
-  <div class="work">
-
-    <div class="panel form-panel">
-
-      <h3 data-t="details">Настрой свой подарок</h3>
-
-      <div class="two">
-        <div>
-          <label class="label" for="recipient" data-t="to">
-            Кому
-          </label>
-          <input id="recipient" class="control" maxlength="70">
-        </div>
-
-        <div>
-          <label class="label" for="sender" data-t="from">
-            От кого
-          </label>
-          <input id="sender" class="control" maxlength="70">
-        </div>
-      </div>
-
-      <label class="label" for="title" data-t="title">
-        Заголовок
-      </label>
-      <input id="title" class="control" maxlength="90">
-
-      <label class="label" for="message" data-t="message">
-        Твоё сообщение
-      </label>
-
-      <textarea
-        id="message"
-        class="control"
-        maxlength="600"></textarea>
-
-      <label class="label" data-t="photo">
-        Добавь фотографию
-      </label>
-
-      <label class="upload" for="photoInput">
-        <span style="font-size:30px">📸</span>
-
-        <strong data-t="upload">
-          Нажми, чтобы выбрать своё фото
-        </strong>
-
-        <small>JPG, PNG, WebP · max 8 MB</small>
-
-        <input
-          type="file"
-          id="photoInput"
-          accept="image/png,image/jpeg,image/webp">
-      </label>
-
-      <div class="controls">
-        <button class="btn small" id="removePhoto" data-t="remove">
-          ✕ Убрать фото
-        </button>
-
-        <small class="tiny" data-t="photoHint">
-          Фото остаётся в твоём браузере
-        </small>
-      </div>
-
-      <div class="two">
-        <div>
-          <label class="label" for="font" data-t="font">
-            Шрифт
-          </label>
-
-          <select id="font" class="control">
-            <option value="classic">Elegant</option>
-            <option value="modern">Modern</option>
-            <option value="soft">Soft</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="label" for="shape" data-t="shape">
-            Форма фото
-          </label>
-
-          <select id="shape" class="control">
-            <option value="round">● Round</option>
-            <option value="square">▢ Square</option>
-          </select>
-        </div>
-      </div>
-
-      <label class="check">
-        <input type="checkbox" id="spark" checked>
-        <span data-t="spark">
-          Волшебные искры при открытии
-        </span>
-      </label>
-
-      <div class="actions">
-        <button class="btn primary" id="open" data-t="open">
-          🎁 Открыть подарок
-        </button>
-
-        <button class="btn dark" id="download" data-t="download">
-          ⬇ Скачать PNG
-        </button>
-
-        <button class="btn" id="share" data-t="share">
-          💌 Поделиться
-        </button>
-
-        <button class="btn" id="save" data-t="save">
-          💾 Черновик
-        </button>
-      </div>
-
-      <div class="status" id="status" aria-live="polite"></div>
-
-      <p class="tiny" data-t="warning">
-        Фото можно отправить в скачанной открытке.
-        В ссылку фото не включено: для этого
-        понадобится облачное хранение.
+      <p data-t="editorDesc">
+        Добавь свои слова и фотографию.
+        Преврати открытку в незабываемый подарок.
       </p>
-
     </div>
 
-    <div class="panel preview-panel">
+    <div class="work">
 
-      <h3 data-t="preview">Живой предпросмотр</h3>
+      <div class="panel form-panel">
+        <h3 data-t="settings">💗 Настрой открытку</h3>
 
-      <article class="card" id="card">
-        <div class="card-bg"></div>
-        <div class="card-shade"></div>
-        <div class="card-emoji"></div>
+        <div class="two">
+          <div>
+            <label class="label" for="to" data-t="to">Кому</label>
+            <input id="to" class="control" maxlength="70">
+          </div>
 
-        <img class="card-photo" alt="Your photo">
+          <div>
+            <label class="label" for="from" data-t="from">От кого</label>
+            <input id="from" class="control" maxlength="70">
+          </div>
+        </div>
 
-        <div class="card-kicker"></div>
-        <h4></h4>
-        <p></p>
-        <div class="card-from"></div>
-      </article>
+        <label class="label" for="title" data-t="cardTitle">
+          Заголовок
+        </label>
 
-      <div class="actions">
-        <button class="btn small" id="change" data-t="change">
-          🎨 Другой стиль
-        </button>
+        <input id="title" class="control" maxlength="90">
 
-        <button class="btn small" id="print" data-t="print">
-          🖨 Печать
-        </button>
+        <label class="label" for="message" data-t="message">
+          Твоё сообщение
+        </label>
+
+        <textarea
+          id="message"
+          class="control"
+          maxlength="600"></textarea>
+
+        <label class="label" data-t="photoLabel">
+          📷 Добавь фотографию
+        </label>
+
+        <label class="upload" for="photoInput">
+          <span style="font-size:33px">📸</span>
+
+          <strong data-t="upload">
+            Нажми, чтобы выбрать своё фото
+          </strong>
+
+          <small>JPG, PNG, WebP · до 8 MB</small>
+
+          <input
+            id="photoInput"
+            type="file"
+            accept="image/png,image/jpeg,image/webp">
+        </label>
+
+        <div class="actions">
+          <button class="btn small" id="removePhoto" data-t="removePhoto">
+            ✕ Убрать фото
+          </button>
+        </div>
+
+        <div class="two">
+          <div>
+            <label class="label" for="font" data-t="font">
+              Шрифт
+            </label>
+
+            <select id="font" class="control">
+              <option value="classic">Elegant</option>
+              <option value="modern">Modern</option>
+              <option value="soft">Soft</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="label" for="shape" data-t="shape">
+              Форма фотографии
+            </label>
+
+            <select id="shape" class="control">
+              <option value="round">● Round</option>
+              <option value="square">▢ Square</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="check">
+          <input id="spark" type="checkbox" checked>
+          <span data-t="spark">✨ Волшебные искры при открытии</span>
+        </label>
+
+        <div class="actions">
+          <button id="open" class="btn primary" data-t="open">
+            🎁 Открыть подарок
+          </button>
+
+          <button id="download" class="btn dark" data-t="download">
+            ⬇ Скачать PNG
+          </button>
+        </div>
+
+        <div class="actions">
+          <button id="copyLink" class="btn" data-t="copyLink">
+            🔗 Копировать ссылку
+          </button>
+
+          <button id="send" class="btn primary" data-t="send">
+            💌 Отправить
+          </button>
+
+          <button id="save" class="btn" data-t="save">
+            💾 Сохранить
+          </button>
+        </div>
+
+        <div id="status" class="status" aria-live="polite"></div>
+
+        <p class="tiny" data-t="photoInfo">
+          🔒 Твоё фото остаётся в браузере.
+          Ссылка передаёт текст и оформление.
+          Чтобы отправить открытку с фотографией,
+          скачай PNG.
+        </p>
       </div>
 
-      <div class="premium-box" id="premiumBox">
-        <b data-t="premiumTitle">
-          👑 Эксклюзивный шаблон
-        </b>
+      <div class="panel preview-panel">
+        <h3 data-t="preview">✨ Живой предпросмотр</h3>
 
-        <p data-t="premiumBody">
-          Предпросмотр Premium. Скачивание и отправка
-          этого шаблона будут доступны
-          после подключения оплаты.
-        </p>
+        <article class="card" id="card">
+          <div class="card-bg"></div>
+          <div class="card-shade"></div>
+          <div class="card-emoji"></div>
+          <img class="card-photo" alt="Uploaded photo">
+          <div class="card-kicker"></div>
+          <h4></h4>
+          <p></p>
+          <div class="card-from"></div>
+        </article>
 
-        <button class="btn small" id="premiumDetails" data-t="more">
-          Подробнее
-        </button>
+        <div class="actions">
+          <button id="anotherStyle" class="btn small" data-t="another">
+            🎨 Другое оформление
+          </button>
+
+          <button id="print" class="btn small" data-t="print">
+            🖨 Печать
+          </button>
+        </div>
       </div>
 
     </div>
   </div>
-</div>
 </section>
 
 <section class="section wrap">
-
-  <div class="section-title">
+  <div class="section-head">
     <span class="tag">✦ HOW IT WORKS</span>
-    <h2 data-t="how">Всего три шага до улыбки</h2>
+    <h2 data-t="stepsTitle">Три шага до счастливой улыбки</h2>
   </div>
 
   <div class="steps">
-
     <div class="step">
-      <b>🎨</b>
-      <h3 data-t="s1">Выбери оформление</h3>
-      <p data-t="s1b">
-        Начни с красивого бесплатного шаблона.
+      <div class="symbol">🎨</div>
+      <h3 data-t="step1">Выбери картинку</h3>
+      <p data-t="step1Desc">
+        Найди оформление среди 24 красивых фотографий.
       </p>
     </div>
 
     <div class="step">
-      <b>📷</b>
-      <h3 data-t="s2">Добавь свою историю</h3>
-      <p data-t="s2b">
-        Вставь фото, имя и тёплые слова.
+      <div class="symbol">💖</div>
+      <h3 data-t="step2">Добавь свои чувства</h3>
+      <p data-t="step2Desc">
+        Напиши пожелания и добавь любимую фотографию.
       </p>
     </div>
 
     <div class="step">
-      <b>💌</b>
-      <h3 data-t="s3">Поделись эмоцией</h3>
-      <p data-t="s3b">
-        Скачай открытку с фото или отправь ссылку.
+      <div class="symbol">💌</div>
+      <h3 data-t="step3">Подари эмоции</h3>
+      <p data-t="step3Desc">
+        Отправь ссылку или скачай открытку с фотографией.
       </p>
     </div>
-
   </div>
 </section>
 
@@ -1147,148 +1271,138 @@ textarea.control {
 
 <footer class="footer">
   <strong>DearlyStudio ♡</strong>
-  ·
-  <span data-t="footer">Создано с любовью</span>
-  ·
-  © <span id="year"></span>
+  · <span data-t="footer">Создано с любовью</span>
+  · © <span id="year"></span>
 
-  <p style="font-size:11px;opacity:.8">
+  <p>
     Photography:
-    <a
-      href="https://unsplash.com/license"
-      target="_blank"
-      rel="noopener"
-      style="text-decoration:underline">Unsplash</a>
+    <a href="https://unsplash.com/license" target="_blank" rel="noopener">
+      Unsplash
+    </a>
   </p>
 </footer>
 
-<div class="overlay" id="giftOverlay" role="dialog" aria-modal="true">
+<!-- ОТКРЫТИЕ ПОДАРКА -->
 
+<div class="overlay" id="giftOverlay" role="dialog" aria-modal="true">
   <div class="modal gift-modal" id="giftModal">
 
-    <button class="close" id="closeGift" aria-label="Close">
-      ×
-    </button>
+    <button class="close" id="closeGift" aria-label="Close">×</button>
 
     <div class="gift-intro">
       <h2 data-t="giftIntro">Для тебя есть сюрприз!</h2>
-
-      <button class="gift-btn" id="giftButton" aria-label="Open gift">
+      <button class="gift-big" id="giftButton" aria-label="Open gift">
         🎁
       </button>
-
       <p data-t="giftHint">Нажми на подарок</p>
     </div>
 
-    <div class="gift-card">
+    <div class="gift-result">
       <div id="giftCard"></div>
-
-      <button class="btn primary" id="createOwn" data-t="createOwn">
-        💗 Создать своё
-      </button>
+      <div class="actions" style="justify-content:center">
+        <button id="createOwn" class="btn primary" data-t="createOwn">
+          💗 Создать своё
+        </button>
+      </div>
     </div>
-
   </div>
 </div>
 
-<div class="overlay" id="premiumOverlay"
-     role="dialog" aria-modal="true">
+<!-- МЕНЮ ОТПРАВКИ -->
 
+<div class="overlay" id="shareOverlay" role="dialog" aria-modal="true">
   <div class="modal">
-    <button class="close" id="closePremium" aria-label="Close">
-      ×
-    </button>
 
-    <div style="font-size:80px">👑</div>
-
-    <h2>DearlyStudio Premium</h2>
-
-    <p data-t="premiumModal">
-      Это эксклюзивная коллекция фотографических шаблонов.
-      Настоящая оплата ещё не подключена,
-      поэтому покупки пока недоступны.
-      Мы не запрашиваем данные карты.
-    </p>
-
-    <button class="btn primary" id="premiumOK" data-t="ok">
-      Понятно
-    </button>
-  </div>
-</div>
-
-<div class="overlay" id="shareOverlay" role="dialog" aria-modal="true" aria-labelledby="shareHeading">
-  <div class="modal share-modal">
     <button class="close" id="closeShare" aria-label="Close">×</button>
-    <span class="tag">✦ DEARLY SHARING</span>
-    <h2 id="shareHeading">💌 Поделиться подарком</h2>
-    <p id="shareSub">Выбери, куда отправить свою открытку.</p>
+
+    <span class="tag">✦ SHARE THE LOVE</span>
+
+    <h2 data-t="shareTitle">💌 Отправь немного счастья</h2>
+
+    <p data-t="shareDesc">
+      Выбери, через какое приложение хочешь отправить открытку.
+    </p>
 
     <div class="share-grid">
-      <button class="share-service" data-service="whatsapp" type="button">
-        <span class="share-icon" style="--share-color:#22bb65">✆</span>
+
+      <button class="share-option" data-service="whatsapp">
+        <span class="share-icon" style="--c:#25c365">✆</span>
         WhatsApp
       </button>
-      <button class="share-service" data-service="telegram" type="button">
-        <span class="share-icon" style="--share-color:#279bd6">➤</span>
+
+      <button class="share-option" data-service="telegram">
+        <span class="share-icon" style="--c:#2aa4da">➤</span>
         Telegram
       </button>
-      <button class="share-service" data-service="facebook" type="button">
-        <span class="share-icon" style="--share-color:#1877f2">f</span>
+
+      <button class="share-option" data-service="facebook">
+        <span class="share-icon" style="--c:#1877f2">f</span>
         Facebook
       </button>
-      <button class="share-service" data-service="messenger" type="button">
-        <span class="share-icon" style="--share-color:#8a4cff">ϟ</span>
+
+      <button class="share-option" data-service="messenger">
+        <span class="share-icon" style="--c:#9b4eff">ϟ</span>
         Messenger
       </button>
-      <button class="share-service" data-service="instagram" type="button">
-        <span class="share-icon" style="--share-color:#dd4a9a">◎</span>
+
+      <button class="share-option" data-service="instagram">
+        <span class="share-icon" style="--c:#dc4998">◎</span>
         Instagram
       </button>
-      <button class="share-service" data-service="tiktok" type="button">
-        <span class="share-icon" style="--share-color:#20202a">♪</span>
+
+      <button class="share-option" data-service="tiktok">
+        <span class="share-icon" style="--c:#23232e">♪</span>
         TikTok
       </button>
-      <button class="share-service" data-service="pinterest" type="button">
-        <span class="share-icon" style="--share-color:#e60023">P</span>
+
+      <button class="share-option" data-service="pinterest">
+        <span class="share-icon" style="--c:#e60023">P</span>
         Pinterest
       </button>
-      <button class="share-service" data-service="viber" type="button">
-        <span class="share-icon" style="--share-color:#7656a8">☎</span>
+
+      <button class="share-option" data-service="viber">
+        <span class="share-icon" style="--c:#7a57ae">☎</span>
         Viber
       </button>
-      <button class="share-service" data-service="line" type="button">
-        <span class="share-icon" style="--share-color:#00b900">L</span>
+
+      <button class="share-option" data-service="line">
+        <span class="share-icon" style="--c:#06ba45">L</span>
         LINE
       </button>
-      <button class="share-service" data-service="wechat" type="button">
-        <span class="share-icon" style="--share-color:#21aa53">☏</span>
+
+      <button class="share-option" data-service="wechat">
+        <span class="share-icon" style="--c:#31b45a">☏</span>
         WeChat
       </button>
-      <button class="share-service" data-service="vk" type="button">
-        <span class="share-icon" style="--share-color:#0077ff">VK</span>
+
+      <button class="share-option" data-service="vk">
+        <span class="share-icon" style="--c:#0077ff">VK</span>
         VK
       </button>
-      <button class="share-service" data-service="email" type="button">
-        <span class="share-icon" style="--share-color:#c56a9a">✉</span>
+
+      <button class="share-option" data-service="email">
+        <span class="share-icon" style="--c:#c66a9a">✉</span>
         Email
       </button>
+
     </div>
 
-    <div class="share-tools">
-      <button class="btn primary" id="copyGift" type="button">
+    <div class="actions" style="justify-content:center">
+      <button id="shareCopy" class="btn primary" data-t="copyLink">
         🔗 Копировать ссылку
       </button>
-      <button class="btn dark" id="nativeShare" type="button">
-        📲 Ещё приложения
+
+      <button id="nativeShare" class="btn dark" data-t="otherApps">
+        📲 Другие приложения
       </button>
     </div>
 
-    <p class="share-warning" id="sharePhotoWarning">
-      📷 В ссылку не входит загруженное фото.
-      Чтобы отправить открытку с фото, сначала скачай PNG.
+    <p class="share-warning" data-t="shareWarning">
+      📷 Загруженное фото не включается в ссылку.
+      Для отправки открытки с фото скачай PNG.
     </p>
 
-    <div class="share-feedback" id="shareFeedback" aria-live="polite"></div>
+    <div id="shareFeedback" class="share-feedback" aria-live="polite"></div>
   </div>
 </div>
 
@@ -1297,1050 +1411,764 @@ textarea.control {
 
 const $ = id => document.getElementById(id);
 
-/* 8 ТЕМАТИЧЕСКИХ ФОТОШАБЛОНОВ */
+/* =====================================================
+   24 БЕСПЛАТНЫХ ШАБЛОНА
+   ===================================================== */
 
-const photos = [
-  [
-    'roses',
-    'photo-1490750967868-88aa4486c946',
-    '🌹', 1, 0, '#bb547b'
-  ],
-  [
-    'birthday',
-    'photo-1530103862676-de8c9debad1d',
-    '🎂', 0, 0, '#b77bc1'
-  ],
-  [
-    'party',
-    'photo-1511795409834-ef04bbd61622',
-    '🎉', 2, 0, '#b48c4b'
-  ],
-  [
-    'flowers',
-    'photo-1464366400600-7168b8af9bc3',
-    '💐', 3, 0, '#ae6d91'
-  ],
-  [
-    'velvet',
-    'photo-1511988617509-a57c8a288659',
-    '💖', 1, 1, '#772d54'
-  ],
-  [
-    'bouquet',
-    'photo-1525310072745-f49212b5ac6d',
-    '🌺', 3, 1, '#7c5173'
-  ],
-  [
-    'sunset',
-    'photo-1470252649378-9c29740c9fa8',
-    '🥂', 2, 1, '#a47448'
-  ],
-  [
-    'ocean',
-    'photo-1507525428034-b723cf961d3e',
-    '🐚', 1, 1, '#267d9f'
-  ]
+const templates = [
+  {
+    id:'roses',
+    img:'photo-1490750967868-88aa4486c946',
+    emoji:'🌹',
+    cat:'love',
+    name:'Romantic Roses',
+    title:'With All My Love',
+    color:'#c05586'
+  },
+  {
+    id:'birthday',
+    img:'photo-1530103862676-de8c9debad1d',
+    emoji:'🎂',
+    cat:'birthday',
+    name:'Birthday Magic',
+    title:'Happy Birthday!',
+    color:'#b777c7'
+  },
+  {
+    id:'goldenparty',
+    img:'photo-1511795409834-ef04bbd61622',
+    emoji:'🎉',
+    cat:'celebrate',
+    name:'Golden Celebration',
+    title:'Let’s Celebrate!',
+    color:'#bd904e'
+  },
+  {
+    id:'flowers',
+    img:'photo-1464366400600-7168b8af9bc3',
+    emoji:'💐',
+    cat:'flowers',
+    name:'Sweet Flowers',
+    title:'Thank You!',
+    color:'#ae7398'
+  },
+  {
+    id:'love',
+    img:'photo-1511988617509-a57c8a288659',
+    emoji:'❤️',
+    cat:'love',
+    name:'True Love',
+    title:'I Love You',
+    color:'#933b66'
+  },
+  {
+    id:'bouquet',
+    img:'photo-1525310072745-f49212b5ac6d',
+    emoji:'🌺',
+    cat:'flowers',
+    name:'Dream Bouquet',
+    title:'For Someone Special',
+    color:'#a6679c'
+  },
+  {
+    id:'sunset',
+    img:'photo-1470252649378-9c29740c9fa8',
+    emoji:'🥂',
+    cat:'love',
+    name:'Golden Sunset',
+    title:'Our Beautiful Moments',
+    color:'#b37c52'
+  },
+  {
+    id:'ocean',
+    img:'photo-1507525428034-b723cf961d3e',
+    emoji:'🐚',
+    cat:'love',
+    name:'Ocean Dreams',
+    title:'You Are My Paradise',
+    color:'#498fa5'
+  },
+  {
+    id:'pinkflowers',
+    img:'photo-1457089328109-e5d9bd499191',
+    emoji:'🌸',
+    cat:'flowers',
+    name:'Pink Blossom',
+    title:'You Make Me Smile',
+    color:'#d17ca4'
+  },
+  {
+    id:'wedding',
+    img:'photo-1519741497674-611481863552',
+    emoji:'💍',
+    cat:'wedding',
+    name:'Wedding Dreams',
+    title:'Our Special Day',
+    color:'#b88891'
+  },
+  {
+    id:'heart',
+    img:'photo-1516589178581-6cd7833ae3b2',
+    emoji:'💖',
+    cat:'love',
+    name:'Forever Together',
+    title:'Forever & Always',
+    color:'#b96d91'
+  },
+  {
+    id:'lights',
+    img:'photo-1513151233558-d860c5398176',
+    emoji:'✨',
+    cat:'celebrate',
+    name:'Sparkle Night',
+    title:'Make a Wish',
+    color:'#9a71c1'
+  },
+  {
+    id:'spring',
+    img:'photo-1497250681960-ef046c08a56e',
+    emoji:'🌿',
+    cat:'flowers',
+    name:'Fresh Morning',
+    title:'A Beautiful Day',
+    color:'#639d7e'
+  },
+  {
+    id:'cake',
+    img:'photo-1464349095431-e9a21285b5f3',
+    emoji:'🍰',
+    cat:'birthday',
+    name:'Sweet Birthday',
+    title:'Make a Wish!',
+    color:'#c87c9d'
+  },
+  {
+    id:'weddingflowers',
+    img:'photo-1519225421980-715cb0215aed',
+    emoji:'👰',
+    cat:'wedding',
+    name:'Wedding Romance',
+    title:'Love Begins Here',
+    color:'#b49e89'
+  },
+  {
+    id:'pinkrose',
+    img:'photo-1487530811176-3780de880c2d',
+    emoji:'🌷',
+    cat:'flowers',
+    name:'Tender Roses',
+    title:'Just For You',
+    color:'#b65c85'
+  },
+  {
+    id:'beach',
+    img:'photo-1473116763249-2faaef81ccda',
+    emoji:'☀️',
+    cat:'love',
+    name:'Summer Love',
+    title:'Together Is Better',
+    color:'#5e9ba4'
+  },
+  {
+    id:'celebration',
+    img:'photo-1492684223066-81342ee5ff30',
+    emoji:'🎊',
+    cat:'celebrate',
+    name:'Happy Moments',
+    title:'Enjoy Every Moment',
+    color:'#a164ae'
+  },
+  {
+    id:'nature',
+    img:'photo-1441974231531-c6227db76b6e',
+    emoji:'🌲',
+    cat:'flowers',
+    name:'Nature's Magic',
+    title:'Wonderful You',
+    color:'#527d67'
+  },
+  {
+    id:'lavender',
+    img:'photo-1499002238440-d264edd596ec',
+    emoji:'🦋',
+    cat:'love',
+    name:'Dreamy Skies',
+    title:'My Favorite Dream',
+    color:'#9879bd'
+  },
+  {
+    id:'gift',
+    img:'photo-1549465220-1a8b9238cd48',
+    emoji:'🎁',
+    cat:'birthday',
+    name:'Special Surprise',
+    title:'A Gift For You',
+    color:'#b8748b'
+  },
+  {
+    id:'chocolate',
+    img:'photo-1519681393784-d120267933ba',
+    emoji:'🌟',
+    cat:'celebrate',
+    name:'Starlight',
+    title:'Shine Bright!',
+    color:'#5a69a8'
+  },
+  {
+    id:'whiteroses',
+    img:'photo-1508615070457-7baeba4003ab',
+    emoji:'🤍',
+    cat:'wedding',
+    name:'Pure Elegance',
+    title:'A Beautiful Beginning',
+    color:'#b0a1a1'
+  },
+  {
+    id:'night',
+    img:'photo-1485470733090-0aae1788d5af',
+    emoji:'🌄',
+    cat:'celebrate',
+    name:'Beautiful Journey',
+    title:'New Adventures',
+    color:'#9c7880'
+  }
 ];
 
-const imageURL = (id, w = 1000) =>
-  'https://images.unsplash.com/' + id +
-  '?w=' + w + '&q=80&fit=crop';
+const imageURL = (id, width = 1000) =>
+  'https://images.unsplash.com/' +
+  id + '?w=' + width + '&q=85&fit=crop';
 
-/* КЛЮЧИ ПЕРЕВОДОВ */
+/* =====================================================
+   ПЕРЕВОДЫ — 14 ЯЗЫКОВ
+   ===================================================== */
 
-const KEYS = [
-  'strip','nav1','nav2','hero','intro','start','demo',
-  'hint','gallery','gallerySub','all','free','premNote',
-  'editor','editorSub','details','to','from','title',
-  'message','photo','upload','remove','photoHint','font',
-  'shape','spark','open','download','share','save',
-  'warning','preview','change','print','premiumTitle',
-  'premiumBody','more','how','s1','s1b','s2','s2b',
-  's3','s3b','footer','giftIntro','giftHint','createOwn',
-  'premiumModal','ok'
-];
+const translations = {
 
-/* 14 ЯЗЫКОВ */
+ru: {
+  top:'✦ Дарите любовь, создавайте воспоминания ✦',
+  navGallery:'Открытки',
+  navEditor:'Редактор',
+  hero:'Чувства, которые <em>оживают.</em>',
+  heroDesc:'Создавай невероятно красивые поздравления, признания в любви и приглашения. Добавляй фотографии и дари настоящие эмоции.',
+  start:'💗 Создать открытку',
+  demo:'✨ Посмотреть чудо',
+  hint:'♡ 24 дизайна · Бесплатно · Без регистрации',
+  galleryTitle:'Открой мир красивых моментов',
+  galleryDesc:'Романтические фотографии, роскошные цветы, праздничные торты, свадебные сцены и многое другое.',
+  freeNote:'♡ Все 24 открытки совершенно бесплатные',
+  filterAll:'✨ Все',
+  filterLove:'❤️ Любовь',
+  filterBirthday:'🎂 День рождения',
+  filterWedding:'💍 Свадьба',
+  filterFlowers:'💐 Цветы',
+  filterCelebrate:'🎉 Праздники',
+  galleryFoot:'✦ Выбирай любое оформление — ограничений нет ✦',
+  editorTitle:'Создай свою историю любви',
+  editorDesc:'Добавь свои слова и фотографию. Преврати открытку в незабываемый подарок.',
+  settings:'💗 Настрой открытку',
+  to:'Кому',
+  from:'От кого',
+  cardTitle:'Заголовок',
+  message:'Твоё сообщение',
+  photoLabel:'📷 Добавь фотографию',
+  upload:'Нажми, чтобы выбрать своё фото',
+  removePhoto:'✕ Убрать фото',
+  font:'Шрифт',
+  shape:'Форма фотографии',
+  spark:'✨ Волшебные искры при открытии',
+  open:'🎁 Открыть подарок',
+  download:'⬇ Скачать PNG',
+  copyLink:'🔗 Копировать ссылку',
+  send:'💌 Отправить',
+  save:'💾 Сохранить',
+  photoInfo:'🔒 Фото остаётся в браузере. Ссылка передаёт текст и оформление. Для отправки с фото скачай PNG.',
+  preview:'✨ Живой предпросмотр',
+  another:'🎨 Другое оформление',
+  print:'🖨 Печать',
+  stepsTitle:'Три шага до счастливой улыбки',
+  step1:'Выбери картинку',
+  step1Desc:'Найди оформление среди 24 красивых фотографий.',
+  step2:'Добавь свои чувства',
+  step2Desc:'Напиши пожелания и добавь любимую фотографию.',
+  step3:'Подари эмоции',
+  step3Desc:'Отправь ссылку или скачай открытку с фотографией.',
+  footer:'Создано с любовью',
+  giftIntro:'Для тебя есть сюрприз!',
+  giftHint:'Нажми на подарок',
+  createOwn:'💗 Создать своё',
+  shareTitle:'💌 Отправь немного счастья',
+  shareDesc:'Выбери приложение для отправки открытки.',
+  otherApps:'📲 Другие приложения',
+  shareWarning:'📷 Загруженное фото не включается в ссылку. Для отправки с фото скачай PNG.',
+  copied:'Ссылка скопирована!',
+  pasted:'Ссылка скопирована! Вставь её в приложении.',
+  saved:'Черновик сохранён без фото.',
+  photoAdded:'Фотография добавлена!',
+  photoRemoved:'Фотография удалена.',
+  invalidPhoto:'Выбери JPG, PNG или WebP до 8 MB.',
+  downloaded:'Открытка скачана!',
+  error:'Не удалось выполнить действие.',
+  defaultMessage:'Пусть каждый день дарит тебе радость, улыбки и прекрасные моменты!'
+},
 
-const LANG = {
+en: {
+  top:'✦ Share love and create memories ✦',
+  navGallery:'Cards',navEditor:'Editor',
+  hero:'Feelings that <em>come alive.</em>',
+  heroDesc:'Create beautiful greetings, love notes and invitations. Add your own photos and share real emotions.',
+  start:'💗 Create a card',demo:'✨ See the magic',
+  hint:'♡ 24 designs · Free · No account',
+  galleryTitle:'Discover beautiful moments',
+  galleryDesc:'Romantic photos, luxurious flowers, birthday cakes, wedding scenes and more.',
+  freeNote:'♡ All 24 designs are completely free',
+  filterAll:'✨ All',filterLove:'❤️ Love',
+  filterBirthday:'🎂 Birthday',filterWedding:'💍 Wedding',
+  filterFlowers:'💐 Flowers',filterCelebrate:'🎉 Celebration',
+  galleryFoot:'✦ Choose any design — no restrictions ✦',
+  editorTitle:'Create your love story',
+  editorDesc:'Add your own words and photos to create an unforgettable gift.',
+  settings:'💗 Customize your card',
+  to:'To',from:'From',cardTitle:'Title',message:'Your message',
+  photoLabel:'📷 Add a photo',upload:'Tap to choose your photo',
+  removePhoto:'✕ Remove photo',font:'Font',shape:'Photo shape',
+  spark:'✨ Magic sparkles when opened',
+  open:'🎁 Open gift',download:'⬇ Download PNG',
+  copyLink:'🔗 Copy link',send:'💌 Send',save:'💾 Save',
+  photoInfo:'🔒 Your photo stays in the browser. Links contain text and design only. Download PNG to share the photo.',
+  preview:'✨ Live preview',another:'🎨 Another design',print:'🖨 Print',
+  stepsTitle:'Three steps to a smile',
+  step1:'Choose a picture',step1Desc:'Explore 24 beautiful photo designs.',
+  step2:'Add your feelings',step2Desc:'Write a personal note and add a photo.',
+  step3:'Share the joy',step3Desc:'Send a link or download the card with your photo.',
+  footer:'Made with love',
+  giftIntro:'A surprise for you!',giftHint:'Tap the gift',
+  createOwn:'💗 Create your own',
+  shareTitle:'💌 Share a little happiness',
+  shareDesc:'Choose an app to send your greeting.',
+  otherApps:'📲 More apps',
+  shareWarning:'📷 Uploaded photos are not in shared links. Download PNG to send a photo.',
+  copied:'Link copied!',pasted:'Link copied! Paste it into the app.',
+  saved:'Draft saved without photo.',photoAdded:'Photo added!',
+  photoRemoved:'Photo removed.',invalidPhoto:'Choose JPG, PNG or WebP under 8 MB.',
+  downloaded:'Card downloaded!',error:'Action failed.',
+  defaultMessage:'Wishing you happiness, smiles and beautiful moments every day!'
+},
 
-ru: [
-  '✦ Делись любовью и радостью ✦',
-  'Шаблоны',
-  'Редактор',
-  'Чувства, которые <em>оживают.</em>',
-  'Создавай поздравления, признания и приглашения со своими фотографиями.',
-  '💗 Создать подарок',
-  '✨ Посмотреть чудо',
-  '♡ Без регистрации · Свои фото · Бесплатно',
-  'Маленькие шедевры для больших чувств',
-  'Красивые фотографии, романтика и праздничные сцены.',
-  'Все',
-  'Бесплатные',
-  'Premium — пока демонстрация. Оплата не подключена.',
-  'Сделай подарок личным',
-  'Твои фотографии. Твои слова. Твои чувства.',
-  'Настрой свой подарок',
-  'Кому',
-  'От кого',
-  'Заголовок',
-  'Твоё сообщение',
-  'Добавь фотографию',
-  'Нажми, чтобы выбрать своё фото',
-  '✕ Убрать фото',
-  'Фото останется в браузере',
-  'Шрифт',
-  'Форма фото',
-  'Волшебные искры при открытии',
-  '🎁 Открыть подарок',
-  '⬇ Скачать PNG',
-  '🔗 Ссылка',
-  '💾 Черновик',
-  'Фото можно отправить в скачанной открытке. В ссылку фото не включено: для этого нужно облачное хранение.',
-  'Живой предпросмотр',
-  '🎨 Другой стиль',
-  '🖨 Печать',
-  '👑 Эксклюзивный шаблон',
-  'Это предварительный просмотр Premium. Скачивание и отправка отключены до запуска оплаты.',
-  'Подробнее',
-  'Три шага до улыбки',
-  'Выбери оформление',
-  'Начни с бесплатного шаблона.',
-  'Добавь свою историю',
-  'Вставь фото и тёплые слова.',
-  'Поделись эмоцией',
-  'Скачай фотооткрытку или отправь ссылку.',
-  'Создано с любовью',
-  'Для тебя есть сюрприз!',
-  'Нажми на подарок',
-  '💗 Создать своё',
-  'Эксклюзивные изображения Premium пока доступны только для просмотра. Настоящая оплата ещё не подключена: мы не собираем данные карт.',
-  'Понятно'
-],
+de: {
+  top:'✦ Liebe teilen, Erinnerungen schaffen ✦',
+  navGallery:'Grußkarten',navEditor:'Editor',
+  hero:'Gefühle werden <em>lebendig.</em>',
+  heroDesc:'Gestalte wunderschöne Grüße, Liebesbotschaften und Einladungen. Füge eigene Fotos hinzu.',
+  start:'💗 Karte erstellen',demo:'✨ Magie erleben',
+  hint:'♡ 24 Designs · Kostenlos · Ohne Anmeldung',
+  galleryTitle:'Entdecke wunderschöne Momente',
+  galleryDesc:'Romantische Fotos, Blumen, Geburtstagstorten und Hochzeitsszenen.',
+  freeNote:'♡ Alle 24 Designs sind kostenlos',
+  filterAll:'✨ Alle',filterLove:'❤️ Liebe',
+  filterBirthday:'🎂 Geburtstag',filterWedding:'💍 Hochzeit',
+  filterFlowers:'💐 Blumen',filterCelebrate:'🎉 Feiern',
+  galleryFoot:'✦ Alle Designs sind frei verfügbar ✦',
+  editorTitle:'Gestalte deine Liebesgeschichte',
+  editorDesc:'Füge eigene Worte und Fotos hinzu und verschenke Freude.',
+  settings:'💗 Karte gestalten',to:'Für',from:'Von',
+  cardTitle:'Titel',message:'Deine Nachricht',
+  photoLabel:'📷 Foto hinzufügen',upload:'Foto auswählen',
+  removePhoto:'✕ Foto entfernen',font:'Schrift',shape:'Fotoform',
+  spark:'✨ Magische Funken beim Öffnen',
+  open:'🎁 Geschenk öffnen',download:'⬇ PNG herunterladen',
+  copyLink:'🔗 Link kopieren',send:'💌 Senden',save:'💾 Speichern',
+  photoInfo:'🔒 Dein Foto bleibt im Browser. Der Link enthält nur Text und Design. Für Fotos bitte PNG herunterladen.',
+  preview:'✨ Live-Vorschau',another:'🎨 Anderes Design',print:'🖨 Drucken',
+  stepsTitle:'Drei Schritte zum Lächeln',
+  step1:'Bild auswählen',step1Desc:'Entdecke 24 schöne Fotodesigns.',
+  step2:'Persönlich gestalten',step2Desc:'Schreibe deine Worte und füge ein Foto hinzu.',
+  step3:'Freude teilen',step3Desc:'Link senden oder Karte mit Foto herunterladen.',
+  footer:'Mit Liebe gemacht',
+  giftIntro:'Eine Überraschung für dich!',giftHint:'Tippe auf das Geschenk',
+  createOwn:'💗 Selbst gestalten',
+  shareTitle:'💌 Verschenke Freude',
+  shareDesc:'Wähle eine App zum Versenden.',
+  otherApps:'📲 Weitere Apps',
+  shareWarning:'📷 Hochgeladene Fotos sind nicht im Link. Für Fotos bitte PNG herunterladen.',
+  copied:'Link kopiert!',pasted:'Link kopiert! In der App einfügen.',
+  saved:'Entwurf ohne Foto gespeichert.',photoAdded:'Foto hinzugefügt!',
+  photoRemoved:'Foto entfernt.',invalidPhoto:'JPG, PNG oder WebP bis 8 MB auswählen.',
+  downloaded:'Karte heruntergeladen!',error:'Aktion fehlgeschlagen.',
+  defaultMessage:'Ich wünsche dir Glück, Freude und wunderschöne Momente!'
+},
 
-en: [
-  '✦ Share love and happiness ✦',
-  'Templates',
-  'Editor',
-  'Feelings that <em>come alive.</em>',
-  'Create personal greetings, love notes and invitations with your own photos.',
-  '💗 Create a gift',
-  '✨ See the magic',
-  '♡ No account · Your photos · Free',
-  'Little masterpieces for big feelings',
-  'Beautiful photographs and scenes for every occasion.',
-  'All',
-  'Free',
-  'Premium is a preview. Payments are not active.',
-  'Make it personal',
-  'Your photos. Your words. Your feelings.',
-  'Customize your gift',
-  'To',
-  'From',
-  'Title',
-  'Your message',
-  'Add a photo',
-  'Tap to choose your photo',
-  '✕ Remove photo',
-  'Photo stays in the browser',
-  'Font',
-  'Photo shape',
-  'Magical sparkles when opening',
-  '🎁 Open gift',
-  '⬇ Download PNG',
-  '🔗 Share link',
-  '💾 Save draft',
-  'Download the card with the photo. Share links do not contain photos without secure cloud storage.',
-  'Live preview',
-  '🎨 Change style',
-  '🖨 Print',
-  '👑 Exclusive template',
-  'Premium preview only. Downloading and sharing are disabled until payment integration.',
-  'Details',
-  'Three steps to a smile',
-  'Choose a design',
-  'Start with a free template.',
-  'Make it yours',
-  'Add a photo and kind words.',
-  'Share the feeling',
-  'Send a photo card or a link.',
-  'Made with love',
-  'A surprise is waiting!',
-  'Tap the gift',
-  '💗 Create your own',
-  'Premium images are for preview only. Secure payments have not been connected, so purchases are unavailable. No card details are collected.',
-  'Got it'
-],
+es: {
+  navGallery:'Tarjetas',navEditor:'Editor',
+  hero:'Emociones que <em>cobran vida.</em>',
+  heroDesc:'Crea bonitas felicitaciones e invitaciones con tus fotos.',
+  start:'💗 Crear tarjeta',demo:'✨ Ver la magia',
+  galleryTitle:'Descubre momentos hermosos',
+  freeNote:'♡ 24 diseños totalmente gratis',
+  filterAll:'✨ Todos',filterLove:'❤️ Amor',
+  filterBirthday:'🎂 Cumpleaños',filterWedding:'💍 Boda',
+  filterFlowers:'💐 Flores',filterCelebrate:'🎉 Fiestas',
+  editorTitle:'Crea tu historia de amor',
+  to:'Para',from:'De',cardTitle:'Título',message:'Mensaje',
+  upload:'Elige tu foto',open:'🎁 Abrir regalo',
+  download:'⬇ Descargar PNG',copyLink:'🔗 Copiar enlace',
+  send:'💌 Enviar',save:'💾 Guardar',
+  shareTitle:'💌 Comparte felicidad',copied:'¡Enlace copiado!'
+},
 
-de: [
-  '✦ Liebe und Freude teilen ✦',
-  'Vorlagen',
-  'Editor',
-  'Gefühle werden <em>lebendig.</em>',
-  'Gestalte Grüße, Liebesbotschaften und Einladungen mit deinen Fotos.',
-  '💗 Geschenk gestalten',
-  '✨ Magie erleben',
-  '♡ Ohne Anmeldung · Eigene Fotos · Kostenlos',
-  'Kleine Kunstwerke voller Gefühl',
-  'Wunderschöne Fotos und romantische Szenen.',
-  'Alle',
-  'Kostenlos',
-  'Premium ist eine Vorschau. Keine Zahlung möglich.',
-  'Gestalte etwas Persönliches',
-  'Deine Bilder. Deine Worte. Deine Gefühle.',
-  'Geschenk gestalten',
-  'Für',
-  'Von',
-  'Titel',
-  'Deine Nachricht',
-  'Foto hinzufügen',
-  'Foto auswählen',
-  '✕ Foto entfernen',
-  'Foto bleibt im Browser',
-  'Schrift',
-  'Fotoform',
-  'Magische Funken beim Öffnen',
-  '🎁 Geschenk öffnen',
-  '⬇ PNG herunterladen',
-  '🔗 Link teilen',
-  '💾 Entwurf',
-  'Das Foto ist nur im heruntergeladenen Bild enthalten, nicht im Link.',
-  'Live-Vorschau',
-  '🎨 Stil wechseln',
-  '🖨 Drucken',
-  '👑 Exklusive Vorlage',
-  'Premium-Vorschau. Herunterladen und Teilen sind noch gesperrt.',
-  'Details',
-  'Drei Schritte zum Lächeln',
-  'Design wählen',
-  'Starte kostenlos.',
-  'Persönlich gestalten',
-  'Füge Foto und Text hinzu.',
-  'Freude teilen',
-  'Bild speichern oder Link senden.',
-  'Mit Liebe gemacht',
-  'Eine Überraschung für dich!',
-  'Tippe auf das Geschenk',
-  '💗 Selbst gestalten',
-  'Premium ist eine Vorschau. Sichere Bezahlung ist noch nicht verbunden; es werden keine Kartendaten erfasst.',
-  'Verstanden'
-],
+fr: {
+  navGallery:'Cartes',navEditor:'Éditeur',
+  hero:'Des émotions qui <em>prennent vie.</em>',
+  heroDesc:'Créez de belles cartes et invitations avec vos photos.',
+  start:'💗 Créer une carte',demo:'✨ Voir la magie',
+  galleryTitle:'Découvrez de beaux moments',
+  freeNote:'♡ 24 modèles entièrement gratuits',
+  filterAll:'✨ Tous',filterLove:'❤️ Amour',
+  filterBirthday:'🎂 Anniversaire',filterWedding:'💍 Mariage',
+  filterFlowers:'💐 Fleurs',filterCelebrate:'🎉 Fêtes',
+  editorTitle:'Créez votre histoire d’amour',
+  to:'Pour',from:'De',cardTitle:'Titre',message:'Message',
+  upload:'Choisir une photo',open:'🎁 Ouvrir le cadeau',
+  download:'⬇ Télécharger PNG',copyLink:'🔗 Copier le lien',
+  send:'💌 Envoyer',save:'💾 Enregistrer',
+  shareTitle:'💌 Partagez le bonheur',copied:'Lien copié !'
+},
 
-es: [
-  '✦ Comparte amor y alegría ✦',
-  'Plantillas',
-  'Editor',
-  'Emociones que <em>cobran vida.</em>',
-  'Crea felicitaciones y mensajes de amor con tus fotos.',
-  '💗 Crear regalo',
-  '✨ Ver la magia',
-  '♡ Sin registro · Tus fotos · Gratis',
-  'Pequeñas obras de arte',
-  'Fotografías y escenas para cada ocasión.',
-  'Todas',
-  'Gratis',
-  'Premium es una vista previa; no hay pagos.',
-  'Hazlo personal',
-  'Tus fotos. Tus palabras. Tus sentimientos.',
-  'Personalizar regalo',
-  'Para',
-  'De',
-  'Título',
-  'Tu mensaje',
-  'Añadir foto',
-  'Elegir foto',
-  '✕ Quitar foto',
-  'La foto queda en tu navegador',
-  'Fuente',
-  'Forma de foto',
-  'Chispas mágicas',
-  '🎁 Abrir regalo',
-  '⬇ Descargar PNG',
-  '🔗 Compartir enlace',
-  '💾 Guardar',
-  'La foto solo aparece en la imagen descargada, no en el enlace.',
-  'Vista previa',
-  '🎨 Cambiar estilo',
-  '🖨 Imprimir',
-  '👑 Plantilla exclusiva',
-  'Solo vista previa. No se puede descargar hasta activar pagos.',
-  'Detalles',
-  'Tres pasos para sonreír',
-  'Elige diseño',
-  'Empieza gratis.',
-  'Personaliza',
-  'Añade foto y mensaje.',
-  'Comparte',
-  'Envía la imagen o un enlace.',
-  'Hecho con amor',
-  '¡Una sorpresa para ti!',
-  'Toca el regalo',
-  '💗 Crea el tuyo',
-  'Las compras Premium no están disponibles. No solicitamos datos bancarios.',
-  'Entendido'
-],
+pt: {
+  navGallery:'Cartões',navEditor:'Editor',
+  hero:'Sentimentos que <em>ganham vida.</em>',
+  heroDesc:'Crie lindos cartões e convites com suas fotos.',
+  start:'💗 Criar cartão',demo:'✨ Ver a magia',
+  galleryTitle:'Descubra momentos especiais',
+  freeNote:'♡ Todos os 24 modelos são grátis',
+  filterAll:'✨ Todos',filterLove:'❤️ Amor',
+  filterBirthday:'🎂 Aniversário',filterWedding:'💍 Casamento',
+  filterFlowers:'💐 Flores',filterCelebrate:'🎉 Festas',
+  editorTitle:'Crie sua história de amor',
+  to:'Para',from:'De',cardTitle:'Título',message:'Mensagem',
+  upload:'Escolher foto',open:'🎁 Abrir presente',
+  download:'⬇ Baixar PNG',copyLink:'🔗 Copiar link',
+  send:'💌 Enviar',save:'💾 Salvar',
+  shareTitle:'💌 Compartilhe felicidade',copied:'Link copiado!'
+},
 
-fr: [
-  '✦ Partagez amour et joie ✦',
-  'Modèles',
-  'Éditeur',
-  'Des émotions qui <em>prennent vie.</em>',
-  'Créez cartes et messages avec vos propres photos.',
-  '💗 Créer un cadeau',
-  '✨ Voir la magie',
-  '♡ Sans inscription · Vos photos · Gratuit',
-  'Petits chefs-d’œuvre',
-  'Photos et scènes romantiques.',
-  'Tous',
-  'Gratuits',
-  'Premium en aperçu seulement.',
-  'Un cadeau personnel',
-  'Vos photos. Vos mots. Vos émotions.',
-  'Personnaliser',
-  'Pour',
-  'De',
-  'Titre',
-  'Message',
-  'Ajouter photo',
-  'Choisir une photo',
-  '✕ Retirer photo',
-  'Photo dans ce navigateur',
-  'Police',
-  'Forme photo',
-  'Étincelles à l’ouverture',
-  '🎁 Ouvrir',
-  '⬇ Télécharger PNG',
-  '🔗 Lien',
-  '💾 Enregistrer',
-  'La photo est dans le fichier téléchargé, pas dans le lien.',
-  'Aperçu',
-  '🎨 Autre style',
-  '🖨 Imprimer',
-  '👑 Modèle exclusif',
-  'Aperçu Premium seulement. Téléchargement indisponible.',
-  'Détails',
-  'Trois étapes',
-  'Choisir',
-  'Commencez gratuitement.',
-  'Personnaliser',
-  'Ajoutez photo et texte.',
-  'Partager',
-  'Envoyez image ou lien.',
-  'Fait avec amour',
-  'Une surprise pour vous !',
-  'Touchez le cadeau',
-  '💗 Créer le vôtre',
-  'Paiement Premium non disponible. Aucune carte bancaire demandée.',
-  'Compris'
-],
+zh: {
+  navGallery:'贺卡',navEditor:'编辑器',
+  hero:'让情感 <em>鲜活起来。</em>',
+  heroDesc:'用自己的照片制作精美的贺卡与邀请函。',
+  start:'💗 制作贺卡',demo:'✨ 查看惊喜',
+  galleryTitle:'发现美好瞬间',freeNote:'♡ 24款设计全部免费',
+  filterAll:'✨ 全部',filterLove:'❤️ 爱情',
+  filterBirthday:'🎂 生日',filterWedding:'💍 婚礼',
+  filterFlowers:'💐 鲜花',filterCelebrate:'🎉 庆祝',
+  editorTitle:'制作专属爱的故事',
+  to:'收件人',from:'发送人',cardTitle:'标题',message:'留言',
+  upload:'选择照片',open:'🎁 打开礼物',
+  download:'⬇ 下载PNG',copyLink:'🔗 复制链接',
+  send:'💌 发送',save:'💾 保存',
+  shareTitle:'💌 分享快乐',copied:'链接已复制！'
+},
 
-pt: [
-  '✦ Compartilhe amor e alegria ✦',
-  'Modelos',
-  'Editor',
-  'Sentimentos que <em>ganham vida.</em>',
-  'Crie presentes e mensagens com suas fotos.',
-  '💗 Criar presente',
-  '✨ Ver a magia',
-  '♡ Sem cadastro · Suas fotos · Grátis',
-  'Pequenas obras de arte',
-  'Fotos lindas para cada ocasião.',
-  'Todos',
-  'Grátis',
-  'Premium é apenas prévia.',
-  'Faça algo pessoal',
-  'Suas fotos. Suas palavras. Seus sentimentos.',
-  'Personalizar',
-  'Para',
-  'De',
-  'Título',
-  'Mensagem',
-  'Adicionar foto',
-  'Escolher foto',
-  '✕ Remover foto',
-  'Foto permanece no navegador',
-  'Fonte',
-  'Formato da foto',
-  'Brilho mágico',
-  '🎁 Abrir presente',
-  '⬇ Baixar PNG',
-  '🔗 Link',
-  '💾 Salvar',
-  'Foto só aparece na imagem baixada, não no link.',
-  'Prévia',
-  '🎨 Mudar estilo',
-  '🖨 Imprimir',
-  '👑 Modelo exclusivo',
-  'Apenas prévia Premium. Download indisponível.',
-  'Detalhes',
-  'Três passos',
-  'Escolher',
-  'Comece grátis.',
-  'Personalizar',
-  'Adicione foto e texto.',
-  'Compartilhar',
-  'Envie foto ou link.',
-  'Feito com amor',
-  'Uma surpresa para você!',
-  'Toque no presente',
-  '💗 Crie o seu',
-  'Pagamento Premium ainda não disponível. Nenhum cartão solicitado.',
-  'Entendi'
-],
+hi: {
+  navGallery:'कार्ड',navEditor:'एडिटर',
+  hero:'भावनाएँ जो <em>जी उठें।</em>',
+  heroDesc:'अपनी तस्वीरों से सुंदर शुभकामना कार्ड बनाएँ।',
+  start:'💗 कार्ड बनाएँ',demo:'✨ जादू देखें',
+  galleryTitle:'खूबसूरत पल खोजें',
+  freeNote:'♡ सभी 24 डिज़ाइन मुफ्त हैं',
+  filterAll:'✨ सभी',filterLove:'❤️ प्यार',
+  filterBirthday:'🎂 जन्मदिन',filterWedding:'💍 शादी',
+  filterFlowers:'💐 फूल',filterCelebrate:'🎉 उत्सव',
+  editorTitle:'अपनी प्रेम कहानी बनाएँ',
+  to:'किसके लिए',from:'किसकी ओर से',cardTitle:'शीर्षक',
+  message:'संदेश',upload:'फोटो चुनें',open:'🎁 उपहार खोलें',
+  download:'⬇ PNG डाउनलोड',copyLink:'🔗 लिंक कॉपी करें',
+  send:'💌 भेजें',save:'💾 सहेजें',
+  shareTitle:'💌 खुशी बाँटें',copied:'लिंक कॉपी हो गया!'
+},
 
-zh: [
-  '✦ 分享爱与快乐 ✦',
-  '模板',
-  '编辑器',
-  '让情感 <em>鲜活起来。</em>',
-  '用自己的照片制作祝福、情书和邀请函。',
-  '💗 制作礼物',
-  '✨ 体验惊喜',
-  '♡ 无需注册 · 我的照片 · 免费',
-  '小小艺术品',
-  '精美照片和浪漫场景。',
-  '全部',
-  '免费',
-  'Premium 仅供预览，暂不收费。',
-  '制作专属礼物',
-  '你的照片、文字和情感。',
-  '定制礼物',
-  '收件人',
-  '发送人',
-  '标题',
-  '留言',
-  '添加照片',
-  '选择照片',
-  '✕ 删除照片',
-  '照片保留在浏览器',
-  '字体',
-  '照片形状',
-  '打开时显示闪光',
-  '🎁 打开礼物',
-  '⬇ 下载 PNG',
-  '🔗 分享链接',
-  '💾 保存',
-  '照片仅包含在下载图片中，分享链接不含照片。',
-  '实时预览',
-  '🎨 更换风格',
-  '🖨 打印',
-  '👑 独家模板',
-  'Premium 仅供预览，暂不支持下载。',
-  '详情',
-  '三个步骤',
-  '选择',
-  '从免费模板开始。',
-  '个性化',
-  '添加照片和留言。',
-  '分享',
-  '发送图片或链接。',
-  '用爱制作',
-  '有惊喜等着你！',
-  '点击礼物',
-  '💗 自己制作',
-  'Premium 尚未开通付款，我们不会收集银行卡信息。',
-  '明白'
-],
+ar: {
+  navGallery:'البطاقات',navEditor:'المحرر',
+  hero:'مشاعر <em>تنبض بالحياة.</em>',
+  heroDesc:'اصنع بطاقات جميلة باستخدام صورك الشخصية.',
+  start:'💗 اصنع بطاقة',demo:'✨ شاهد السحر',
+  galleryTitle:'اكتشف لحظات جميلة',
+  freeNote:'♡ جميع التصاميم الـ24 مجانية',
+  filterAll:'✨ الكل',filterLove:'❤️ حب',
+  filterBirthday:'🎂 عيد ميلاد',filterWedding:'💍 زفاف',
+  filterFlowers:'💐 زهور',filterCelebrate:'🎉 احتفال',
+  editorTitle:'اصنع قصة حبك',
+  to:'إلى',from:'من',cardTitle:'العنوان',message:'الرسالة',
+  upload:'اختر صورتك',open:'🎁 افتح الهدية',
+  download:'⬇ تنزيل PNG',copyLink:'🔗 نسخ الرابط',
+  send:'💌 إرسال',save:'💾 حفظ',
+  shareTitle:'💌 شارك السعادة',copied:'تم نسخ الرابط!'
+},
 
-hi: [
-  '✦ प्यार और खुशी बाँटें ✦',
-  'टेम्पलेट',
-  'एडिटर',
-  'भावनाएँ जो <em>जी उठें।</em>',
-  'अपनी फोटो से खास शुभकामनाएँ और प्रेम संदेश बनाएँ।',
-  '💗 उपहार बनाएँ',
-  '✨ जादू देखें',
-  '♡ बिना पंजीकरण · अपनी फोटो · मुफ्त',
-  'छोटी कलाकृतियाँ',
-  'हर मौके के लिए सुंदर फोटो।',
-  'सभी',
-  'मुफ्त',
-  'Premium केवल प्रीव्यू है।',
-  'खास बनाएँ',
-  'आपकी फोटो, शब्द और भावनाएँ।',
-  'उपहार बनाएँ',
-  'किसके लिए',
-  'किसकी ओर से',
-  'शीर्षक',
-  'संदेश',
-  'फोटो जोड़ें',
-  'फोटो चुनें',
-  '✕ फोटो हटाएँ',
-  'फोटो ब्राउज़र में रहेगी',
-  'फ़ॉन्ट',
-  'फोटो का आकार',
-  'जादुई चमक',
-  '🎁 उपहार खोलें',
-  '⬇ PNG डाउनलोड',
-  '🔗 लिंक',
-  '💾 सहेजें',
-  'फोटो केवल डाउनलोड की गई छवि में होगी, लिंक में नहीं।',
-  'पूर्वावलोकन',
-  '🎨 डिज़ाइन बदलें',
-  '🖨 प्रिंट',
-  '👑 खास टेम्पलेट',
-  'Premium प्रीव्यू, डाउनलोड बंद है।',
-  'जानकारी',
-  'तीन कदम',
-  'चुनें',
-  'मुफ्त शुरुआत।',
-  'निजी बनाएँ',
-  'फोटो और संदेश जोड़ें।',
-  'साझा करें',
-  'चित्र या लिंक भेजें।',
-  'प्यार से बनाया',
-  'आपके लिए सरप्राइज़!',
-  'उपहार दबाएँ',
-  '💗 खुद बनाएँ',
-  'Premium भुगतान अभी उपलब्ध नहीं; कार्ड जानकारी नहीं ली जाती।',
-  'ठीक है'
-],
+ja: {
+  navGallery:'カード',navEditor:'編集',
+  hero:'気持ちが <em>輝きだす。</em>',
+  heroDesc:'自分の写真で美しいカードや招待状を作成。',
+  start:'💗 カードを作る',demo:'✨ 魔法を見る',
+  galleryTitle:'素敵な瞬間を見つけよう',
+  freeNote:'♡ 24種類すべて無料',
+  filterAll:'✨ すべて',filterLove:'❤️ 愛',
+  filterBirthday:'🎂 誕生日',filterWedding:'💍 結婚式',
+  filterFlowers:'💐 花',filterCelebrate:'🎉 お祝い',
+  editorTitle:'あなただけの物語',
+  to:'相手',from:'差出人',cardTitle:'タイトル',
+  message:'メッセージ',upload:'写真を選択',
+  open:'🎁 ギフトを開く',download:'⬇ PNG保存',
+  copyLink:'🔗 リンクをコピー',send:'💌 送る',
+  save:'💾 保存',shareTitle:'💌 幸せをシェア',
+  copied:'リンクをコピーしました！'
+},
 
-ar: [
-  '✦ شارك الحب والسعادة ✦',
-  'القوالب',
-  'المحرر',
-  'مشاعر <em>تنبض بالحياة.</em>',
-  'اصنع تهاني ورسائل حب بصورك الخاصة.',
-  '💗 اصنع هدية',
-  '✨ شاهد السحر',
-  '♡ دون تسجيل · صورك · مجاناً',
-  'تحف فنية صغيرة',
-  'صور ومشاهد رومانسية جميلة.',
-  'الكل',
-  'مجاني',
-  'Premium للمعاينة فقط.',
-  'اجعلها شخصية',
-  'صورك وكلماتك ومشاعرك.',
-  'خصص الهدية',
-  'إلى',
-  'من',
-  'العنوان',
-  'الرسالة',
-  'أضف صورة',
-  'اختر صورة',
-  '✕ احذف الصورة',
-  'الصورة تبقى في المتصفح',
-  'الخط',
-  'شكل الصورة',
-  'إضافة بريق',
-  '🎁 افتح الهدية',
-  '⬇ تنزيل PNG',
-  '🔗 الرابط',
-  '💾 حفظ',
-  'الصورة في الملف المحمل فقط، وليست في الرابط.',
-  'معاينة',
-  '🎨 تغيير التصميم',
-  '🖨 طباعة',
-  '👑 قالب حصري',
-  'معاينة Premium فقط. التنزيل غير متاح.',
-  'تفاصيل',
-  'ثلاث خطوات',
-  'اختر',
-  'ابدأ مجاناً.',
-  'خصص',
-  'أضف صورة ورسالة.',
-  'شارك',
-  'أرسل صورة أو رابطاً.',
-  'صنع بحب',
-  'مفاجأة بانتظارك!',
-  'افتح الهدية',
-  '💗 اصنع هديتك',
-  'الدفع غير متاح حالياً ولا نطلب معلومات البطاقة.',
-  'حسناً'
-],
+ko: {
+  navGallery:'카드',navEditor:'편집',
+  hero:'마음이 <em>살아나요.</em>',
+  heroDesc:'사진으로 아름다운 카드와 초대장을 만드세요.',
+  start:'💗 카드 만들기',demo:'✨ 마법 보기',
+  galleryTitle:'아름다운 순간을 발견하세요',
+  freeNote:'♡ 24개 디자인 모두 무료',
+  filterAll:'✨ 전체',filterLove:'❤️ 사랑',
+  filterBirthday:'🎂 생일',filterWedding:'💍 결혼',
+  filterFlowers:'💐 꽃',filterCelebrate:'🎉 축하',
+  editorTitle:'나만의 사랑 이야기',
+  to:'받는 사람',from:'보내는 사람',
+  cardTitle:'제목',message:'메시지',
+  upload:'사진 선택',open:'🎁 선물 열기',
+  download:'⬇ PNG 다운로드',copyLink:'🔗 링크 복사',
+  send:'💌 보내기',save:'💾 저장',
+  shareTitle:'💌 행복을 나누세요',copied:'링크 복사 완료!'
+},
 
-ja: [
-  '✦ 愛と幸せをシェア ✦',
-  'テンプレート',
-  '編集',
-  '気持ちが <em>輝きだす。</em>',
-  '自分の写真でお祝いとラブメッセージを作成。',
-  '💗 ギフトを作る',
-  '✨ 魔法を見る',
-  '♡ 登録不要 · 自分の写真 · 無料',
-  '小さなアート作品',
-  '美しい写真とロマンチックな場面。',
-  'すべて',
-  '無料',
-  'Premium はプレビューのみ。',
-  '特別なギフトに',
-  '写真と気持ちを込めて。',
-  'カスタマイズ',
-  '相手',
-  '差出人',
-  'タイトル',
-  'メッセージ',
-  '写真を追加',
-  '写真を選ぶ',
-  '✕ 写真を削除',
-  '写真はブラウザ内に保存',
-  'フォント',
-  '写真の形',
-  '魔法のきらめき',
-  '🎁 ギフトを開く',
-  '⬇ PNG 保存',
-  '🔗 リンク',
-  '💾 保存',
-  '写真はダウンロード画像のみ。リンクに含まれません。',
-  'プレビュー',
-  '🎨 スタイル変更',
-  '🖨 印刷',
-  '👑 限定テンプレート',
-  'Premium はプレビューのみ。保存できません。',
-  '詳細',
-  '3つのステップ',
-  '選ぶ',
-  '無料で始めよう。',
-  'アレンジ',
-  '写真とメッセージを。',
-  'シェア',
-  '画像やリンクで送信。',
-  '愛を込めて',
-  'サプライズがあるよ！',
-  'ギフトをタップ',
-  '💗 自分で作る',
-  'Premium の決済はまだありません。カード情報は不要です。',
-  '了解'
-],
+id: {
+  navGallery:'Kartu',navEditor:'Editor',
+  hero:'Perasaan yang <em>hidup.</em>',
+  heroDesc:'Buat kartu dan undangan indah dengan fotomu.',
+  start:'💗 Buat kartu',demo:'✨ Lihat keajaiban',
+  galleryTitle:'Temukan momen indah',
+  freeNote:'♡ Semua 24 desain gratis',
+  filterAll:'✨ Semua',filterLove:'❤️ Cinta',
+  filterBirthday:'🎂 Ulang tahun',filterWedding:'💍 Pernikahan',
+  filterFlowers:'💐 Bunga',filterCelebrate:'🎉 Perayaan',
+  editorTitle:'Buat cerita cintamu',
+  to:'Untuk',from:'Dari',cardTitle:'Judul',
+  message:'Pesan',upload:'Pilih foto',
+  open:'🎁 Buka hadiah',download:'⬇ Unduh PNG',
+  copyLink:'🔗 Salin tautan',send:'💌 Kirim',
+  save:'💾 Simpan',shareTitle:'💌 Bagikan kebahagiaan',
+  copied:'Tautan disalin!'
+},
 
-ko: [
-  '✦ 사랑과 행복을 나누세요 ✦',
-  '템플릿',
-  '편집',
-  '마음이 <em>살아나요.</em>',
-  '나만의 사진으로 축하와 사랑 메시지를 만드세요.',
-  '💗 선물 만들기',
-  '✨ 마법 보기',
-  '♡ 가입 없음 · 내 사진 · 무료',
-  '작은 예술 작품',
-  '아름다운 사진과 로맨틱한 장면.',
-  '전체',
-  '무료',
-  'Premium은 미리보기 전용입니다.',
-  '특별하게 만들기',
-  '사진과 말, 마음을 담아.',
-  '꾸미기',
-  '받는 사람',
-  '보내는 사람',
-  '제목',
-  '메시지',
-  '사진 추가',
-  '사진 선택',
-  '✕ 사진 삭제',
-  '사진은 브라우저에 보관',
-  '글꼴',
-  '사진 모양',
-  '마법 효과',
-  '🎁 선물 열기',
-  '⬇ PNG 다운로드',
-  '🔗 링크',
-  '💾 저장',
-  '사진은 다운로드 이미지에만 포함됩니다.',
-  '미리보기',
-  '🎨 스타일 변경',
-  '🖨 인쇄',
-  '👑 특별 템플릿',
-  'Premium 미리보기, 다운로드는 아직 안 됩니다.',
-  '자세히',
-  '세 단계',
-  '선택',
-  '무료로 시작.',
-  '꾸미기',
-  '사진과 글 추가.',
-  '공유',
-  '이미지 또는 링크 전송.',
-  '사랑을 담아',
-  '특별한 선물이 있어요!',
-  '선물을 누르세요',
-  '💗 직접 만들기',
-  'Premium 결제는 아직 제공되지 않으며 카드 정보를 받지 않습니다.',
-  '확인'
-],
+tr: {
+  navGallery:'Kartlar',navEditor:'Düzenleyici',
+  hero:'Duygular <em>canlanıyor.</em>',
+  heroDesc:'Fotoğraflarınla güzel kartlar ve davetiyeler oluştur.',
+  start:'💗 Kart oluştur',demo:'✨ Sihri gör',
+  galleryTitle:'Güzel anları keşfet',
+  freeNote:'♡ 24 tasarımın tamamı ücretsiz',
+  filterAll:'✨ Tümü',filterLove:'❤️ Aşk',
+  filterBirthday:'🎂 Doğum günü',filterWedding:'💍 Düğün',
+  filterFlowers:'💐 Çiçekler',filterCelebrate:'🎉 Kutlama',
+  editorTitle:'Aşk hikâyeni oluştur',
+  to:'Kime',from:'Kimden',cardTitle:'Başlık',
+  message:'Mesaj',upload:'Fotoğraf seç',
+  open:'🎁 Hediyeyi aç',download:'⬇ PNG indir',
+  copyLink:'🔗 Bağlantıyı kopyala',send:'💌 Gönder',
+  save:'💾 Kaydet',shareTitle:'💌 Mutluluğu paylaş',
+  copied:'Bağlantı kopyalandı!'
+},
 
-id: [
-  '✦ Bagikan cinta dan bahagia ✦',
-  'Templat',
-  'Editor',
-  'Perasaan yang <em>hidup.</em>',
-  'Buat ucapan cinta dengan foto pribadimu.',
-  '💗 Buat hadiah',
-  '✨ Lihat keajaiban',
-  '♡ Tanpa akun · Foto sendiri · Gratis',
-  'Karya seni kecil',
-  'Foto indah untuk setiap momen.',
-  'Semua',
-  'Gratis',
-  'Premium hanya pratinjau.',
-  'Buat lebih personal',
-  'Foto, kata dan perasaanmu.',
-  'Atur hadiah',
-  'Untuk',
-  'Dari',
-  'Judul',
-  'Pesan',
-  'Tambah foto',
-  'Pilih foto',
-  '✕ Hapus foto',
-  'Foto tetap di browser',
-  'Font',
-  'Bentuk foto',
-  'Kilau saat dibuka',
-  '🎁 Buka hadiah',
-  '⬇ Unduh PNG',
-  '🔗 Tautan',
-  '💾 Simpan',
-  'Foto hanya dalam gambar yang diunduh, bukan tautan.',
-  'Pratinjau',
-  '🎨 Ganti gaya',
-  '🖨 Cetak',
-  '👑 Templat eksklusif',
-  'Premium hanya pratinjau. Belum bisa diunduh.',
-  'Detail',
-  'Tiga langkah',
-  'Pilih',
-  'Mulai gratis.',
-  'Personal',
-  'Tambah foto dan pesan.',
-  'Bagikan',
-  'Kirim gambar atau tautan.',
-  'Dibuat dengan cinta',
-  'Ada kejutan untukmu!',
-  'Ketuk hadiah',
-  '💗 Buat sendiri',
-  'Pembayaran Premium belum aktif. Kami tidak meminta data kartu.',
-  'Mengerti'
-],
-
-tr: [
-  '✦ Sevgi ve mutluluk paylaş ✦',
-  'Şablonlar',
-  'Düzenleyici',
-  'Duygular <em>canlanıyor.</em>',
-  'Fotoğraflarınla tebrik ve aşk mesajları hazırla.',
-  '💗 Hediye oluştur',
-  '✨ Sihri gör',
-  '♡ Üyelik yok · Fotoğrafın · Ücretsiz',
-  'Küçük sanat eserleri',
-  'Her an için güzel fotoğraflar.',
-  'Tümü',
-  'Ücretsiz',
-  'Premium sadece önizleme.',
-  'Kişisel hale getir',
-  'Fotoğrafın, sözlerin, duyguların.',
-  'Hediyeyi düzenle',
-  'Kime',
-  'Kimden',
-  'Başlık',
-  'Mesajın',
-  'Fotoğraf ekle',
-  'Fotoğraf seç',
-  '✕ Fotoğrafı sil',
-  'Fotoğraf tarayıcıda kalır',
-  'Yazı tipi',
-  'Fotoğraf şekli',
-  'Işıltı efekti',
-  '🎁 Hediyeyi aç',
-  '⬇ PNG indir',
-  '🔗 Bağlantı',
-  '💾 Kaydet',
-  'Fotoğraf indirilen görselde yer alır, bağlantıda yoktur.',
-  'Önizleme',
-  '🎨 Stili değiştir',
-  '🖨 Yazdır',
-  '👑 Özel şablon',
-  'Premium önizleme. İndirme henüz yok.',
-  'Detay',
-  'Üç adım',
-  'Seç',
-  'Ücretsiz başla.',
-  'Kişiselleştir',
-  'Fotoğraf ve mesaj ekle.',
-  'Paylaş',
-  'Görsel veya bağlantı gönder.',
-  'Sevgiyle yapıldı',
-  'Sana sürpriz var!',
-  'Hediyeye dokun',
-  '💗 Kendin oluştur',
-  'Premium ödemeleri henüz açık değil. Kart bilgisi istemiyoruz.',
-  'Anladım'
-],
-
-it: [
-  '✦ Condividi amore e felicità ✦',
-  'Modelli',
-  'Editor',
-  'Emozioni che <em>prendono vita.</em>',
-  'Crea auguri e messaggi d’amore con le tue foto.',
-  '💗 Crea un regalo',
-  '✨ Vedi la magia',
-  '♡ Senza account · Foto tue · Gratis',
-  'Piccoli capolavori',
-  'Belle foto per ogni occasione.',
-  'Tutti',
-  'Gratis',
-  'Premium è solo anteprima.',
-  'Rendilo personale',
-  'Le tue foto, parole ed emozioni.',
-  'Personalizza',
-  'Per',
-  'Da',
-  'Titolo',
-  'Messaggio',
-  'Aggiungi foto',
-  'Scegli foto',
-  '✕ Rimuovi foto',
-  'La foto resta nel browser',
-  'Font',
-  'Forma foto',
-  'Scintille all’apertura',
-  '🎁 Apri regalo',
-  '⬇ Scarica PNG',
-  '🔗 Link',
-  '💾 Salva',
-  'La foto è solo nell’immagine scaricata, non nel link.',
-  'Anteprima',
-  '🎨 Cambia stile',
-  '🖨 Stampa',
-  '👑 Modello esclusivo',
-  'Solo anteprima Premium, download non attivo.',
-  'Dettagli',
-  'Tre passi',
-  'Scegli',
-  'Inizia gratis.',
-  'Personalizza',
-  'Aggiungi foto e testo.',
-  'Condividi',
-  'Invia immagine o link.',
-  'Fatto con amore',
-  'Una sorpresa per te!',
-  'Apri il regalo',
-  '💗 Crea il tuo',
-  'Il pagamento Premium non è ancora disponibile. Nessun dato bancario richiesto.',
-  'Capito'
-]
+it: {
+  navGallery:'Biglietti',navEditor:'Editor',
+  hero:'Emozioni che <em>prendono vita.</em>',
+  heroDesc:'Crea bellissimi biglietti e inviti con le tue foto.',
+  start:'💗 Crea biglietto',demo:'✨ Guarda la magia',
+  galleryTitle:'Scopri momenti meravigliosi',
+  freeNote:'♡ Tutti i 24 modelli sono gratuiti',
+  filterAll:'✨ Tutti',filterLove:'❤️ Amore',
+  filterBirthday:'🎂 Compleanno',filterWedding:'💍 Matrimonio',
+  filterFlowers:'💐 Fiori',filterCelebrate:'🎉 Festa',
+  editorTitle:'Crea la tua storia d’amore',
+  to:'Per',from:'Da',cardTitle:'Titolo',
+  message:'Messaggio',upload:'Scegli foto',
+  open:'🎁 Apri regalo',download:'⬇ Scarica PNG',
+  copyLink:'🔗 Copia link',send:'💌 Invia',
+  save:'💾 Salva',shareTitle:'💌 Condividi felicità',
+  copied:'Link copiato!'
+}
 
 };
 
-/* НАЗВАНИЯ ШАБЛОНОВ */
+/* =====================================================
+   СОСТОЯНИЕ РЕДАКТОРА
+   ===================================================== */
 
-const templateNames = {
-  ru: [
-    'Розы и любовь',
-    'День рождения',
-    'Золотой праздник',
-    'Цветы благодарности',
-    'Бархатная любовь',
-    'Роскошные цветы',
-    'Золотой закат',
-    'Морской бриз'
-  ],
-  en: [
-    'Rose Romance',
-    'Birthday Joy',
-    'Golden Party',
-    'Thank You Flowers',
-    'Velvet Love',
-    'Luxury Flowers',
-    'Golden Sunset',
-    'Ocean Breeze'
-  ],
-  de: [
-    'Rosenliebe',
-    'Geburtstag',
-    'Goldene Feier',
-    'Dankesblumen',
-    'Samtliebe',
-    'Luxusblumen',
-    'Goldener Abend',
-    'Meeresbrise'
-  ]
-};
-
-const titles = {
-  ru: [
-    'С днём рождения!',
-    'С любовью для тебя',
-    'Ты приглашён!',
-    'Спасибо от всего сердца!'
-  ],
-  en: [
-    'Happy birthday!',
-    'With all my love',
-    'You are invited!',
-    'Thank you so much!'
-  ],
-  de: [
-    'Alles Gute zum Geburtstag!',
-    'Von Herzen für dich',
-    'Du bist eingeladen!',
-    'Vielen Dank!'
-  ]
-};
-
-/* СОСТОЯНИЕ РЕДАКТОРА */
-
-const fresh = () => ({
-  id: 'roses',
-  to: '',
-  from: '',
-  title: '',
-  message: '',
-  font: 'classic',
-  shape: 'round',
-  spark: true
+const blank = () => ({
+  id:'roses',
+  to:'',
+  from:'',
+  title:'',
+  message:'',
+  font:'classic',
+  shape:'round',
+  spark:true
 });
 
-let state = fresh();
+let state = blank();
 let photo = '';
 let lang = 'ru';
 let filter = 'all';
-let shared = false;
+let receivedGift = false;
+let shareURL = '';
 
-const tr = k => (
-  Object.fromEntries(
-    KEYS.map((a, i) => [a, (LANG[lang] || LANG.en)[i]])
-  )
-)[k];
+function tr(key) {
+  return (
+    translations[lang] &&
+    translations[lang][key]
+  ) || translations.en[key] || translations.ru[key] || '';
+}
 
-const current = () =>
-  photos.find(x => x[0] === state.id) || photos[0];
+function current() {
+  return templates.find(x => x.id === state.id) || templates[0];
+}
 
-function localGet(k) {
+function getStored(key) {
   try {
-    return localStorage.getItem(k);
+    return localStorage.getItem(key);
   } catch {
     return null;
   }
 }
 
-function localSet(k, v) {
+function setStored(key,value) {
   try {
-    localStorage.setItem(k, v);
+    localStorage.setItem(key,value);
     return true;
   } catch {
     return false;
   }
 }
 
-/* ПЕРЕВОД САЙТА */
-
-function translate() {
-  document.documentElement.lang =
-    lang === 'zh' ? 'zh-CN' : lang;
-
-  document.documentElement.dir =
-    lang === 'ar' ? 'rtl' : 'ltr';
-
-  $('lang').value = lang;
-
-  document.querySelectorAll('[data-t]').forEach(el => {
-    const key = el.dataset.t;
-    el.textContent = tr(key) || el.textContent;
-  });
-
-  $('heroText').innerHTML = tr('hero');
-
-  renderTiles();
-  render();
-
-  if ($('shareOverlay').classList.contains('show')) {
-    updateShareUI();
-  }
+function status(message) {
+  $('status').textContent = message || '';
 }
 
-/* СОЗДАНИЕ ГАЛЕРЕИ */
+/* =====================================================
+   ЯЗЫКИ
+   ===================================================== */
 
-function renderTiles() {
+function translate() {
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+  $('language').value = lang;
+
+  document.querySelectorAll('[data-t]').forEach(el => {
+    el.textContent = tr(el.dataset.t);
+  });
+
+  $('heroTitle').innerHTML = tr('hero');
+
+  renderGallery();
+  renderCard($('card'));
+}
+
+/* =====================================================
+   ГАЛЕРЕЯ
+   ===================================================== */
+
+function renderGallery() {
   $('templates').replaceChildren();
 
-  photos.forEach((item, i) => {
-    if (filter === 'free' && item[4]) return;
-    if (filter === 'premium' && !item[4]) return;
+  templates.forEach(item => {
+    if (filter !== 'all' && item.cat !== filter) return;
 
-    const b = document.createElement('button');
-    b.className = 'tile' +
-      (state.id === item[0] ? ' active' : '');
+    const button = document.createElement('button');
 
-    b.type = 'button';
+    button.type = 'button';
+    button.className =
+      'tile' + (state.id === item.id ? ' active' : '');
 
-    const name =
-      (templateNames[lang] || templateNames.en)[i];
-
-    b.innerHTML = `
+    button.innerHTML = `
       <div class="tile-image">
         <img loading="lazy" alt="">
-        <span class="tile-icon"></span>
+        <span class="tile-stamp">♡ FREE</span>
+        <span class="tile-emoji"></span>
         <span class="tile-word"></span>
-        <span class="tile-label"></span>
       </div>
       <div class="tile-bottom">
-        <span></span><i></i>
+        <span class="tile-title"></span>
+        <span class="tile-arrow">↗</span>
       </div>
     `;
 
-    b.querySelector('img').src =
-      imageURL(item[1], 550);
+    const image = button.querySelector('img');
+    image.src = imageURL(item.img,600);
+    image.alt = item.name;
 
-    b.querySelector('.tile-icon').textContent =
-      item[2];
+    image.onerror = () => {
+      image.style.display = 'none';
+      button.querySelector('.tile-image').style.background =
+        `linear-gradient(130deg,${item.color},#8464bd)`;
+    };
 
-    b.querySelector('.tile-word').textContent =
-      name;
+    button.querySelector('.tile-emoji').textContent =
+      item.emoji;
 
-    b.querySelector('.tile-label').textContent =
-      item[4] ? '✦ PREMIUM' : '♡ FREE';
+    button.querySelector('.tile-word').textContent =
+      item.name;
 
-    b.querySelector('.tile-bottom span').textContent =
-      name;
+    button.querySelector('.tile-title').textContent =
+      item.name;
 
-    b.querySelector('.tile-bottom i').textContent =
-      item[4] ? 'PREMIUM' : 'FREE';
-
-    b.addEventListener('click', () => {
-      state.id = item[0];
+    button.addEventListener('click',() => {
+      state.id = item.id;
       state.title = '';
       $('title').value = '';
 
-      render();
+      renderGallery();
+      renderCard($('card'));
 
       $('editor').scrollIntoView({
-        behavior: 'smooth'
+        behavior:'smooth'
       });
-
-      if (item[4]) setStatus('premium');
     });
 
-    $('templates').append(b);
+    $('templates').append(button);
   });
 }
 
-/* ЖИВАЯ ОТКРЫТКА */
+/* =====================================================
+   ПРЕДПРОСМОТР ОТКРЫТКИ
+   ===================================================== */
 
 function renderCard(el) {
   const item = current();
 
-  el.classList.toggle('premium', Boolean(item[4]));
-  el.classList.toggle('has-photo', Boolean(photo));
-
-  el.style.background = item[5];
+  el.classList.toggle('has-photo',Boolean(photo));
+  el.style.background = item.color;
 
   el.querySelector('.card-bg').style.backgroundImage =
-    `url("${imageURL(item[1], 1200)}")`;
+    `url("${imageURL(item.img,1200)}")`;
 
-  el.querySelector('.card-emoji').textContent = item[2];
+  el.querySelector('.card-emoji').textContent =
+    item.emoji;
 
-  el.querySelector('.card-photo').src = photo || '';
+  const photoEl = el.querySelector('.card-photo');
 
-  el.querySelector('.card-photo')
-    .classList.toggle('square', state.shape === 'square');
+  photoEl.src = photo || '';
+  photoEl.classList.toggle(
+    'square',
+    state.shape === 'square'
+  );
 
   el.querySelector('.card-kicker').textContent =
     state.to || '♡ DEARLYSTUDIO ♡';
 
   el.querySelector('h4').textContent =
-    state.title ||
-    (titles[lang] || titles.en)[item[3]];
+    state.title || item.title;
 
   el.querySelector('h4').style.fontFamily =
     state.font === 'classic'
@@ -2350,259 +2178,203 @@ function renderCard(el) {
         : 'system-ui,sans-serif';
 
   el.querySelector('p').textContent =
-    state.message ||
-    (lang === 'ru'
-      ? 'Пусть каждый день дарит радость и незабываемые моменты!'
-      : 'May every day bring joy and wonderful moments!');
+    state.message || tr('defaultMessage');
 
   el.querySelector('.card-from').textContent =
-    state.from
-      ? (lang === 'ru' ? 'От: ' : 'From: ') + state.from
-      : '';
+    state.from ? state.from : '';
 }
 
-function render() {
-  renderCard($('card'));
-
-  $('premiumBox').classList.toggle(
-    'visible',
-    Boolean(current()[4])
-  );
-
-  document.querySelectorAll('.tile').forEach(b => {
-    const selectedIndex = photos.findIndex(
-      x => x[0] === state.id
-    );
-
-    b.classList.toggle(
-      'active',
-      b.querySelector('.tile-bottom span').textContent ===
-      (templateNames[lang] || templateNames.en)[selectedIndex]
-    );
-  });
-}
-
-function read() {
-  state.to = $('recipient').value;
-  state.from = $('sender').value;
+function readFields() {
+  state.to = $('to').value;
+  state.from = $('from').value;
   state.title = $('title').value;
   state.message = $('message').value;
   state.font = $('font').value;
   state.shape = $('shape').value;
   state.spark = $('spark').checked;
 
-  render();
+  renderCard($('card'));
 }
 
-function fill() {
-  [
-    ['recipient', 'to'],
-    ['sender', 'from'],
-    ['title', 'title'],
-    ['message', 'message'],
-    ['font', 'font'],
-    ['shape', 'shape']
-  ].forEach(([el, k]) => {
-    $(el).value = state[k];
-  });
-
+function fillFields() {
+  $('to').value = state.to;
+  $('from').value = state.from;
+  $('title').value = state.title;
+  $('message').value = state.message;
+  $('font').value = state.font;
+  $('shape').value = state.shape;
   $('spark').checked = state.spark;
-  render();
+
+  renderCard($('card'));
 }
-
-/* СООБЩЕНИЯ */
-
-function setStatus(key) {
-  const messages = {
-    ru: {
-      premium: 'Платный шаблон пока доступен только для просмотра.',
-      bad: 'Выбери JPG, PNG или WebP до 8 МБ.',
-      photo: 'Фото добавлено!',
-      remove: 'Фото удалено.',
-      saved: 'Черновик сохранён без фотографии.',
-      error: 'Не удалось сохранить.',
-      shared: 'Ссылка скопирована!',
-      noPhoto: 'Ссылка скопирована без фото. Скачай изображение, чтобы отправить его с фотографией.',
-      download: 'Открытка скачана!'
-    },
-    en: {
-      premium: 'Premium is preview-only.',
-      bad: 'Choose JPG, PNG or WebP under 8 MB.',
-      photo: 'Photo added!',
-      remove: 'Photo removed.',
-      saved: 'Draft saved without photo.',
-      error: 'Could not save.',
-      shared: 'Link copied!',
-      noPhoto: 'Link copied without photo. Download the card image to share the photo.',
-      download: 'Card downloaded!'
-    }
-  };
-
-  $('status').textContent =
-    (messages[lang] || messages.en)[key] || '';
-}
-
-/* РЕАКЦИЯ НА ПОЛЯ */
 
 [
-  'recipient',
-  'sender',
-  'title',
-  'message',
-  'font',
-  'shape',
-  'spark'
-].forEach(x => {
-  $(x).addEventListener('input', read);
+  'to','from','title','message',
+  'font','shape','spark'
+].forEach(id => {
+  $(id).addEventListener('input',readFields);
+  $(id).addEventListener('change',readFields);
 });
 
-$('lang').addEventListener('change', e => {
+$('language').addEventListener('change',e => {
   lang = e.target.value;
-  localSet('dearly-language', lang);
+  setStored('dearly-language',lang);
   translate();
 });
 
-document.querySelectorAll('[data-filter]').forEach(b => {
-  b.addEventListener('click', () => {
-    filter = b.dataset.filter;
+document.querySelectorAll('[data-filter]').forEach(button => {
+  button.addEventListener('click',() => {
+    filter = button.dataset.filter;
 
-    document.querySelectorAll('[data-filter]').forEach(a => {
-      a.classList.toggle('active', a === b);
+    document.querySelectorAll('[data-filter]').forEach(b => {
+      b.classList.toggle('active',b === button);
     });
 
-    renderTiles();
+    renderGallery();
   });
 });
 
-$('change').addEventListener('click', () => {
-  $('gallery').scrollIntoView({ behavior: 'smooth' });
+$('anotherStyle').addEventListener('click',() => {
+  $('gallery').scrollIntoView({behavior:'smooth'});
 });
 
-/* ЗАГРУЗКА СОБСТВЕННОГО ФОТО */
+/* =====================================================
+   ЗАГРУЗКА ФОТО
+   ===================================================== */
 
-$('photoInput').addEventListener('change', async e => {
+$('photoInput').addEventListener('change',async e => {
   const file = e.target.files[0];
   if (!file) return;
 
   if (
-    !['image/png','image/jpeg','image/webp'].includes(file.type) ||
+    !['image/jpeg','image/png','image/webp'].includes(file.type) ||
     file.size > 8 * 1024 * 1024
   ) {
-    setStatus('bad');
+    status(tr('invalidPhoto'));
     return;
   }
 
   try {
-    const im = new Image();
-    const u = URL.createObjectURL(file);
+    const image = new Image();
+    const url = URL.createObjectURL(file);
 
     try {
-      await new Promise((ok, fail) => {
-        im.onload = ok;
-        im.onerror = fail;
-        im.src = u;
+      await new Promise((resolve,reject) => {
+        image.onload = resolve;
+        image.onerror = reject;
+        image.src = url;
       });
 
       const scale = Math.min(
         1,
-        1000 / Math.max(im.naturalWidth, im.naturalHeight)
+        1000 / Math.max(image.naturalWidth,image.naturalHeight)
       );
 
-      const c = document.createElement('canvas');
-      c.width = Math.round(im.naturalWidth * scale);
-      c.height = Math.round(im.naturalHeight * scale);
+      const canvas = document.createElement('canvas');
 
-      const g = c.getContext('2d');
-      g.fillStyle = 'white';
-      g.fillRect(0, 0, c.width, c.height);
-      g.drawImage(im, 0, 0, c.width, c.height);
+      canvas.width = Math.max(
+        1,Math.round(image.naturalWidth * scale)
+      );
 
-      photo = c.toDataURL('image/jpeg', .82);
+      canvas.height = Math.max(
+        1,Math.round(image.naturalHeight * scale)
+      );
 
-      render();
-      setStatus('photo');
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(image,0,0,canvas.width,canvas.height);
+
+      photo = canvas.toDataURL('image/jpeg',.85);
+
+      renderCard($('card'));
+      status(tr('photoAdded'));
 
     } finally {
-      URL.revokeObjectURL(u);
+      URL.revokeObjectURL(url);
     }
 
   } catch {
-    setStatus('bad');
+    status(tr('invalidPhoto'));
   }
 });
 
-$('removePhoto').addEventListener('click', () => {
+$('removePhoto').addEventListener('click',() => {
   photo = '';
   $('photoInput').value = '';
-
-  render();
-  setStatus('remove');
+  renderCard($('card'));
+  status(tr('photoRemoved'));
 });
 
-/* СОХРАНЕНИЕ ЧЕРНОВИКА */
+/* =====================================================
+   СОХРАНЕНИЕ
+   ===================================================== */
 
-$('save').addEventListener('click', () => {
-  read();
+$('save').addEventListener('click',() => {
+  readFields();
 
-  const success = localSet(
+  const ok = setStored(
     'dearly-draft',
     JSON.stringify(state)
   );
 
-  setStatus(success ? 'saved' : 'error');
+  status(ok ? tr('saved') : tr('error'));
 });
 
-/* МОДАЛЬНЫЕ ОКНА */
+/* =====================================================
+   АНИМАЦИЯ ПОДАРКА
+   ===================================================== */
 
-function openOverlay(id) {
+function showOverlay(id) {
   $(id).classList.add('show');
   document.body.style.overflow = 'hidden';
 }
 
 function closeOverlay(id) {
   $(id).classList.remove('show');
-  document.body.style.overflow = '';
-}
 
-function premium() {
-  openOverlay('premiumOverlay');
-}
-
-function reveal() {
-  if (current()[4]) {
-    premium();
-    return;
+  if (!document.querySelector('.overlay.show')) {
+    document.body.style.overflow = '';
   }
+}
 
-  const copy = $('card').cloneNode(true);
-  copy.removeAttribute('id');
+function revealGift() {
+  const card = $('card').cloneNode(true);
+  card.removeAttribute('id');
 
-  $('giftCard').replaceChildren(copy);
+  $('giftCard').replaceChildren(card);
 
   $('giftModal').classList.remove('opened');
-  openOverlay('giftOverlay');
+  showOverlay('giftOverlay');
 }
 
-/* ОТКРЫТИЕ ПОДАРКА */
-
-$('open').addEventListener('click', reveal);
-
-$('demo').addEventListener('click', () => {
-  const old = state;
-
-  state = {
-    ...fresh(),
-    id: 'birthday'
-  };
-
-  render();
-  reveal();
-
-  state = old;
-  render();
+$('open').addEventListener('click',() => {
+  readFields();
+  revealGift();
 });
 
-$('giftButton').addEventListener('click', () => {
+$('demo').addEventListener('click',() => {
+  const oldState = {...state};
+  const oldPhoto = photo;
+
+  state = {
+    ...blank(),
+    id:'birthday',
+    title:'A Special Surprise!',
+    message:'Made with love ♡'
+  };
+
+  photo = '';
+  renderCard($('card'));
+  revealGift();
+
+  state = oldState;
+  photo = oldPhoto;
+  renderCard($('card'));
+});
+
+$('giftButton').addEventListener('click',() => {
   $('giftModal').classList.add('opened');
 
   if (
@@ -2610,695 +2382,492 @@ $('giftButton').addEventListener('click', () => {
     matchMedia('(prefers-reduced-motion:reduce)').matches
   ) return;
 
-  for (let i = 0; i < 35; i++) {
-    const el = document.createElement('span');
+  for (let i=0; i<40; i++) {
+    const sparkle = document.createElement('span');
 
-    el.className = 'burst';
-    el.textContent = ['✨','💖','✦','💫'][i % 4];
+    sparkle.className = 'sparkle';
+    sparkle.textContent =
+      ['✨','💖','💫','🌟','💕'][i%5];
 
-    el.style.left = '50%';
-    el.style.top = '50%';
+    sparkle.style.left = '50%';
+    sparkle.style.top = '50%';
 
-    const a = Math.random() * Math.PI * 2;
-    const d = 80 + Math.random() * 250;
+    const angle = Math.random()*Math.PI*2;
+    const distance = 80+Math.random()*260;
 
-    el.style.setProperty(
+    sparkle.style.setProperty(
       '--x',
-      Math.cos(a) * d + 'px'
+      Math.cos(angle)*distance+'px'
     );
 
-    el.style.setProperty(
+    sparkle.style.setProperty(
       '--y',
-      Math.sin(a) * d + 'px'
+      Math.sin(angle)*distance+'px'
     );
 
-    document.body.append(el);
+    document.body.append(sparkle);
 
-    setTimeout(() => el.remove(), 1500);
+    setTimeout(() => sparkle.remove(),1400);
   }
 });
 
-$('closeGift').addEventListener('click', () => {
+$('closeGift').addEventListener('click',() => {
   closeOverlay('giftOverlay');
 });
 
-$('createOwn').addEventListener('click', () => {
+$('createOwn').addEventListener('click',() => {
   closeOverlay('giftOverlay');
 
   history.replaceState(
-    null,
-    '',
-    location.pathname + '#editor'
+    null,'',location.pathname+'#editor'
   );
 
-  $('editor').scrollIntoView({
-    behavior: 'smooth'
-  });
+  $('editor').scrollIntoView({behavior:'smooth'});
 });
 
-/* PREMIUM */
+/* =====================================================
+   ССЫЛКА И ОТПРАВКА — ДВЕ ОТДЕЛЬНЫЕ КНОПКИ
+   ===================================================== */
 
-$('premiumDetails').addEventListener('click', premium);
+function makeGiftURL() {
+  readFields();
 
-$('closePremium').addEventListener('click', () => {
-  closeOverlay('premiumOverlay');
-});
+  const url = new URL(location.href);
 
-$('premiumOK').addEventListener('click', () => {
-  closeOverlay('premiumOverlay');
-});
+  url.search = '';
+  url.hash = '';
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeOverlay('giftOverlay');
-    closeOverlay('premiumOverlay');
-    closeOverlay('shareOverlay');
-  }
-});
+  /* В ссылку передаются текст и дизайн, не фотография */
+  url.searchParams.set(
+    'gift',
+    JSON.stringify(state)
+  );
 
-$('print').addEventListener('click', () => {
-  if (current()[4]) premium();
-  else window.print();
-});
-
-/* МЕЖДУНАРОДНАЯ ОТПРАВКА ОТКРЫТОК */
-
-const SHARE_LANG = {
-  ru: [
-    '💌 Поделиться подарком',
-    'Выбери, куда отправить свою открытку.',
-    '🔗 Копировать ссылку',
-    '📲 Ещё приложения',
-    '📷 Ссылка не содержит загруженное фото. Чтобы отправить фото, скачай PNG.',
-    'Ссылка скопирована!',
-    'Ссылка скопирована! Открой приложение и вставь её.',
-    'Не удалось скопировать автоматически. Скопируй ссылку из появившегося окна.'
-  ],
-  en: [
-    '💌 Share your gift',
-    'Choose where to send your card.',
-    '🔗 Copy link',
-    '📲 More apps',
-    '📷 The link does not include uploaded photos. Download the PNG to send a card with your photo.',
-    'Link copied!',
-    'Link copied! Open the app and paste it.',
-    'Copy the link from the popup.'
-  ],
-  de: [
-    '💌 Geschenk teilen',
-    'Wohin möchtest du deine Karte senden?',
-    '🔗 Link kopieren',
-    '📲 Weitere Apps',
-    '📷 Dein hochgeladenes Foto ist nicht im Link enthalten. Lade das PNG herunter, um es mit Foto zu versenden.',
-    'Link kopiert!',
-    'Link kopiert! Öffne die App und füge ihn ein.',
-    'Kopiere den Link im Fenster.'
-  ],
-  es: [
-    '💌 Compartir regalo',
-    'Elige dónde enviar tu tarjeta.',
-    '🔗 Copiar enlace',
-    '📲 Más apps',
-    '📷 El enlace no incluye tu foto. Descarga el PNG para enviarla.',
-    '¡Enlace copiado!',
-    '¡Copiado! Abre la aplicación y pega el enlace.',
-    'Copia el enlace de la ventana.'
-  ],
-  fr: [
-    '💌 Partager le cadeau',
-    'Choisissez où envoyer votre carte.',
-    '🔗 Copier le lien',
-    '📲 Autres applications',
-    '📷 La photo ajoutée ne figure pas dans le lien. Téléchargez le PNG pour la partager.',
-    'Lien copié !',
-    'Lien copié ! Ouvrez l’application et collez-le.',
-    'Copiez le lien affiché.'
-  ],
-  pt: [
-    '💌 Compartilhar presente',
-    'Escolha onde enviar o cartão.',
-    '🔗 Copiar link',
-    '📲 Mais apps',
-    '📷 A foto enviada não aparece no link. Baixe o PNG para enviar com a foto.',
-    'Link copiado!',
-    'Copiado! Abra o app e cole o link.',
-    'Copie o link da janela.'
-  ],
-  zh: [
-    '💌 分享礼物',
-    '选择要发送贺卡的应用。',
-    '🔗 复制链接',
-    '📲 更多应用',
-    '📷 链接不包含上传的照片。如需分享照片，请下载 PNG。',
-    '链接已复制！',
-    '链接已复制！打开应用并粘贴。',
-    '请从弹窗复制链接。'
-  ],
-  hi: [
-    '💌 उपहार साझा करें',
-    'कार्ड भेजने के लिए ऐप चुनें।',
-    '🔗 लिंक कॉपी करें',
-    '📲 और ऐप्स',
-    '📷 लिंक में अपलोड की गई फ़ोटो नहीं होगी। फ़ोटो भेजने के लिए PNG डाउनलोड करें।',
-    'लिंक कॉपी हो गया!',
-    'लिंक कॉपी हुआ! ऐप में पेस्ट करें।',
-    'पॉपअप से लिंक कॉपी करें।'
-  ],
-  ar: [
-    '💌 شارك هديتك',
-    'اختر أين ترسل البطاقة.',
-    '🔗 نسخ الرابط',
-    '📲 تطبيقات أخرى',
-    '📷 الرابط لا يحتوي على الصورة المرفوعة. نزّل ملف PNG لإرسالها.',
-    'تم نسخ الرابط!',
-    'تم نسخ الرابط! افتح التطبيق والصقه.',
-    'انسخ الرابط من النافذة.'
-  ],
-  ja: [
-    '💌 ギフトをシェア',
-    'カードの送信先を選んでください。',
-    '🔗 リンクをコピー',
-    '📲 その他のアプリ',
-    '📷 リンクにはアップロードした写真は含まれません。写真付きは PNG を保存して送信してください。',
-    'リンクをコピーしました！',
-    'コピーしました！アプリで貼り付けてください。',
-    '表示されたリンクをコピーしてください。'
-  ],
-  ko: [
-    '💌 선물 공유하기',
-    '카드를 보낼 앱을 선택하세요.',
-    '🔗 링크 복사',
-    '📲 다른 앱',
-    '📷 링크에는 업로드한 사진이 포함되지 않습니다. 사진을 보내려면 PNG를 다운로드하세요.',
-    '링크 복사 완료!',
-    '복사 완료! 앱에서 붙여넣으세요.',
-    '팝업에서 링크를 복사하세요.'
-  ],
-  id: [
-    '💌 Bagikan hadiah',
-    'Pilih aplikasi untuk mengirim kartu.',
-    '🔗 Salin tautan',
-    '📲 Aplikasi lain',
-    '📷 Foto yang diunggah tidak ada di tautan. Unduh PNG untuk mengirim foto.',
-    'Tautan disalin!',
-    'Disalin! Buka aplikasi dan tempel tautannya.',
-    'Salin tautan dari jendela.'
-  ],
-  tr: [
-    '💌 Hediyeyi paylaş',
-    'Kartını göndereceğin uygulamayı seç.',
-    '🔗 Bağlantıyı kopyala',
-    '📲 Diğer uygulamalar',
-    '📷 Yüklenen fotoğraf bağlantıda yok. Fotoğrafla göndermek için PNG indir.',
-    'Bağlantı kopyalandı!',
-    'Kopyalandı! Uygulamayı açıp yapıştır.',
-    'Bağlantıyı pencereden kopyala.'
-  ],
-  it: [
-    '💌 Condividi il regalo',
-    'Scegli dove inviare il biglietto.',
-    '🔗 Copia link',
-    '📲 Altre app',
-    '📷 Il link non contiene la foto caricata. Scarica il PNG per inviarla.',
-    'Link copiato!',
-    'Copiato! Apri l’app e incolla il link.',
-    'Copia il link dalla finestra.'
-  ]
-};
-
-const shareText = i =>
-  (SHARE_LANG[lang] || SHARE_LANG.en)[i];
-
-let giftURL = '';
-
-function createGiftURL() {
-  read();
-
-  const u = new URL(location.href);
-  u.hash = '';
-  u.search = '';
-
-  /* В ссылку входят текст и настройки, но не фотография */
-  u.searchParams.set('gift', JSON.stringify(state));
-
-  return u.href;
+  return url.href;
 }
 
-function updateShareUI() {
-  $('shareHeading').textContent = shareText(0);
-  $('shareSub').textContent = shareText(1);
-  $('copyGift').textContent = shareText(2);
-  $('nativeShare').textContent = shareText(3);
-  $('sharePhotoWarning').textContent = shareText(4);
-
-  $('nativeShare').hidden =
-    typeof navigator.share !== 'function';
-}
-
-async function copyGiftURL(messageIndex = 5) {
+async function copyURL(url) {
   try {
-    if (
-      !navigator.clipboard ||
-      !navigator.clipboard.writeText
-    ) {
-      throw Error('clipboard');
+    if (!navigator.clipboard?.writeText) {
+      throw new Error('Clipboard unavailable');
     }
 
-    await navigator.clipboard.writeText(giftURL);
+    await navigator.clipboard.writeText(url);
 
-    $('shareFeedback').textContent =
-      shareText(messageIndex);
-
-    return true;
+    status(tr('copied'));
+    $('shareFeedback').textContent = tr('copied');
 
   } catch {
-    window.prompt(shareText(7), giftURL);
-
-    $('shareFeedback').textContent =
-      shareText(7);
-
-    return false;
+    window.prompt(tr('copyLink'),url);
   }
 }
 
-function openExternalShare(url) {
-  const w = window.open(url, '_blank');
+$('copyLink').addEventListener('click',() => {
+  copyURL(makeGiftURL());
+});
 
-  if (w) {
-    w.opener = null;
+$('send').addEventListener('click',() => {
+  shareURL = makeGiftURL();
+  $('shareFeedback').textContent = '';
+  showOverlay('shareOverlay');
+});
+
+$('shareCopy').addEventListener('click',() => {
+  copyURL(shareURL);
+});
+
+$('closeShare').addEventListener('click',() => {
+  closeOverlay('shareOverlay');
+});
+
+$('nativeShare').hidden = !navigator.share;
+
+$('nativeShare').addEventListener('click',async () => {
+  if (!navigator.share) return;
+
+  try {
+    await navigator.share({
+      title:'DearlyStudio ♡',
+      text:'💌 DearlyStudio',
+      url:shareURL
+    });
+  } catch(e) {
+    if (e.name !== 'AbortError') {
+      $('shareFeedback').textContent = tr('error');
+    }
+  }
+});
+
+function openShareTarget(url) {
+  const tab = window.open(url,'_blank');
+
+  if (tab) {
+    tab.opener = null;
   } else {
     location.href = url;
   }
 }
 
-$('share').addEventListener('click', () => {
-  if (current()[4]) {
-    premium();
-    return;
-  }
-
-  giftURL = createGiftURL();
-
-  $('shareFeedback').textContent = '';
-
-  updateShareUI();
-  openOverlay('shareOverlay');
-});
-
-$('closeShare').addEventListener('click', () => {
-  closeOverlay('shareOverlay');
-});
-
-$('copyGift').addEventListener('click', () => {
-  copyGiftURL();
-});
-
-$('nativeShare').addEventListener('click', async () => {
-  if (typeof navigator.share !== 'function') return;
-
-  try {
-    await navigator.share({
-      title: 'DearlyStudio ♡',
-      text: '💌 DearlyStudio',
-      url: giftURL
-    });
-
-    $('shareFeedback').textContent = '';
-
-  } catch (e) {
-    if (e.name !== 'AbortError') {
-      $('shareFeedback').textContent = shareText(7);
-    }
-  }
-});
-
-/* ПРИЛОЖЕНИЯ, ГДЕ НЕТ УНИВЕРСАЛЬНОЙ ПРЯМОЙ ОТПРАВКИ */
-
-const manualShare = {
-  messenger: 'https://www.messenger.com/',
-  instagram: 'https://www.instagram.com/',
-  tiktok: 'https://www.tiktok.com/',
-  viber: 'https://www.viber.com/',
-  wechat: 'https://www.wechat.com/'
+const manualApps = {
+  messenger:'https://www.messenger.com/',
+  instagram:'https://www.instagram.com/',
+  tiktok:'https://www.tiktok.com/',
+  viber:'https://www.viber.com/',
+  wechat:'https://www.wechat.com/'
 };
 
 document.querySelectorAll('[data-service]').forEach(button => {
-  button.addEventListener('click', async () => {
+  button.addEventListener('click',async () => {
     const service = button.dataset.service;
 
-    const url = encodeURIComponent(giftURL);
-
+    const url = encodeURIComponent(shareURL);
     const message = encodeURIComponent(
-      '💌 DearlyStudio ♡ ' + giftURL
+      '💌 DearlyStudio ♡ ' + shareURL
     );
 
-    const desc = encodeURIComponent(
-      '💌 DearlyStudio — Made with Love'
-    );
-
-    if (manualShare[service]) {
-      openExternalShare(manualShare[service]);
-      await copyGiftURL(6);
+    if (manualApps[service]) {
+      openShareTarget(manualApps[service]);
+      await copyURL(shareURL);
+      $('shareFeedback').textContent =
+        tr('pasted') || tr('copied');
       return;
     }
 
-    const destinations = {
+    const targets = {
       whatsapp:
-        'https://api.whatsapp.com/send?text=' + message,
+        'https://api.whatsapp.com/send?text='+message,
 
       telegram:
-        'https://t.me/share/url?url=' +
-        url + '&text=' + desc,
+        'https://t.me/share/url?url='+url+
+        '&text='+encodeURIComponent('DearlyStudio ♡'),
 
       facebook:
-        'https://www.facebook.com/sharer/sharer.php?u=' + url,
+        'https://www.facebook.com/sharer/sharer.php?u='+url,
 
       pinterest:
-        'https://www.pinterest.com/pin/create/button/?url=' +
-        url +
-        '&media=' +
-        encodeURIComponent(imageURL(current()[1], 900)) +
-        '&description=' + desc,
+        'https://www.pinterest.com/pin/create/button/?url='+
+        url+
+        '&media='+
+        encodeURIComponent(imageURL(current().img,900))+
+        '&description='+
+        encodeURIComponent('DearlyStudio ♡'),
 
       line:
-        'https://social-plugins.line.me/lineit/share?url=' + url,
+        'https://social-plugins.line.me/lineit/share?url='+url,
 
       vk:
-        'https://vk.com/share.php?url=' + url,
+        'https://vk.com/share.php?url='+url,
 
       email:
-        'mailto:?subject=' +
-        encodeURIComponent('DearlyStudio ♡') +
-        '&body=' + message
+        'mailto:?subject='+
+        encodeURIComponent('DearlyStudio ♡')+
+        '&body='+message
     };
 
-    if (destinations[service]) {
-      openExternalShare(destinations[service]);
+    if (targets[service]) {
+      openShareTarget(targets[service]);
     }
   });
 });
 
-$('shareOverlay').addEventListener('click', e => {
-  if (e.target === $('shareOverlay')) {
-    closeOverlay('shareOverlay');
-  }
-});
+/* =====================================================
+   PNG
+   ===================================================== */
 
-/* ЭКСПОРТ ОТКРЫТКИ В PNG */
+function loadImage(url,cors=false) {
+  return new Promise((resolve,reject) => {
+    const img = new Image();
 
-function getImage(url, cors = false) {
-  return new Promise((ok, fail) => {
-    const im = new Image();
+    if (cors) img.crossOrigin = 'anonymous';
 
     const timer = setTimeout(
-      () => fail(Error('timeout')),
-      2500
+      () => reject(new Error('Timeout')),
+      6000
     );
 
-    if (cors) im.crossOrigin = 'anonymous';
-
-    im.onload = () => {
+    img.onload = () => {
       clearTimeout(timer);
-      ok(im);
+      resolve(img);
     };
 
-    im.onerror = () => {
+    img.onerror = () => {
       clearTimeout(timer);
-      fail(Error('image'));
+      reject(new Error('Image failed'));
     };
 
-    im.src = url;
+    img.src = url;
   });
 }
 
-function drawCover(g, im, w, h) {
-  const ratio = Math.max(
-    w / im.width,
-    h / im.height
+function drawCover(ctx,img,x,y,w,h) {
+  const scale = Math.max(
+    w/img.width,h/img.height
   );
 
-  const sw = w / ratio;
-  const sh = h / ratio;
+  const sw = w/scale;
+  const sh = h/scale;
 
-  g.drawImage(
-    im,
-    (im.width - sw) / 2,
-    (im.height - sh) / 2,
-    sw, sh,
-    0, 0, w, h
+  ctx.drawImage(
+    img,
+    (img.width-sw)/2,
+    (img.height-sh)/2,
+    sw,sh,x,y,w,h
   );
 }
 
-function lineWrap(g, text, max) {
-  const lines = [];
-  let line = '';
+function wrapText(ctx,text,maxWidth) {
+  const result = [];
 
-  for (const word of String(text).split(/\s+/)) {
-    if (
-      g.measureText(line + ' ' + word).width > max &&
-      line
-    ) {
-      lines.push(line);
-      line = word;
-    } else {
-      line = line ? line + ' ' + word : word;
+  for (const paragraph of String(text).split('\n')) {
+    let line = '';
+
+    for (const word of paragraph.split(/\s+/)) {
+      const test = line ? line+' '+word : word;
+
+      if (
+        line &&
+        ctx.measureText(test).width > maxWidth
+      ) {
+        result.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
     }
+
+    result.push(line);
   }
 
-  if (line) lines.push(line);
-  return lines;
+  return result;
 }
 
-$('download').addEventListener('click', async () => {
-  if (current()[4]) {
-    premium();
-    return;
-  }
+$('download').addEventListener('click',async () => {
+  readFields();
 
-  read();
+  const canvas = document.createElement('canvas');
 
-  const c = document.createElement('canvas');
-  c.width = 1080;
-  c.height = 1350;
+  canvas.width = 1080;
+  canvas.height = 1350;
 
-  const g = c.getContext('2d');
+  const ctx = canvas.getContext('2d');
 
-  g.fillStyle = current()[5];
-  g.fillRect(0, 0, 1080, 1350);
+  ctx.fillStyle = current().color;
+  ctx.fillRect(0,0,1080,1350);
 
   try {
-    const bg = await getImage(
-      imageURL(current()[1], 1400),
+    const background = await loadImage(
+      imageURL(current().img,1400),
       true
     );
 
-    drawCover(g, bg, 1080, 1350);
+    drawCover(ctx,background,0,0,1080,1350);
 
   } catch {
-    /* Если фотофон не загрузился, остаётся цветной фон */
+    /* Если фотография недоступна, цветной фон остаётся */
   }
 
-  const shade = g.createLinearGradient(
-    0, 0, 0, 1350
-  );
+  const shade = ctx.createLinearGradient(0,0,0,1350);
 
-  shade.addColorStop(0, '#24132655');
-  shade.addColorStop(1, '#1a1039dd');
+  shade.addColorStop(0,'#231b3655');
+  shade.addColorStop(1,'#1c1039e5');
 
-  g.fillStyle = shade;
-  g.fillRect(0, 0, 1080, 1350);
+  ctx.fillStyle = shade;
+  ctx.fillRect(0,0,1080,1350);
 
-  g.fillStyle = 'white';
-  g.textAlign = 'center';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'white';
 
-  g.font = 'bold 32px system-ui';
-  g.fillText('DEARLYSTUDIO ✦', 540, 72);
+  ctx.font = 'bold 30px system-ui';
+  ctx.fillText('DEARLYSTUDIO ✦',540,68);
 
-  let y = 200;
+  let y = 190;
 
   if (photo) {
     try {
-      const im = await getImage(photo);
+      const img = await loadImage(photo);
 
-      const side = 260;
-      const x = 410;
+      ctx.save();
+      ctx.beginPath();
 
-      g.save();
-      g.beginPath();
+      const r = state.shape === 'square' ? 22 : 125;
 
-      g.roundRect(
-        x,
-        y,
-        side,
-        side,
-        state.shape === 'square' ? 25 : 130
-      );
+      ctx.roundRect(415,y,250,250,r);
+      ctx.clip();
 
-      g.clip();
+      drawCover(ctx,img,415,y,250,250);
 
-      const r = Math.max(
-        side / im.width,
-        side / im.height
-      );
+      ctx.restore();
 
-      const sw = side / r;
-      const sh = side / r;
-
-      g.drawImage(
-        im,
-        (im.width - sw) / 2,
-        (im.height - sh) / 2,
-        sw, sh,
-        x, y,
-        side, side
-      );
-
-      g.restore();
       y += 290;
 
     } catch {
-      /* Экспорт продолжится даже без фотографии */
+      /* Продолжаем без фото */
     }
   }
 
-  g.font = '86px system-ui';
-  g.fillText(current()[2], 540, y + 80);
-  y += 143;
+  ctx.font = '75px system-ui';
+  ctx.fillText(current().emoji,540,y+75);
 
-  g.font = 'bold 30px system-ui';
+  y += 137;
 
-  g.fillText(
-    state.to || '♡ DEARLYSTUDIO ♡',
-    540,
-    y
+  ctx.font = 'bold 30px system-ui';
+  ctx.fillText(
+    (state.to || '♡ DEARLYSTUDIO ♡').slice(0,70),
+    540,y
   );
 
-  y += 83;
+  y += 85;
 
-  g.font = state.font === 'classic'
-    ? 'bold 65px Georgia'
-    : 'bold 62px system-ui';
+  ctx.font =
+    state.font === 'classic'
+      ? 'bold 64px Georgia'
+      : 'bold 61px system-ui';
 
-  const heading =
-    state.title ||
-    (titles[lang] || titles.en)[current()[3]];
+  const title = state.title || current().title;
 
-  for (
-    const line of lineWrap(g, heading, 880).slice(0, 3)
-  ) {
-    g.fillText(line, 540, y);
-    y += 79;
+  for (const line of wrapText(ctx,title,900).slice(0,3)) {
+    ctx.fillText(line,540,y);
+    y += 76;
   }
 
-  y += 15;
-  g.font = '35px system-ui';
+  y += 18;
 
-  const paragraphs = (
-    state.message || 'Made with love ♡'
-  ).split('\n');
+  ctx.font = '35px system-ui';
 
-  for (const para of paragraphs) {
-    for (
-      const line of lineWrap(g, para, 880).slice(0, 8)
-    ) {
-      if (y > 1220) break;
+  const lines = wrapText(
+    ctx,
+    state.message || tr('defaultMessage'),
+    900
+  );
 
-      g.fillText(line, 540, y);
-      y += 51;
-    }
+  for (const line of lines) {
+    if (y > 1190) break;
+
+    ctx.fillText(line,540,y);
+    y += 52;
   }
 
   if (state.from) {
-    g.font = 'bold 30px system-ui';
+    ctx.font = 'bold 30px system-ui';
 
-    g.fillText(
-      state.from,
+    ctx.fillText(
+      state.from.slice(0,70),
       540,
-      Math.min(y + 33, 1270)
+      Math.min(y+38,1270)
     );
   }
 
-  g.font = '23px system-ui';
-  g.fillText('Made with love ♡', 540, 1320);
+  ctx.font = '23px system-ui';
+  ctx.fillText('Made with love ♡',540,1320);
 
-  c.toBlob(blob => {
-    if (!blob) return;
+  canvas.toBlob(blob => {
+    if (!blob) {
+      status(tr('error'));
+      return;
+    }
 
-    const u = URL.createObjectURL(blob);
+    const url = URL.createObjectURL(blob);
+
     const a = document.createElement('a');
 
-    a.href = u;
+    a.href = url;
     a.download = 'DearlyStudio.png';
 
     document.body.append(a);
     a.click();
     a.remove();
 
-    setTimeout(() => URL.revokeObjectURL(u), 1500);
+    setTimeout(() => URL.revokeObjectURL(url),2000);
 
-    setStatus('download');
+    status(tr('downloaded'));
 
-  }, 'image/png');
+  },'image/png');
 });
 
-/* ЗАПУСК САЙТА */
+/* =====================================================
+   ОСТАЛЬНЫЕ ДЕЙСТВИЯ
+   ===================================================== */
+
+$('print').addEventListener('click',() => {
+  window.print();
+});
+
+document.addEventListener('keydown',e => {
+  if (e.key === 'Escape') {
+    closeOverlay('giftOverlay');
+    closeOverlay('shareOverlay');
+  }
+});
+
+document.querySelectorAll('.overlay').forEach(el => {
+  el.addEventListener('click',e => {
+    if (e.target === el) closeOverlay(el.id);
+  });
+});
+
+/* =====================================================
+   ЗАПУСК
+   ===================================================== */
 
 $('year').textContent = new Date().getFullYear();
 
 lang =
-  localGet('dearly-language') ||
-  navigator.language.slice(0, 2) ||
+  getStored('dearly-language') ||
+  navigator.language.slice(0,2) ||
   'en';
 
-if (!LANG[lang]) lang = 'en';
+if (!translations[lang]) lang = 'en';
 
 try {
+  const saved = JSON.parse(
+    getStored('dearly-draft') || '{}'
+  );
+
   state = {
-    ...fresh(),
-    ...JSON.parse(
-      localGet('dearly-draft') || '{}'
-    )
+    ...blank(),
+    ...saved
   };
+
 } catch {
-  state = fresh();
+  state = blank();
 }
 
-if (!photos.some(x => x[0] === state.id)) {
+if (!templates.some(x => x.id === state.id)) {
   state.id = 'roses';
 }
 
-/* ОТКРЫТИЕ ПОДАРКА ИЗ ССЫЛКИ */
+/* ОТКРЫТКА ПО ПОЛУЧЕННОЙ ССЫЛКЕ */
 
 try {
   const raw = new URLSearchParams(
     location.search
   ).get('gift');
 
-  if (raw && raw.length < 4500) {
-    const obj = JSON.parse(raw);
+  if (raw && raw.length < 5000) {
+    const incoming = JSON.parse(raw);
 
     if (
-      obj &&
-      photos.some(x => x[0] === obj.id && !x[4])
+      incoming &&
+      templates.some(t => t.id === incoming.id)
     ) {
       state = {
-        ...fresh(),
-        ...obj
+        ...blank(),
+        ...incoming
       };
 
-      shared = true;
+      receivedGift = true;
     }
   }
 
 } catch {
-  /* Неверная ссылка не ломает сайт */
+  /* Ошибочная ссылка не ломает сайт */
 }
 
-fill();
+fillFields();
 translate();
 
-if (shared) {
-  setTimeout(reveal, 200);
+if (receivedGift) {
+  setTimeout(revealGift,250);
 }
 
 </script>
