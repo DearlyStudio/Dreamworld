@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -660,10 +659,84 @@ textarea.control {
   }
 }
 
+/* КРАСИВОЕ МЕНЮ ПОДЕЛИТЬСЯ */
+
+.share-modal {
+  width: min(650px,100%);
+  max-height: 92vh;
+  overflow-y: auto;
+}
+.share-modal h2 { margin: 5px 0 8px; }
+.share-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 11px;
+  margin: 20px 0;
+}
+.share-service {
+  border: 1px solid #eddfeb;
+  border-radius: 17px;
+  background: #fff;
+  padding: 14px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #342641;
+  transition: transform .2s,box-shadow .2s;
+}
+.share-service:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px #a2538b22;
+}
+.share-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+  background: var(--share-color,#ee6fa7);
+  color: white;
+  font-size: 21px;
+  font-weight: 900;
+}
+.share-tools {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.share-warning {
+  font-size: 12px;
+  color: #756477;
+  background: #fff2f7;
+  border-radius: 12px;
+  padding: 12px;
+}
+.share-feedback {
+  min-height: 22px;
+  font-weight: 750;
+  color: #286548;
+  font-size: 13px;
+}
+@media (max-width:470px) {
+  .share-grid {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 7px;
+  }
+  .share-service { font-size: 11px; }
+}
+
 /* ТЕЛЕФОНЫ */
 
 @media (max-width:800px) {
-  .hero { grid-template-columns: 1fr; padding-top: 20px; gap: 0; }
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 20px;
+    gap: 0;
+  }
   .hero > div:first-child { text-align: center; }
   .hero p { margin-inline: auto; }
   .actions { justify-content: center; }
@@ -689,7 +762,10 @@ textarea.control {
   .tile-bottom { font-size: 12px; }
   .panel { padding: 18px; }
   .two { grid-template-columns: 1fr; }
-  .card { min-height: 485px; padding: 35px 18px; }
+  .card {
+    min-height: 485px;
+    padding: 35px 18px;
+  }
   .card h4 { font-size: 32px; }
 }
 @media (prefers-reduced-motion:reduce) {
@@ -965,7 +1041,7 @@ textarea.control {
         </button>
 
         <button class="btn" id="share" data-t="share">
-          🔗 Ссылка
+          💌 Поделиться
         </button>
 
         <button class="btn" id="save" data-t="save">
@@ -1137,6 +1213,82 @@ textarea.control {
     <button class="btn primary" id="premiumOK" data-t="ok">
       Понятно
     </button>
+  </div>
+</div>
+
+<div class="overlay" id="shareOverlay" role="dialog" aria-modal="true" aria-labelledby="shareHeading">
+  <div class="modal share-modal">
+    <button class="close" id="closeShare" aria-label="Close">×</button>
+    <span class="tag">✦ DEARLY SHARING</span>
+    <h2 id="shareHeading">💌 Поделиться подарком</h2>
+    <p id="shareSub">Выбери, куда отправить свою открытку.</p>
+
+    <div class="share-grid">
+      <button class="share-service" data-service="whatsapp" type="button">
+        <span class="share-icon" style="--share-color:#22bb65">✆</span>
+        WhatsApp
+      </button>
+      <button class="share-service" data-service="telegram" type="button">
+        <span class="share-icon" style="--share-color:#279bd6">➤</span>
+        Telegram
+      </button>
+      <button class="share-service" data-service="facebook" type="button">
+        <span class="share-icon" style="--share-color:#1877f2">f</span>
+        Facebook
+      </button>
+      <button class="share-service" data-service="messenger" type="button">
+        <span class="share-icon" style="--share-color:#8a4cff">ϟ</span>
+        Messenger
+      </button>
+      <button class="share-service" data-service="instagram" type="button">
+        <span class="share-icon" style="--share-color:#dd4a9a">◎</span>
+        Instagram
+      </button>
+      <button class="share-service" data-service="tiktok" type="button">
+        <span class="share-icon" style="--share-color:#20202a">♪</span>
+        TikTok
+      </button>
+      <button class="share-service" data-service="pinterest" type="button">
+        <span class="share-icon" style="--share-color:#e60023">P</span>
+        Pinterest
+      </button>
+      <button class="share-service" data-service="viber" type="button">
+        <span class="share-icon" style="--share-color:#7656a8">☎</span>
+        Viber
+      </button>
+      <button class="share-service" data-service="line" type="button">
+        <span class="share-icon" style="--share-color:#00b900">L</span>
+        LINE
+      </button>
+      <button class="share-service" data-service="wechat" type="button">
+        <span class="share-icon" style="--share-color:#21aa53">☏</span>
+        WeChat
+      </button>
+      <button class="share-service" data-service="vk" type="button">
+        <span class="share-icon" style="--share-color:#0077ff">VK</span>
+        VK
+      </button>
+      <button class="share-service" data-service="email" type="button">
+        <span class="share-icon" style="--share-color:#c56a9a">✉</span>
+        Email
+      </button>
+    </div>
+
+    <div class="share-tools">
+      <button class="btn primary" id="copyGift" type="button">
+        🔗 Копировать ссылку
+      </button>
+      <button class="btn dark" id="nativeShare" type="button">
+        📲 Ещё приложения
+      </button>
+    </div>
+
+    <p class="share-warning" id="sharePhotoWarning">
+      📷 В ссылку не входит загруженное фото.
+      Чтобы отправить открытку с фото, сначала скачай PNG.
+    </p>
+
+    <div class="share-feedback" id="shareFeedback" aria-live="polite"></div>
   </div>
 </div>
 
@@ -2055,8 +2207,11 @@ const current = () =>
   photos.find(x => x[0] === state.id) || photos[0];
 
 function localGet(k) {
-  try { return localStorage.getItem(k); }
-  catch { return null; }
+  try {
+    return localStorage.getItem(k);
+  } catch {
+    return null;
+  }
 }
 
 function localSet(k, v) {
@@ -2088,6 +2243,10 @@ function translate() {
 
   renderTiles();
   render();
+
+  if ($('shareOverlay').classList.contains('show')) {
+    updateShareUI();
+  }
 }
 
 /* СОЗДАНИЕ ГАЛЕРЕИ */
@@ -2513,6 +2672,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     closeOverlay('giftOverlay');
     closeOverlay('premiumOverlay');
+    closeOverlay('shareOverlay');
   }
 });
 
@@ -2521,30 +2681,326 @@ $('print').addEventListener('click', () => {
   else window.print();
 });
 
-/* ОТПРАВКА ПО ССЫЛКЕ */
+/* МЕЖДУНАРОДНАЯ ОТПРАВКА ОТКРЫТОК */
 
-$('share').addEventListener('click', async () => {
-  if (current()[4]) {
-    premium();
-    return;
-  }
+const SHARE_LANG = {
+  ru: [
+    '💌 Поделиться подарком',
+    'Выбери, куда отправить свою открытку.',
+    '🔗 Копировать ссылку',
+    '📲 Ещё приложения',
+    '📷 Ссылка не содержит загруженное фото. Чтобы отправить фото, скачай PNG.',
+    'Ссылка скопирована!',
+    'Ссылка скопирована! Открой приложение и вставь её.',
+    'Не удалось скопировать автоматически. Скопируй ссылку из появившегося окна.'
+  ],
+  en: [
+    '💌 Share your gift',
+    'Choose where to send your card.',
+    '🔗 Copy link',
+    '📲 More apps',
+    '📷 The link does not include uploaded photos. Download the PNG to send a card with your photo.',
+    'Link copied!',
+    'Link copied! Open the app and paste it.',
+    'Copy the link from the popup.'
+  ],
+  de: [
+    '💌 Geschenk teilen',
+    'Wohin möchtest du deine Karte senden?',
+    '🔗 Link kopieren',
+    '📲 Weitere Apps',
+    '📷 Dein hochgeladenes Foto ist nicht im Link enthalten. Lade das PNG herunter, um es mit Foto zu versenden.',
+    'Link kopiert!',
+    'Link kopiert! Öffne die App und füge ihn ein.',
+    'Kopiere den Link im Fenster.'
+  ],
+  es: [
+    '💌 Compartir regalo',
+    'Elige dónde enviar tu tarjeta.',
+    '🔗 Copiar enlace',
+    '📲 Más apps',
+    '📷 El enlace no incluye tu foto. Descarga el PNG para enviarla.',
+    '¡Enlace copiado!',
+    '¡Copiado! Abre la aplicación y pega el enlace.',
+    'Copia el enlace de la ventana.'
+  ],
+  fr: [
+    '💌 Partager le cadeau',
+    'Choisissez où envoyer votre carte.',
+    '🔗 Copier le lien',
+    '📲 Autres applications',
+    '📷 La photo ajoutée ne figure pas dans le lien. Téléchargez le PNG pour la partager.',
+    'Lien copié !',
+    'Lien copié ! Ouvrez l’application et collez-le.',
+    'Copiez le lien affiché.'
+  ],
+  pt: [
+    '💌 Compartilhar presente',
+    'Escolha onde enviar o cartão.',
+    '🔗 Copiar link',
+    '📲 Mais apps',
+    '📷 A foto enviada não aparece no link. Baixe o PNG para enviar com a foto.',
+    'Link copiado!',
+    'Copiado! Abra o app e cole o link.',
+    'Copie o link da janela.'
+  ],
+  zh: [
+    '💌 分享礼物',
+    '选择要发送贺卡的应用。',
+    '🔗 复制链接',
+    '📲 更多应用',
+    '📷 链接不包含上传的照片。如需分享照片，请下载 PNG。',
+    '链接已复制！',
+    '链接已复制！打开应用并粘贴。',
+    '请从弹窗复制链接。'
+  ],
+  hi: [
+    '💌 उपहार साझा करें',
+    'कार्ड भेजने के लिए ऐप चुनें।',
+    '🔗 लिंक कॉपी करें',
+    '📲 और ऐप्स',
+    '📷 लिंक में अपलोड की गई फ़ोटो नहीं होगी। फ़ोटो भेजने के लिए PNG डाउनलोड करें।',
+    'लिंक कॉपी हो गया!',
+    'लिंक कॉपी हुआ! ऐप में पेस्ट करें।',
+    'पॉपअप से लिंक कॉपी करें।'
+  ],
+  ar: [
+    '💌 شارك هديتك',
+    'اختر أين ترسل البطاقة.',
+    '🔗 نسخ الرابط',
+    '📲 تطبيقات أخرى',
+    '📷 الرابط لا يحتوي على الصورة المرفوعة. نزّل ملف PNG لإرسالها.',
+    'تم نسخ الرابط!',
+    'تم نسخ الرابط! افتح التطبيق والصقه.',
+    'انسخ الرابط من النافذة.'
+  ],
+  ja: [
+    '💌 ギフトをシェア',
+    'カードの送信先を選んでください。',
+    '🔗 リンクをコピー',
+    '📲 その他のアプリ',
+    '📷 リンクにはアップロードした写真は含まれません。写真付きは PNG を保存して送信してください。',
+    'リンクをコピーしました！',
+    'コピーしました！アプリで貼り付けてください。',
+    '表示されたリンクをコピーしてください。'
+  ],
+  ko: [
+    '💌 선물 공유하기',
+    '카드를 보낼 앱을 선택하세요.',
+    '🔗 링크 복사',
+    '📲 다른 앱',
+    '📷 링크에는 업로드한 사진이 포함되지 않습니다. 사진을 보내려면 PNG를 다운로드하세요.',
+    '링크 복사 완료!',
+    '복사 완료! 앱에서 붙여넣으세요.',
+    '팝업에서 링크를 복사하세요.'
+  ],
+  id: [
+    '💌 Bagikan hadiah',
+    'Pilih aplikasi untuk mengirim kartu.',
+    '🔗 Salin tautan',
+    '📲 Aplikasi lain',
+    '📷 Foto yang diunggah tidak ada di tautan. Unduh PNG untuk mengirim foto.',
+    'Tautan disalin!',
+    'Disalin! Buka aplikasi dan tempel tautannya.',
+    'Salin tautan dari jendela.'
+  ],
+  tr: [
+    '💌 Hediyeyi paylaş',
+    'Kartını göndereceğin uygulamayı seç.',
+    '🔗 Bağlantıyı kopyala',
+    '📲 Diğer uygulamalar',
+    '📷 Yüklenen fotoğraf bağlantıda yok. Fotoğrafla göndermek için PNG indir.',
+    'Bağlantı kopyalandı!',
+    'Kopyalandı! Uygulamayı açıp yapıştır.',
+    'Bağlantıyı pencereden kopyala.'
+  ],
+  it: [
+    '💌 Condividi il regalo',
+    'Scegli dove inviare il biglietto.',
+    '🔗 Copia link',
+    '📲 Altre app',
+    '📷 Il link non contiene la foto caricata. Scarica il PNG per inviarla.',
+    'Link copiato!',
+    'Copiato! Apri l’app e incolla il link.',
+    'Copia il link dalla finestra.'
+  ]
+};
 
+const shareText = i =>
+  (SHARE_LANG[lang] || SHARE_LANG.en)[i];
+
+let giftURL = '';
+
+function createGiftURL() {
   read();
 
   const u = new URL(location.href);
   u.hash = '';
   u.search = '';
 
-  u.searchParams.set(
-    'gift',
-    JSON.stringify(state)
-  );
+  /* В ссылку входят текст и настройки, но не фотография */
+  u.searchParams.set('gift', JSON.stringify(state));
+
+  return u.href;
+}
+
+function updateShareUI() {
+  $('shareHeading').textContent = shareText(0);
+  $('shareSub').textContent = shareText(1);
+  $('copyGift').textContent = shareText(2);
+  $('nativeShare').textContent = shareText(3);
+  $('sharePhotoWarning').textContent = shareText(4);
+
+  $('nativeShare').hidden =
+    typeof navigator.share !== 'function';
+}
+
+async function copyGiftURL(messageIndex = 5) {
+  try {
+    if (
+      !navigator.clipboard ||
+      !navigator.clipboard.writeText
+    ) {
+      throw Error('clipboard');
+    }
+
+    await navigator.clipboard.writeText(giftURL);
+
+    $('shareFeedback').textContent =
+      shareText(messageIndex);
+
+    return true;
+
+  } catch {
+    window.prompt(shareText(7), giftURL);
+
+    $('shareFeedback').textContent =
+      shareText(7);
+
+    return false;
+  }
+}
+
+function openExternalShare(url) {
+  const w = window.open(url, '_blank');
+
+  if (w) {
+    w.opener = null;
+  } else {
+    location.href = url;
+  }
+}
+
+$('share').addEventListener('click', () => {
+  if (current()[4]) {
+    premium();
+    return;
+  }
+
+  giftURL = createGiftURL();
+
+  $('shareFeedback').textContent = '';
+
+  updateShareUI();
+  openOverlay('shareOverlay');
+});
+
+$('closeShare').addEventListener('click', () => {
+  closeOverlay('shareOverlay');
+});
+
+$('copyGift').addEventListener('click', () => {
+  copyGiftURL();
+});
+
+$('nativeShare').addEventListener('click', async () => {
+  if (typeof navigator.share !== 'function') return;
 
   try {
-    await navigator.clipboard.writeText(u.href);
-    setStatus(photo ? 'noPhoto' : 'shared');
-  } catch {
-    window.prompt('Copy link:', u.href);
+    await navigator.share({
+      title: 'DearlyStudio ♡',
+      text: '💌 DearlyStudio',
+      url: giftURL
+    });
+
+    $('shareFeedback').textContent = '';
+
+  } catch (e) {
+    if (e.name !== 'AbortError') {
+      $('shareFeedback').textContent = shareText(7);
+    }
+  }
+});
+
+/* ПРИЛОЖЕНИЯ, ГДЕ НЕТ УНИВЕРСАЛЬНОЙ ПРЯМОЙ ОТПРАВКИ */
+
+const manualShare = {
+  messenger: 'https://www.messenger.com/',
+  instagram: 'https://www.instagram.com/',
+  tiktok: 'https://www.tiktok.com/',
+  viber: 'https://www.viber.com/',
+  wechat: 'https://www.wechat.com/'
+};
+
+document.querySelectorAll('[data-service]').forEach(button => {
+  button.addEventListener('click', async () => {
+    const service = button.dataset.service;
+
+    const url = encodeURIComponent(giftURL);
+
+    const message = encodeURIComponent(
+      '💌 DearlyStudio ♡ ' + giftURL
+    );
+
+    const desc = encodeURIComponent(
+      '💌 DearlyStudio — Made with Love'
+    );
+
+    if (manualShare[service]) {
+      openExternalShare(manualShare[service]);
+      await copyGiftURL(6);
+      return;
+    }
+
+    const destinations = {
+      whatsapp:
+        'https://api.whatsapp.com/send?text=' + message,
+
+      telegram:
+        'https://t.me/share/url?url=' +
+        url + '&text=' + desc,
+
+      facebook:
+        'https://www.facebook.com/sharer/sharer.php?u=' + url,
+
+      pinterest:
+        'https://www.pinterest.com/pin/create/button/?url=' +
+        url +
+        '&media=' +
+        encodeURIComponent(imageURL(current()[1], 900)) +
+        '&description=' + desc,
+
+      line:
+        'https://social-plugins.line.me/lineit/share?url=' + url,
+
+      vk:
+        'https://vk.com/share.php?url=' + url,
+
+      email:
+        'mailto:?subject=' +
+        encodeURIComponent('DearlyStudio ♡') +
+        '&body=' + message
+    };
+
+    if (destinations[service]) {
+      openExternalShare(destinations[service]);
+    }
+  });
+});
+
+$('shareOverlay').addEventListener('click', e => {
+  if (e.target === $('shareOverlay')) {
+    closeOverlay('shareOverlay');
   }
 });
 
@@ -2639,8 +3095,7 @@ $('download').addEventListener('click', async () => {
     drawCover(g, bg, 1080, 1350);
 
   } catch {
-    // Если фотофон не загрузился,
-    // остаётся красивый цветной фон.
+    /* Если фотофон не загрузился, остаётся цветной фон */
   }
 
   const shade = g.createLinearGradient(
@@ -2672,7 +3127,10 @@ $('download').addEventListener('click', async () => {
       g.beginPath();
 
       g.roundRect(
-        x, y, side, side,
+        x,
+        y,
+        side,
+        side,
         state.shape === 'square' ? 25 : 130
       );
 
@@ -2699,7 +3157,7 @@ $('download').addEventListener('click', async () => {
       y += 290;
 
     } catch {
-      // Можно экспортировать даже без фото.
+      /* Экспорт продолжится даже без фотографии */
     }
   }
 
@@ -2711,7 +3169,8 @@ $('download').addEventListener('click', async () => {
 
   g.fillText(
     state.to || '♡ DEARLYSTUDIO ♡',
-    540, y
+    540,
+    y
   );
 
   y += 83;
@@ -2724,7 +3183,9 @@ $('download').addEventListener('click', async () => {
     state.title ||
     (titles[lang] || titles.en)[current()[3]];
 
-  for (const line of lineWrap(g, heading, 880).slice(0, 3)) {
+  for (
+    const line of lineWrap(g, heading, 880).slice(0, 3)
+  ) {
     g.fillText(line, 540, y);
     y += 79;
   }
@@ -2737,7 +3198,9 @@ $('download').addEventListener('click', async () => {
   ).split('\n');
 
   for (const para of paragraphs) {
-    for (const line of lineWrap(g, para, 880).slice(0, 8)) {
+    for (
+      const line of lineWrap(g, para, 880).slice(0, 8)
+    ) {
       if (y > 1220) break;
 
       g.fillText(line, 540, y);
@@ -2828,7 +3291,7 @@ try {
   }
 
 } catch {
-  // Неверная ссылка не ломает сайт.
+  /* Неверная ссылка не ломает сайт */
 }
 
 fill();
@@ -2839,12 +3302,14 @@ if (shared) {
 }
 
 </script>
-  <!-- Cloudflare Web Analytics -->
+
+<!-- Cloudflare Web Analytics -->
 <script
   type="module"
   src="https://static.cloudflareinsights.com/beacon.min.js"
   data-cf-beacon='{"token":"ca6d40cdee134f759f74cc23dab3f25d"}'>
 </script>
 <!-- End Cloudflare Web Analytics -->
+
 </body>
 </html>
