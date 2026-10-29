@@ -1,1040 +1,2215 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090b20">
-<meta name="description" content="Dreamworld Studio — create and share beautiful digital greetings and invitations.">
-<title>Dreamworld Studio — Create something unforgettable</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#180b49">
+<meta name="description" content="Dreamworld — create magical digital greetings and gifts.">
+<title>Dreamworld — Make Moments Magical</title>
 
 <style>
-:root {
-  color-scheme: dark;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  color: #f8f7ff;
-  background: #090b20;
-  min-height: 100vh;
-}
-button, input, textarea, select { font: inherit; }
-button { cursor: pointer; }
-a { color: inherit; text-decoration: none; }
-
-.cosmos {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse at 15% 12%, #48226d99, transparent 38%),
-    radial-gradient(ellipse at 80% 24%, #174a8499, transparent 36%),
-    radial-gradient(ellipse at 55% 82%, #722d6266, transparent 42%),
-    #090b20;
+:root{
+  color-scheme:dark;
+  --pink:#ff55c7;
+  --cyan:#66f6ff;
+  --gold:#ffdc72;
+  --purple:#a986ff;
+  --white:#ffffff;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 
-.cosmos::before,
-.cosmos::after {
-  content: "";
-  position: absolute;
-  inset: -35%;
-  background-image:
-    radial-gradient(2px 2px at 13% 21%, #fff, transparent),
-    radial-gradient(2px 2px at 45% 71%, #fff9, transparent),
-    radial-gradient(1px 1px at 65% 33%, #fff, transparent),
-    radial-gradient(2px 2px at 88% 58%, #b7d9ff, transparent),
-    radial-gradient(1px 1px at 29% 86%, #fff, transparent),
-    radial-gradient(1px 1px at 76% 90%, #fff, transparent);
-  background-size: 260px 230px;
-  animation: drift 110s linear infinite;
-  opacity: .7;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#180b49;
+  color:white;
+  overflow-x:hidden;
 }
-.cosmos::after {
-  transform: scale(1.3) rotate(15deg);
-  animation-duration: 155s;
-  opacity: .35;
-}
-@keyframes drift {
-  to { translate: -130px 90px; }
-}
-
-.wrap {
-  width: min(1160px, calc(100% - 36px));
-  margin: auto;
-}
-
-header {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 25px 0;
-}
-.logo {
-  font-weight: 900;
-  letter-spacing: .14em;
-  font-size: 19px;
-}
-.logo span { color: #b79eff; }
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-select {
-  background: #ffffff12;
-  color: white;
-  border: 1px solid #ffffff38;
-  border-radius: 12px;
-  padding: 10px 12px;
-}
-option { background: #15152c; }
-.pill {
-  padding: 9px 15px;
-  border: 1px solid #ffffff35;
-  border-radius: 99px;
-  background: #ffffff0b;
-  color: #dcd5ff;
-  font-size: 13px;
-}
-
-.hero {
-  padding: 72px 0 65px;
-  text-align: center;
-}
-.eyebrow {
-  display: inline-block;
-  color: #d4c5ff;
-  letter-spacing: .12em;
-  font-size: 12px;
-  text-transform: uppercase;
-}
-h1 {
-  margin: 19px auto;
-  font-size: clamp(40px, 7vw, 77px);
-  line-height: 1.07;
-  letter-spacing: -.055em;
-  max-width: 860px;
-}
-h1 em {
-  font-style: normal;
-  background: linear-gradient(95deg, #a7d1ff, #db9cfe, #ffa9cc);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.hero p {
-  color: #babbd1;
-  max-width: 660px;
-  margin: 18px auto 27px;
-  font-size: 17px;
-  line-height: 1.7;
-}
-.btn {
-  color: white;
-  border-radius: 13px;
-  border: 1px solid #ffffff28;
-  background: #ffffff10;
-  padding: 12px 18px;
-  transition: transform .2s, background .2s;
-}
-.btn:hover {
-  transform: translateY(-2px);
-  background: #ffffff22;
-}
-.btn.primary {
-  color: #180f2b;
-  border: none;
-  font-weight: 800;
-  background: linear-gradient(115deg, #a9d8ff, #d8a4ff, #ffbad6);
-  box-shadow: 0 7px 30px #ab79ef33;
-}
-.btn:focus-visible,
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+button:focus-visible,
+a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid #dcb8ff;
-  outline-offset: 3px;
+select:focus-visible{
+  outline:3px solid var(--cyan);
+  outline-offset:3px;
 }
 
-.section-title {
-  font-size: 27px;
-  letter-spacing: -.025em;
-  margin-bottom: 8px;
-}
-.muted {
-  color: #aeb0c8;
-  line-height: 1.6;
-}
-.studio {
-  padding: 28px 0 80px;
-  scroll-margin-top: 20px;
-}
-.workspace {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: start;
-  margin-top: 22px;
-}
-.panel {
-  background: #10132ad9;
-  border: 1px solid #ffffff21;
-  border-radius: 24px;
-  padding: 25px;
-  box-shadow: 0 26px 80px #0003;
-  backdrop-filter: blur(15px);
-}
-.panel h3 {
-  margin: 0 0 20px;
-  font-size: 21px;
-}
-label.field {
-  display: block;
-  margin: 15px 0 7px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #d3d0e9;
-}
-input, textarea {
-  width: 100%;
-  outline: none;
-  background: #ffffff0b;
-  color: white;
-  padding: 12px 13px;
-  border: 1px solid #ffffff2a;
-  border-radius: 12px;
-}
-textarea {
-  min-height: 130px;
-  resize: vertical;
-  line-height: 1.55;
-}
-.choices {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 9px;
-}
-.choice {
-  border: 1px solid #ffffff30;
-  background: #ffffff0b;
-  color: white;
-  border-radius: 12px;
-  padding: 13px 9px;
-}
-.choice.active {
-  border-color: #d8adff;
-  background: #a87bfa33;
-}
-.themes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-}
-.themes .choice {
-  flex: 1;
-  min-width: 88px;
-}
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-}
-.status {
-  color: #b8f3d7;
-  font-size: 13px;
-  min-height: 23px;
-  margin-top: 10px;
-}
-.preview-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.preview-title h3 { margin: 0; }
-.preview-title small { color: #c5b5ff; }
+/* ЖИВОЙ КОСМИЧЕСКИЙ ФОН */
 
-.greeting {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  min-height: 460px;
-  overflow: hidden;
-  padding: 46px 28px;
-  border-radius: 18px;
-  isolation: isolate;
-  overflow-wrap: anywhere;
-  border: 1px solid #ffffff37;
-}
-.greeting::before {
-  content: "✦       ✧        ✦";
-  position: absolute;
-  inset: 12% 0 auto;
-  z-index: -1;
-  font-size: 42px;
-  letter-spacing: 30px;
-  opacity: .28;
-}
-.greeting.cosmic {
+.universe{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  overflow:hidden;
+  pointer-events:none;
   background:
-    radial-gradient(ellipse at 25% 25%, #7c3dbaaa, transparent 50%),
-    radial-gradient(ellipse at 90% 80%, #247dd8aa, transparent 48%),
-    linear-gradient(135deg, #11152f, #291b51);
+    radial-gradient(ellipse at 14% 10%,#e74ecb,transparent 42%),
+    radial-gradient(ellipse at 89% 17%,#367eff,transparent 43%),
+    radial-gradient(ellipse at 53% 76%,#8132ff,transparent 56%),
+    linear-gradient(135deg,#2c0d6b,#13092d 65%,#21105e);
 }
-.greeting.rose {
+.universe:before{
+  content:"";
+  position:absolute;
+  inset:-25%;
+  background:conic-gradient(
+    from 30deg,
+    #ff4fc022,
+    #59e8ff55,
+    #a078ff33,
+    #ffb75b33,
+    #ff4fc022
+  );
+  filter:blur(65px);
+  animation:aurora 19s ease-in-out infinite alternate;
+}
+@keyframes aurora{
+  to{transform:translate(4%,-5%) rotate(15deg) scale(1.12)}
+}
+#stars{
+  position:absolute;
+  width:100%;
+  height:100%;
+}
+
+.container{
+  width:min(1180px,calc(100% - 36px));
+  margin:auto;
+}
+
+/* ВЕРХНЕЕ МЕНЮ */
+
+header{
+  min-height:85px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  position:relative;
+  z-index:5;
+}
+.logo{
+  font-size:clamp(16px,2vw,21px);
+  font-weight:1000;
+  letter-spacing:.12em;
+  text-shadow:0 0 25px #ff9efb;
+}
+.logo span{color:var(--cyan)}
+.top-right{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.studio-link{
+  font-weight:700;
+  font-size:13px;
+}
+#language{
+  background:#180b49d9;
+  color:white;
+  border:1px solid #ffffff66;
+  border-radius:40px;
+  padding:11px;
+  max-width:165px;
+}
+#language option{background:#28135f}
+
+/* ГЛАВНАЯ СЦЕНА */
+
+.hero{
+  min-height:min(830px,calc(100svh - 85px));
+  padding:65px 0 100px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+
+.hero-light{
+  position:absolute;
+  top:46%;
+  left:50%;
+  width:min(720px,110vw);
+  aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  z-index:-1;
+  pointer-events:none;
+  filter:drop-shadow(0 0 45px #ff70df66);
+}
+
+.portal{
+  position:absolute;
+  inset:17%;
+  border-radius:50%;
   background:
-    radial-gradient(ellipse at 10% 10%, #ffb6c788, transparent 48%),
-    linear-gradient(145deg, #62255a, #a04866, #39152f);
+    radial-gradient(
+      circle at 44% 41%,
+      #ffffffef 0%,
+      #b7ffff 7%,
+      #b16aff 23%,
+      #501a90 48%,
+      transparent 70%
+    );
+  box-shadow:
+    0 0 110px 45px #ec6df054,
+    inset 0 0 70px 15px #ffb6ff;
+  animation:breathe 7s ease-in-out infinite alternate;
 }
-.greeting.gold {
+.portal:before{
+  content:"";
+  position:absolute;
+  inset:13%;
+  border-radius:50%;
+  background:conic-gradient(
+    #b9ffff,
+    #ff71dc,
+    #ffeaa1,
+    #b08aff,
+    #55edff,
+    #b9ffff
+  );
+  filter:blur(32px);
+  mix-blend-mode:screen;
+  opacity:.75;
+  animation:spin 21s linear infinite;
+}
+.orbit{
+  position:absolute;
+  inset:6%;
+  border-radius:50%;
+  border:3px solid transparent;
   background:
-    radial-gradient(ellipse at 75% 20%, #ffdd8b66, transparent 48%),
-    linear-gradient(145deg, #1c2234, #67502e, #282037);
+    linear-gradient(#ffffff10,#ffffff00) padding-box,
+    conic-gradient(
+      #80fbff,
+      #ff65d7,
+      transparent 35%,
+      #fff2ac,
+      #9b8aff,
+      #80fbff
+    ) border-box;
+  box-shadow:
+    0 0 35px #59f0ff99,
+    inset 0 0 33px #ff5bf7aa;
+  transform:rotate(-27deg) scaleY(.59);
+  animation:orbitMove 12s ease-in-out infinite alternate;
 }
-.greeting .symbol {
-  font-size: 48px;
-  margin-bottom: 22px;
+.orbit.two{
+  inset:10%;
+  transform:rotate(55deg) scaleY(.68);
+  filter:hue-rotate(45deg);
+  animation-delay:-5s;
 }
-.greeting .kicker {
-  font-size: 12px;
-  letter-spacing: .23em;
-  text-transform: uppercase;
-  opacity: .84;
+.orbit.three{
+  inset:2%;
+  transform:rotate(112deg) scaleY(.82);
+  border-width:2px;
+  opacity:.8;
+  animation-delay:-7s;
 }
-.greeting h2 {
-  margin: 15px 0 16px;
-  font-size: clamp(29px, 3.4vw, 43px);
-  line-height: 1.2;
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes breathe{
+  to{transform:scale(1.08);filter:hue-rotate(17deg)}
 }
-.greeting .message {
-  white-space: pre-wrap;
-  line-height: 1.75;
-  color: #fffdf9;
-  font-size: 17px;
-}
-.greeting .sender {
-  margin-top: 27px;
-  color: #ffe7f8;
-  font-size: 14px;
-}
-
-footer {
-  border-top: 1px solid #ffffff20;
-  padding: 28px 0 45px;
-  text-align: center;
-  color: #aeb0c8;
-  font-size: 13px;
+@keyframes orbitMove{
+  to{transform:rotate(18deg) scaleY(.64)}
 }
 
-.shared .normal-only,
-.shared #studioIntro,
-.shared #editorPanel {
-  display: none;
-}
-.shared .workspace {
-  grid-template-columns: 1fr;
-  max-width: 690px;
-  margin-inline: auto;
-}
-.shared .greeting { min-height: 540px; }
-.shared .hero { padding: 26px 0; }
-.shared #studio { padding-top: 0; }
-
-@media (max-width: 760px) {
-  header { padding: 18px 0; }
-  .logo { font-size: 15px; }
-  .nav { gap: 8px; }
-  .nav .pill { display: none; }
-  .hero { padding: 50px 0 36px; }
-  .workspace { grid-template-columns: 1fr; }
-  .panel { padding: 18px; }
-  .greeting { min-height: 400px; }
-  .studio { padding-bottom: 50px; }
+.eyebrow{
+  padding:11px 19px;
+  border-radius:50px;
+  border:1px solid #ffffff88;
+  background:#ffffff24;
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 30px #ff75df55;
+  text-transform:uppercase;
+  letter-spacing:.19em;
+  font-size:12px;
+  font-weight:900;
+  animation:appear .9s both;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    scroll-behavior: auto !important;
-    transition: none !important;
+.hero h1{
+  font-size:clamp(44px,10vw,138px);
+  font-weight:1000;
+  letter-spacing:-.075em;
+  text-transform:uppercase;
+  line-height:1;
+  margin:40px 0 16px;
+  max-width:100%;
+  overflow-wrap:anywhere;
+  background:linear-gradient(
+    180deg,
+    white,
+    #c5ffff 33%,
+    white 49%,
+    #ffb8f6 70%,
+    #ff70d6
+  );
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+  filter:
+    drop-shadow(0 7px 14px #380b73)
+    drop-shadow(0 0 35px #ff8de488);
+  animation:rise 1.1s .15s both;
+}
+.hero h2{
+  font-size:clamp(26px,4vw,53px);
+  letter-spacing:-.05em;
+  line-height:1.2;
+  margin:8px 0;
+  text-shadow:0 5px 35px #180740;
+  animation:rise 1s .3s both;
+}
+.hero p{
+  max-width:630px;
+  font-size:clamp(15px,1.6vw,19px);
+  line-height:1.7;
+  color:#fff1ff;
+  margin:18px auto 30px;
+  text-shadow:0 2px 12px #180740;
+  animation:rise 1s .45s both;
+}
+@keyframes appear{
+  from{opacity:0;transform:translateY(-15px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes rise{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.hero-buttons{
+  display:flex;
+  gap:13px;
+  justify-content:center;
+  flex-wrap:wrap;
+  animation:rise 1s .55s both;
+}
+.btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  min-height:48px;
+  border-radius:50px;
+  padding:14px 21px;
+  background:#ffffff20;
+  color:white;
+  border:1px solid #ffffff75;
+  font-weight:850;
+  transition:transform .2s,box-shadow .2s,background .2s;
+}
+.btn:hover{
+  transform:translateY(-3px);
+  background:#ffffff36;
+  box-shadow:0 10px 30px #f070d677;
+}
+.btn.main{
+  border:0;
+  color:#301049;
+  background:linear-gradient(
+    115deg,
+    #fff9ae,
+    #ff8fe9 45%,
+    #8bf8ff
+  );
+  box-shadow:
+    0 0 42px #ff89d6a6,
+    0 10px 30px #25066877;
+}
+.btn.main:hover{
+  box-shadow:0 0 70px #ff9de6e5;
+}
+.hero-foot{
+  position:absolute;
+  bottom:25px;
+  left:0;
+  right:0;
+  color:#ffffffcc;
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+  50%{transform:translateY(-7px)}
+}
+
+/* ЦВЕТНАЯ ПОЛОСА */
+
+.ribbon{
+  padding:18px;
+  display:flex;
+  gap:25px;
+  justify-content:center;
+  flex-wrap:wrap;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  background:linear-gradient(
+    90deg,
+    #ff64c6,
+    #7855ed,
+    #21bee7
+  );
+  border-block:1px solid #ffffff66;
+  box-shadow:0 10px 45px #df58ff55;
+}
+
+/* СТУДИЯ */
+
+.section{
+  padding:90px 0 100px;
+  scroll-margin-top:20px;
+}
+.section-intro{
+  text-align:center;
+  max-width:800px;
+  margin:0 auto 35px;
+}
+.tag{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.2em;
+  color:#b1faff;
+  text-transform:uppercase;
+}
+.section-intro h2{
+  font-size:clamp(31px,4.4vw,55px);
+  letter-spacing:-.06em;
+  margin:13px 0;
+}
+.section-intro p{
+  color:#f1e6ff;
+  line-height:1.7;
+  font-size:16px;
+}
+.workspace{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
+  align-items:start;
+  gap:22px;
+}
+.glass{
+  background:linear-gradient(
+    145deg,
+    #291352ee,
+    #140f39ed
+  );
+  border:1px solid #ffffff48;
+  border-radius:28px;
+  padding:27px;
+  box-shadow:
+    0 23px 80px #09052588,
+    inset 0 1px #ffffff1f;
+  backdrop-filter:blur(18px);
+}
+.glass h3{
+  margin:0 0 22px;
+  font-size:22px;
+}
+.field{
+  display:block;
+  margin:18px 0 8px;
+  font-size:13px;
+  color:#f4e9ff;
+  font-weight:800;
+}
+.entry{
+  width:100%;
+  background:#150b36bb;
+  border:1px solid #ffffff66;
+  border-radius:13px;
+  padding:14px;
+  color:white;
+}
+.entry::placeholder{color:#d8c5e8a0}
+textarea.entry{
+  min-height:130px;
+  resize:vertical;
+  line-height:1.6;
+}
+.options{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.option{
+  min-height:57px;
+  padding:13px 8px;
+  color:white;
+  font-weight:850;
+  border:1px solid #ffffff55;
+  border-radius:15px;
+  background:#ffffff14;
+  transition:transform .2s,background .2s;
+}
+.option:hover{
+  transform:translateY(-2px);
+  background:#ffffff28;
+}
+.option[aria-pressed="true"]{
+  border-color:#bdfaff;
+  background:linear-gradient(
+    120deg,
+    #ff68c668,
+    #37d0ff70
+  );
+  box-shadow:0 0 18px #84dfff44;
+}
+.themes{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+.theme-choice{
+  font-size:12px;
+  padding:11px 3px;
+}
+.swatch{
+  display:block;
+  width:34px;
+  height:34px;
+  margin:0 auto 8px;
+  border-radius:50%;
+  border:2px solid #ffffffc0;
+}
+.swatch.nebula{
+  background:linear-gradient(135deg,#ff5bbd,#6f54ff,#5ff4ff);
+}
+.swatch.love{
+  background:linear-gradient(135deg,#ff637e,#ffb1dc,#fe3db0);
+}
+.swatch.sunrise{
+  background:linear-gradient(135deg,#fff1a2,#ff9e60,#fa58a7);
+}
+.swatch.ocean{
+  background:linear-gradient(135deg,#45e7ff,#2461e7,#57ffd9);
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:24px;
+}
+.actions .btn{
+  font-size:13px;
+  padding:12px 15px;
+}
+.status{
+  min-height:22px;
+  margin:14px 0 0;
+  color:#baffdf;
+  font-size:13px;
+}
+.privacy{
+  color:#dfd2ec;
+  font-size:12px;
+  line-height:1.6;
+}
+
+/* ОТКРЫТКИ */
+
+.preview-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+.preview-head h3{margin:0}
+.live{
+  color:#b5fff6;
+  font-size:11px;
+  letter-spacing:.1em;
+  font-weight:900;
+}
+.card{
+  position:relative;
+  min-height:500px;
+  padding:36px 29px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  isolation:isolate;
+  overflow:hidden;
+  overflow-wrap:anywhere;
+  border-radius:24px;
+  border:1px solid #ffffff99;
+  box-shadow:
+    inset 0 1px 15px #ffffff44,
+    0 15px 45px #11072177;
+}
+.card:before{
+  content:"";
+  position:absolute;
+  inset:-35%;
+  z-index:-2;
+  background:conic-gradient(
+    from 40deg,
+    #ffffff55,
+    #ffffff00,
+    #ffffff33,
+    #ffffff00,
+    #ffffff55
+  );
+  animation:spin 22s linear infinite;
+}
+.card:after{
+  content:"✦     ✧     ✦";
+  position:absolute;
+  top:10%;
+  left:0;
+  right:0;
+  font-size:31px;
+  letter-spacing:15px;
+  opacity:.45;
+  z-index:-1;
+}
+.card.nebula{
+  background:
+    radial-gradient(ellipse at 20% 18%,#ff54d7,transparent 57%),
+    radial-gradient(ellipse at 85% 80%,#50cfff,transparent 56%),
+    linear-gradient(140deg,#4b22a7,#251257);
+}
+.card.love{
+  background:
+    radial-gradient(ellipse at 20% 15%,#ffbdce,transparent 48%),
+    radial-gradient(ellipse at 80% 85%,#fe338e,transparent 60%),
+    linear-gradient(140deg,#8d207d,#4a1049);
+}
+.card.sunrise{
+  background:
+    radial-gradient(ellipse at 15% 10%,#fff2a5,transparent 44%),
+    radial-gradient(ellipse at 85% 75%,#ff72bd,transparent 59%),
+    linear-gradient(140deg,#ff9a4b,#ca368d,#6f29bd);
+}
+.card.ocean{
+  background:
+    radial-gradient(ellipse at 15% 15%,#89ffff,transparent 48%),
+    radial-gradient(ellipse at 85% 85%,#3a78ff,transparent 58%),
+    linear-gradient(140deg,#1495c0,#224ab6,#231265);
+}
+.card-icon{
+  font-size:60px;
+  margin-bottom:23px;
+  filter:drop-shadow(0 8px 15px #0004);
+}
+.card-kicker{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.19em;
+  opacity:.9;
+}
+.card h4{
+  font-size:clamp(30px,3.5vw,45px);
+  line-height:1.18;
+  letter-spacing:-.04em;
+  margin:17px 0;
+  text-shadow:0 4px 20px #0004;
+}
+.card-message{
+  font-size:17px;
+  line-height:1.7;
+  white-space:pre-wrap;
+  max-width:440px;
+}
+.card-from{
+  margin-top:28px;
+  font-size:14px;
+  font-weight:700;
+}
+
+/* ЭКРАН ПОДАРКА */
+
+.experience{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:20px;
+  overflow:auto;
+  background:
+    radial-gradient(ellipse at 50% 45%,#b529b8a8,transparent 52%),
+    radial-gradient(ellipse at 15% 80%,#2369e8a6,transparent 50%),
+    #16072f;
+}
+.experience.visible{display:flex}
+.close-experience{
+  position:absolute;
+  top:18px;
+  right:20px;
+  z-index:110;
+  background:#ffffff26;
+  border:1px solid #ffffff77;
+  color:white;
+  border-radius:30px;
+  padding:10px 18px;
+}
+.gift-screen{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+  text-align:center;
+}
+.gift-screen h2{
+  font-size:clamp(26px,5vw,55px);
+  margin:8px 0;
+  text-shadow:0 0 35px #ffc5ff;
+}
+.gift-box{
+  width:min(290px,65vw);
+  aspect-ratio:1;
+  position:relative;
+  border:0;
+  background:transparent;
+  font-size:clamp(100px,23vw,210px);
+  cursor:pointer;
+  filter:drop-shadow(0 0 45px #ff94e7);
+  animation:giftFloat 3s ease-in-out infinite;
+}
+.gift-box:hover{
+  transform:scale(1.05);
+  filter:drop-shadow(0 0 75px #ffe5a7);
+}
+@keyframes giftFloat{
+  50%{translate:0 -13px}
+}
+.gift-hint{
+  font-size:12px;
+  letter-spacing:.14em;
+  font-weight:900;
+}
+.revealed{
+  display:none;
+  width:min(620px,100%);
+  max-height:calc(100svh - 125px);
+  overflow:auto;
+  text-align:center;
+}
+.revealed .card{
+  min-height:min(520px,65svh);
+}
+.experience.opened .gift-screen{display:none}
+.experience.opened .revealed{display:block}
+.revealed-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:15px;
+}
+.spark{
+  position:fixed;
+  z-index:130;
+  pointer-events:none;
+  background:radial-gradient(circle,#fff,#ffd0fa 45%,#ff58db);
+  border-radius:50%;
+  box-shadow:0 0 18px #fff;
+  animation:sparkFly 1.4s ease-out forwards;
+}
+@keyframes sparkFly{
+  to{
+    transform:translate(var(--dx),var(--dy)) scale(0);
+    opacity:0;
   }
 }
-@media print {
-  body { background: white; }
-  header, .hero, #editorPanel, footer,
-  #studioIntro, .preview-title {
-    display: none !important;
+footer{
+  border-top:1px solid #ffffff35;
+  padding:30px 15px 45px;
+  text-align:center;
+  color:#e3d5f1;
+  font-size:13px;
+}
+
+@media(max-width:780px){
+  .workspace{grid-template-columns:1fr}
+  .hero{min-height:670px;padding:50px 0 80px}
+  .glass{padding:20px}
+  .card{min-height:430px}
+  .hero-light{width:112vw}
+  .top-right{gap:7px}
+  .studio-link{display:none}
+  #language{max-width:145px}
+}
+@media(max-width:430px){
+  .hero h1{font-size:clamp(39px,11vw,55px)}
+  .hero h2{font-size:26px}
+  .theme-choice{font-size:10px}
+  .swatch{width:28px;height:28px}
+  .ribbon{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation:none!important;
+    scroll-behavior:auto!important;
+    transition:none!important;
   }
-  .workspace { display: block; }
-  .panel {
-    box-shadow: none;
-    padding: 0;
-    border: 0;
+}
+@media print{
+  body{background:white}
+  .universe,header,.hero,.ribbon,
+  .section-intro,#editor,footer,
+  .preview-head,.actions,.experience{
+    display:none!important;
   }
-  .greeting {
-    min-height: 95vh;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
+  .workspace{display:block}
+  .glass{border:0;box-shadow:none;background:none;padding:0}
+  .card{
+    min-height:95vh;
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
   }
 }
 </style>
 </head>
 
 <body>
-<div class="cosmos" aria-hidden="true"></div>
 
-<div class="wrap">
+<div class="universe" aria-hidden="true">
+  <canvas id="stars"></canvas>
+</div>
+
+<div class="container">
   <header>
-    <a href="./" class="logo">DREAM<span>WORLD</span></a>
+    <a class="logo" href="./">
+      DREAM<span>WORLD</span>
+    </a>
 
-    <nav class="nav" aria-label="Navigation">
-      <span class="pill">✦ Studio</span>
+    <div class="top-right">
+      <a class="studio-link" href="#studio">Studio ✦</a>
       <select id="language" aria-label="Language">
-        <option value="ru">🇷🇺 Русский</option>
         <option value="en">🇬🇧 English</option>
+        <option value="ru">🇷🇺 Русский</option>
         <option value="de">🇩🇪 Deutsch</option>
         <option value="es">🇪🇸 Español</option>
         <option value="fr">🇫🇷 Français</option>
+        <option value="pt">🇧🇷 Português</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="hi">🇮🇳 हिन्दी</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="ko">🇰🇷 한국어</option>
+        <option value="id">🇮🇩 Indonesia</option>
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="it">🇮🇹 Italiano</option>
       </select>
-    </nav>
+    </div>
   </header>
+</div>
 
-  <section class="hero">
-    <div class="eyebrow" id="eyebrow">
-      ✦ Моменты, которые запоминаются
+<main>
+
+<section class="hero">
+
+  <div class="hero-light" id="heroLight" aria-hidden="true">
+    <div class="portal"></div>
+    <div class="orbit"></div>
+    <div class="orbit two"></div>
+    <div class="orbit three"></div>
+  </div>
+
+  <div class="eyebrow" id="heroTag">
+    ✦ YOUR IMAGINATION HAS NO LIMITS
+  </div>
+
+  <h1>DREAMWORLD</h1>
+
+  <h2 id="heroSubtitle">
+    Создай момент, который невозможно забыть
+  </h2>
+
+  <p id="heroDescription">
+    Преврати обычные слова в волшебный цифровой подарок.
+    Создавай, удивляй и делись эмоциями.
+  </p>
+
+  <div class="hero-buttons">
+    <a class="btn main" id="startLink" href="#studio">
+      ✦ Создать волшебство
+    </a>
+    <button class="btn" id="demoButton" type="button">
+      🎁 Увидеть магию
+    </button>
+  </div>
+
+  <div class="hero-foot" id="scrollHint">
+    ↓ Открой новый мир
+  </div>
+
+</section>
+
+<div class="ribbon">
+  <span>✦ DREAM</span>
+  <span>✦ CREATE</span>
+  <span>✦ SHARE</span>
+  <span>✦ INSPIRE</span>
+</div>
+
+<section class="section" id="studio">
+
+<div class="container">
+
+  <div class="section-intro">
+    <div class="tag">✦ DREAMWORLD STUDIO</div>
+
+    <h2 id="studioTitle">
+      Создавай волшебные моменты
+    </h2>
+
+    <p id="studioDescription">
+      Выбери повод, добавь свои слова, оформи подарок
+      и отправь кому-то особенному.
+    </p>
+  </div>
+
+  <div class="workspace">
+
+    <div class="glass" id="editor">
+
+      <h3 id="editorTitle">Создай свой подарок</h3>
+
+      <label class="field" id="typeLabel">
+        Выбери повод
+      </label>
+
+      <div class="options">
+        <button class="option" data-type="birthday"
+                aria-pressed="true" type="button">
+          🎂 <span>День рождения</span>
+        </button>
+
+        <button class="option" data-type="love"
+                aria-pressed="false" type="button">
+          💖 <span>Любовь</span>
+        </button>
+
+        <button class="option" data-type="invite"
+                aria-pressed="false" type="button">
+          🎉 <span>Приглашение</span>
+        </button>
+
+        <button class="option" data-type="thanks"
+                aria-pressed="false" type="button">
+          🌷 <span>Благодарность</span>
+        </button>
+      </div>
+
+      <label class="field" for="recipient" id="toLabel">
+        Кому
+      </label>
+      <input class="entry" id="recipient"
+             maxlength="70" placeholder="Имя получателя">
+
+      <label class="field" for="message" id="messageLabel">
+        Твоё сообщение
+      </label>
+      <textarea class="entry" id="message"
+                maxlength="600"
+                placeholder="Напиши что-нибудь от души..."></textarea>
+
+      <label class="field" for="sender" id="fromLabel">
+        От кого
+      </label>
+      <input class="entry" id="sender"
+             maxlength="70" placeholder="Твоё имя">
+
+      <label class="field" id="themeLabel">
+        Выбери магический стиль
+      </label>
+
+      <div class="themes">
+
+        <button class="option theme-choice"
+                data-theme="nebula"
+                aria-pressed="true" type="button">
+          <span class="swatch nebula"></span>
+          <span>Туманность</span>
+        </button>
+
+        <button class="option theme-choice"
+                data-theme="love"
+                aria-pressed="false" type="button">
+          <span class="swatch love"></span>
+          <span>Романтика</span>
+        </button>
+
+        <button class="option theme-choice"
+                data-theme="sunrise"
+                aria-pressed="false" type="button">
+          <span class="swatch sunrise"></span>
+          <span>Рассвет</span>
+        </button>
+
+        <button class="option theme-choice"
+                data-theme="ocean"
+                aria-pressed="false" type="button">
+          <span class="swatch ocean"></span>
+          <span>Океан</span>
+        </button>
+
+      </div>
+
+      <div class="actions">
+        <button class="btn main" id="viewButton" type="button">
+          ✨ Посмотреть подарок
+        </button>
+
+        <button class="btn" id="shareButton" type="button">
+          🔗 Поделиться
+        </button>
+
+        <button class="btn" id="saveButton" type="button">
+          💾 Сохранить
+        </button>
+
+        <button class="btn" id="printButton" type="button">
+          🖨️ Печать
+        </button>
+      </div>
+
+      <div class="status" id="status"
+           role="status" aria-live="polite"></div>
+
+      <p class="privacy" id="privacy">
+        Черновик хранится в твоём браузере.
+        Любой, у кого есть ссылка на подарок,
+        сможет прочитать сообщение.
+      </p>
+
     </div>
 
-    <h1 id="heroTitle">
-      Создай что-то <em>незабываемое</em>
-    </h1>
+    <div class="glass">
 
-    <p id="heroDescription">
-      Создавай красивые поздравления, приглашения и признания
-      за пару минут. Бесплатно, без регистрации.
+      <div class="preview-head">
+        <h3 id="previewTitle">Живой предпросмотр</h3>
+        <span class="live">✦ LIVE MAGIC</span>
+      </div>
+
+      <article class="card nebula" id="previewCard">
+        <div class="card-icon">🎂</div>
+        <div class="card-kicker">СОЗДАНО ДЛЯ ТЕБЯ</div>
+        <h4>С днём рождения!</h4>
+        <div class="card-message"></div>
+        <div class="card-from"></div>
+      </article>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> DREAMWORLD
+  <p id="footerNote">Мечтай. Создавай. Делись.</p>
+</footer>
+
+<!-- ИНТЕРАКТИВНОЕ ОТКРЫТИЕ ПОДАРКА -->
+
+<div class="experience" id="experience"
+     role="dialog" aria-modal="true"
+     aria-label="Magical gift">
+
+  <button class="close-experience"
+          id="closeExperience" type="button">
+    ✕
+  </button>
+
+  <div class="gift-screen">
+
+    <div class="tag">✦ DREAMWORLD MAGIC ✦</div>
+
+    <h2 id="giftName">
+      Тебя ждёт волшебный момент
+    </h2>
+
+    <button class="gift-box" id="giftButton"
+            type="button"
+            aria-label="Open gift">
+      🎁
+    </button>
+
+    <p class="gift-hint" id="giftInstruction">
+      ✦ НАЖМИ, ЧТОБЫ ОТКРЫТЬ СЮРПРИЗ ✦
     </p>
 
-    <a href="#studio" class="btn primary normal-only" id="startButton">
-      Начать создавать ✨
-    </a>
+  </div>
 
-    <button class="btn primary" id="newButton" hidden>
-      Создать своё ✨
-    </button>
-  </section>
+  <div class="revealed">
 
-  <section class="studio" id="studio">
+    <article class="card nebula" id="experienceCard">
+      <div class="card-icon">🎂</div>
+      <div class="card-kicker"></div>
+      <h4></h4>
+      <div class="card-message"></div>
+      <div class="card-from"></div>
+    </article>
 
-    <div id="studioIntro">
-      <div class="eyebrow">DREAMWORLD STUDIO</div>
-      <h2 class="section-title" id="sectionTitle">
-        Твоя творческая мастерская
-      </h2>
-      <p class="muted" id="sectionDescription">
-        Выбери повод, напиши свои слова и отправь
-        красивую открытку по ссылке.
-      </p>
+    <div class="revealed-actions">
+      <a href="#studio" id="createOwn"
+         class="btn main">
+        ✦ Создать свой подарок
+      </a>
     </div>
 
-    <div class="workspace">
+  </div>
 
-      <div class="panel" id="editorPanel">
-
-        <h3 id="editorTitle">Создай открытку</h3>
-
-        <label class="field" id="typeLabel">
-          Что создаём?
-        </label>
-
-        <div class="choices" id="typeChoices">
-          <button type="button" class="choice active" data-type="birthday">
-            🎂 <span>День рождения</span>
-          </button>
-          <button type="button" class="choice" data-type="love">
-            💖 <span>Признание</span>
-          </button>
-          <button type="button" class="choice" data-type="invite">
-            🎉 <span>Приглашение</span>
-          </button>
-          <button type="button" class="choice" data-type="thanks">
-            🌷 <span>Благодарность</span>
-          </button>
-        </div>
-
-        <label class="field" for="recipient" id="recipientLabel">
-          Имя получателя
-        </label>
-
-        <input id="recipient" type="text" maxlength="80"
-               placeholder="Например, Анна" autocomplete="off">
-
-        <label class="field" for="message" id="messageLabel">
-          Твои слова
-        </label>
-
-        <textarea id="message" maxlength="1200"
-                  placeholder="Напиши что-нибудь от души..."></textarea>
-
-        <label class="field" for="sender" id="senderLabel">
-          От кого
-        </label>
-
-        <input id="sender" type="text" maxlength="80"
-               placeholder="Твоё имя" autocomplete="off">
-
-        <label class="field" id="themeLabel">
-          Оформление
-        </label>
-
-        <div class="themes" id="themeChoices">
-          <button type="button" class="choice active" data-theme="cosmic">
-            🌌 <span>Космос</span>
-          </button>
-          <button type="button" class="choice" data-theme="rose">
-            🌸 <span>Романтика</span>
-          </button>
-          <button type="button" class="choice" data-theme="gold">
-            ✨ <span>Золото</span>
-          </button>
-        </div>
-
-        <div class="actions">
-          <button type="button" class="btn primary" id="shareButton">
-            🔗 Поделиться
-          </button>
-          <button type="button" class="btn" id="saveButton">
-            💾 Сохранить
-          </button>
-          <button type="button" class="btn" id="printButton">
-            🖨️ Печать
-          </button>
-        </div>
-
-        <div id="status" class="status" role="status" aria-live="polite"></div>
-
-        <p class="muted" id="privacyNote"
-           style="font-size:12px;margin-bottom:0">
-          Черновик хранится только в этом браузере.
-          Любой, у кого есть ссылка, сможет прочитать открытку —
-          не добавляй личные секреты.
-        </p>
-      </div>
-
-      <div class="panel" id="previewPanel">
-
-        <div class="preview-title">
-          <h3 id="previewTitle">Предпросмотр</h3>
-          <small>✦ Dreamworld</small>
-        </div>
-
-        <article class="greeting cosmic" id="greeting"
-                 aria-label="Greeting card">
-          <div class="symbol" id="cardSymbol">🎂</div>
-          <div class="kicker" id="cardKicker">ДЛЯ ТЕБЯ</div>
-          <h2 id="cardTitle">С днём рождения!</h2>
-          <div class="message" id="cardMessage">
-            Пусть каждый день приносит радость,
-            вдохновение и новые мечты!
-          </div>
-          <div class="sender" id="cardSender"></div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    © <span id="year"></span> Dreamworld Studio ·
-    <span id="footerText">
-      Создавай моменты, которыми хочется делиться.
-    </span>
-  </footer>
 </div>
 
 <script>
-'use strict';
+"use strict";
 
-const words = {
-  ru: {
-    eyebrow: '✦ Моменты, которые запоминаются',
-    heroA: 'Создай что-то',
-    heroB: 'незабываемое',
-    desc: 'Создавай красивые поздравления, приглашения и признания за пару минут. Бесплатно, без регистрации.',
-    start: 'Начать создавать ✨',
-    new: 'Создать своё ✨',
-    section: 'Твоя творческая мастерская',
-    sectionDesc: 'Выбери повод, напиши свои слова и отправь красивую открытку по ссылке.',
-    editor: 'Создай открытку',
-    type: 'Что создаём?',
-    recipient: 'Имя получателя',
-    recipientPH: 'Например, Анна',
-    message: 'Твои слова',
-    messagePH: 'Напиши что-нибудь от души...',
-    sender: 'От кого',
-    senderPH: 'Твоё имя',
-    theme: 'Оформление',
-    preview: 'Предпросмотр',
-    share: '🔗 Поделиться',
-    save: '💾 Сохранить',
-    print: '🖨️ Печать',
-    note: 'Черновик хранится только в этом браузере. Любой, у кого есть ссылка, сможет прочитать открытку — не добавляй личные секреты.',
-    footer: 'Создавай моменты, которыми хочется делиться.',
-    types: ['День рождения', 'Признание', 'Приглашение', 'Благодарность'],
-    themes: ['Космос', 'Романтика', 'Золото'],
-    titles: ['С днём рождения!', 'Ты особенный человек!', 'Ты приглашён!', 'Спасибо от всего сердца!'],
-    examples: [
-      'Пусть каждый день приносит радость, вдохновение и новые мечты!',
-      'Хочу сказать тебе кое-что особенное...',
-      'Буду очень рад(а) видеть тебя!',
-      'Спасибо, что ты есть в моей жизни.'
-    ],
-    kicker: 'ДЛЯ ТЕБЯ',
-    from: 'От',
-    copied: 'Ссылка скопирована! Отправь её другу.',
-    copyFallback: 'Скопируй ссылку из открывшегося окна.',
-    saved: 'Черновик сохранён на этом устройстве.',
-    shared: 'Для тебя приготовили кое-что особенное ✨'
-  },
+/*
+  DREAMWORLD STUDIO
+  Languages: 14
+  Everything works without external libraries.
+*/
 
-  en: {
-    eyebrow: '✦ Moments worth remembering',
-    heroA: 'Create something',
-    heroB: 'unforgettable',
-    desc: 'Make beautiful greetings, invitations and love notes in minutes. Free, no account needed.',
-    start: 'Start creating ✨',
-    new: 'Create your own ✨',
-    section: 'Your creative studio',
-    sectionDesc: 'Choose an occasion, write your words and share your card with a link.',
-    editor: 'Create a card',
-    type: 'What are we making?',
-    recipient: 'Recipient name',
-    recipientPH: 'For example, Anna',
-    message: 'Your message',
-    messagePH: 'Write something from the heart...',
-    sender: 'From',
-    senderPH: 'Your name',
-    theme: 'Design',
-    preview: 'Live preview',
-    share: '🔗 Share',
-    save: '💾 Save',
-    print: '🖨️ Print',
-    note: 'Drafts are stored only in this browser. Anyone with your link can read the card — do not include secrets.',
-    footer: 'Make moments worth sharing.',
-    types: ['Birthday', 'Love note', 'Invitation', 'Thank you'],
-    themes: ['Cosmos', 'Romance', 'Gold'],
-    titles: ['Happy birthday!', 'You are special!', 'You are invited!', 'Thank you so much!'],
-    examples: [
-      'Wishing you joy, inspiration and beautiful new adventures!',
-      'There is something special I want to tell you...',
-      'I would love to see you there!',
-      'Thank you for being part of my life.'
-    ],
-    kicker: 'JUST FOR YOU',
-    from: 'From',
-    copied: 'Link copied! Send it to a friend.',
-    copyFallback: 'Copy the link from the dialog.',
-    saved: 'Draft saved on this device.',
-    shared: 'Someone made something special for you ✨'
-  },
+const I18N = {
 
-  de: {
-    eyebrow: '✦ Momente, die bleiben',
-    heroA: 'Erschaffe etwas',
-    heroB: 'Unvergessliches',
-    desc: 'Gestalte Grüße, Einladungen und Liebesbotschaften in wenigen Minuten. Kostenlos und ohne Anmeldung.',
-    start: 'Jetzt gestalten ✨',
-    new: 'Selbst gestalten ✨',
-    section: 'Dein kreatives Studio',
-    sectionDesc: 'Wähle einen Anlass, schreibe deinen Text und teile deine Karte per Link.',
-    editor: 'Karte gestalten',
-    type: 'Was möchtest du erstellen?',
-    recipient: 'Name der Person',
-    recipientPH: 'Zum Beispiel Anna',
-    message: 'Deine Nachricht',
-    messagePH: 'Schreibe etwas von Herzen...',
-    sender: 'Von wem',
-    senderPH: 'Dein Name',
-    theme: 'Design',
-    preview: 'Vorschau',
-    share: '🔗 Teilen',
-    save: '💾 Speichern',
-    print: '🖨️ Drucken',
-    note: 'Entwürfe bleiben nur in diesem Browser. Jeder mit dem Link kann die Karte lesen – keine Geheimnisse eintragen.',
-    footer: 'Gestalte Momente zum Teilen.',
-    types: ['Geburtstag', 'Liebesbotschaft', 'Einladung', 'Dankeschön'],
-    themes: ['Kosmos', 'Romantik', 'Gold'],
-    titles: [
-      'Alles Gute zum Geburtstag!',
-      'Du bist etwas Besonderes!',
-      'Du bist eingeladen!',
-      'Vielen lieben Dank!'
-    ],
-    examples: [
-      'Ich wünsche dir Freude, Inspiration und viele schöne Momente!',
-      'Ich möchte dir etwas ganz Besonderes sagen...',
-      'Ich würde mich freuen, dich dabei zu haben!',
-      'Danke, dass es dich gibt.'
-    ],
-    kicker: 'NUR FÜR DICH',
-    from: 'Von',
-    copied: 'Link kopiert! Schick ihn weiter.',
-    copyFallback: 'Kopiere den Link aus dem Fenster.',
-    saved: 'Entwurf auf diesem Gerät gespeichert.',
-    shared: 'Jemand hat etwas Besonderes für dich gestaltet ✨'
-  },
+ru:{
+tag:"✦ ТВОЁ ВООБРАЖЕНИЕ НЕ ЗНАЕТ ГРАНИЦ",
+sub:"Создай момент, который невозможно забыть",
+desc:"Преврати обычные слова в волшебный цифровой подарок. Создавай, удивляй и делись эмоциями.",
+start:"✦ Создать волшебство",
+demo:"🎁 Увидеть магию",
+scroll:"↓ Открой новый мир",
+title:"Создавай волшебные моменты",
+intro:"Выбери повод, добавь свои слова, оформи подарок и отправь кому-то особенному.",
+editor:"Создай свой подарок",
+type:"Выбери повод",
+to:"Кому",
+toPH:"Имя получателя",
+message:"Твоё сообщение",
+messagePH:"Напиши что-нибудь от души...",
+from:"От кого",
+fromPH:"Твоё имя",
+theme:"Выбери магический стиль",
+view:"✨ Посмотреть подарок",
+share:"🔗 Поделиться",
+save:"💾 Сохранить",
+print:"🖨️ Печать",
+preview:"Живой предпросмотр",
+privacy:"Черновик хранится только в этом браузере. Любой, у кого есть ссылка, сможет прочитать подарок.",
+footer:"Мечтай. Создавай. Делись.",
+types:["День рождения","Любовь","Приглашение","Благодарность"],
+themes:["Туманность","Романтика","Рассвет","Океан"],
+titles:["С днём рождения!","Ты особенный человек!","Ты приглашён!","Спасибо от всего сердца!"],
+examples:[
+"Пусть твой день сияет счастьем и удивительными сюрпризами!",
+"Ты делаешь мой мир намного ярче!",
+"Скоро особенный день, и я хочу разделить его с тобой!",
+"Спасибо, что делаешь этот мир прекраснее!"
+],
+kicker:"СОЗДАНО ТОЛЬКО ДЛЯ ТЕБЯ",
+by:"От",
+gift:"Тебя ждёт волшебный момент",
+tap:"✦ НАЖМИ, ЧТОБЫ ОТКРЫТЬ СЮРПРИЗ ✦",
+create:"✦ Создать свой подарок",
+copied:"Ссылка скопирована! Отправь её близкому человеку.",
+copyFailed:"Скопируй ссылку из окна.",
+saved:"Черновик сохранён на устройстве.",
+saveFailed:"Не удалось сохранить черновик."
+},
 
-  es: {
-    eyebrow: '✦ Momentos inolvidables',
-    heroA: 'Crea algo',
-    heroB: 'inolvidable',
-    desc: 'Crea felicitaciones, invitaciones y mensajes de amor en minutos. Gratis y sin registro.',
-    start: 'Empezar ✨',
-    new: 'Crear el mío ✨',
-    section: 'Tu estudio creativo',
-    sectionDesc: 'Elige la ocasión, escribe tu mensaje y comparte la tarjeta por enlace.',
-    editor: 'Crear tarjeta',
-    type: '¿Qué vamos a crear?',
-    recipient: 'Nombre',
-    recipientPH: 'Por ejemplo, Ana',
-    message: 'Tu mensaje',
-    messagePH: 'Escribe desde el corazón...',
-    sender: 'De parte de',
-    senderPH: 'Tu nombre',
-    theme: 'Diseño',
-    preview: 'Vista previa',
-    share: '🔗 Compartir',
-    save: '💾 Guardar',
-    print: '🖨️ Imprimir',
-    note: 'Los borradores se guardan solo en este navegador. Cualquiera con el enlace puede leer la tarjeta.',
-    footer: 'Crea momentos para compartir.',
-    types: ['Cumpleaños', 'Amor', 'Invitación', 'Gracias'],
-    themes: ['Cosmos', 'Romance', 'Oro'],
-    titles: [
-      '¡Feliz cumpleaños!',
-      '¡Eres especial!',
-      '¡Estás invitado!',
-      '¡Muchas gracias!'
-    ],
-    examples: [
-      '¡Que la alegría y los sueños te acompañen siempre!',
-      'Quiero decirte algo muy especial...',
-      '¡Me encantaría verte allí!',
-      'Gracias por formar parte de mi vida.'
-    ],
-    kicker: 'PARA TI',
-    from: 'De',
-    copied: '¡Enlace copiado!',
-    copyFallback: 'Copia el enlace de la ventana.',
-    saved: 'Borrador guardado en este dispositivo.',
-    shared: 'Alguien creó algo especial para ti ✨'
-  },
+en:{
+tag:"✦ YOUR IMAGINATION HAS NO LIMITS",
+sub:"Create a moment nobody forgets",
+desc:"Turn ordinary words into an extraordinary digital gift. Create, surprise and share the magic.",
+start:"✦ Create magic",
+demo:"🎁 See the magic",
+scroll:"↓ Discover a new world",
+title:"Create magical moments",
+intro:"Choose an occasion, write your message, design your gift and share it with someone special.",
+editor:"Create your gift",
+type:"Choose an occasion",
+to:"For whom",
+toPH:"Recipient's name",
+message:"Your message",
+messagePH:"Write something from the heart...",
+from:"From",
+fromPH:"Your name",
+theme:"Choose a magical style",
+view:"✨ Preview gift",
+share:"🔗 Share",
+save:"💾 Save",
+print:"🖨️ Print",
+preview:"Live preview",
+privacy:"Drafts are saved only in this browser. Anyone with the link can read the gift.",
+footer:"Dream. Create. Share.",
+types:["Birthday","Love","Invitation","Thank you"],
+themes:["Nebula","Romance","Sunrise","Ocean"],
+titles:["Happy Birthday!","You are special!","You're invited!","Thank you so much!"],
+examples:[
+"May your day shine with joy and wonderful surprises!",
+"You make my world brighter just by being in it.",
+"A special moment is coming. I'd love to share it with you!",
+"Thank you for making the world a little more beautiful."
+],
+kicker:"MADE JUST FOR YOU",
+by:"From",
+gift:"A magical moment is waiting for you",
+tap:"✦ TAP TO OPEN YOUR SURPRISE ✦",
+create:"✦ Create your own gift",
+copied:"Link copied! Send it to someone special.",
+copyFailed:"Copy the link from the dialog.",
+saved:"Draft saved on this device.",
+saveFailed:"Could not save your draft."
+},
 
-  fr: {
-    eyebrow: '✦ Des moments inoubliables',
-    heroA: 'Créez quelque chose',
-    heroB: 'd’inoubliable',
-    desc: 'Créez des cartes, invitations et messages d’amour en quelques minutes. Gratuit, sans inscription.',
-    start: 'Commencer ✨',
-    new: 'Créer ma carte ✨',
-    section: 'Votre studio créatif',
-    sectionDesc: 'Choisissez une occasion, écrivez votre message et partagez la carte par lien.',
-    editor: 'Créer une carte',
-    type: 'Quelle occasion ?',
-    recipient: 'Prénom',
-    recipientPH: 'Par exemple, Anna',
-    message: 'Votre message',
-    messagePH: 'Écrivez avec le cœur...',
-    sender: 'De la part de',
-    senderPH: 'Votre nom',
-    theme: 'Design',
-    preview: 'Aperçu',
-    share: '🔗 Partager',
-    save: '💾 Enregistrer',
-    print: '🖨️ Imprimer',
-    note: 'Les brouillons restent dans ce navigateur. Toute personne ayant le lien peut lire la carte.',
-    footer: 'Créez des moments à partager.',
-    types: ['Anniversaire', 'Amour', 'Invitation', 'Remerciement'],
-    themes: ['Cosmos', 'Romance', 'Or'],
-    titles: [
-      'Joyeux anniversaire !',
-      'Tu es unique !',
-      'Tu es invité(e) !',
-      'Merci du fond du cœur !'
-    ],
-    examples: [
-      'Que chaque jour t’apporte de la joie et de nouveaux rêves !',
-      'J’ai quelque chose de spécial à te dire...',
-      'J’aimerais beaucoup te voir !',
-      'Merci de faire partie de ma vie.'
-    ],
-    kicker: 'POUR TOI',
-    from: 'De',
-    copied: 'Lien copié !',
-    copyFallback: 'Copiez le lien de la fenêtre.',
-    saved: 'Brouillon enregistré sur cet appareil.',
-    shared: 'Quelqu’un a créé quelque chose pour vous ✨'
-  }
+de:{
+tag:"✦ DEINE FANTASIE KENNT KEINE GRENZEN",
+sub:"Erschaffe einen unvergesslichen Moment",
+desc:"Verwandle Worte in ein magisches digitales Geschenk. Gestalte, überrasche und teile Freude.",
+start:"✦ Magie erschaffen",
+demo:"🎁 Magie erleben",
+scroll:"↓ Entdecke eine neue Welt",
+title:"Erschaffe magische Momente",
+intro:"Wähle einen Anlass, schreibe deine Nachricht und teile dein Geschenk.",
+editor:"Gestalte dein Geschenk",
+type:"Anlass wählen",
+to:"Für wen",
+toPH:"Name der Person",
+message:"Deine Nachricht",
+messagePH:"Schreibe etwas von Herzen...",
+from:"Von wem",
+fromPH:"Dein Name",
+theme:"Magischen Stil wählen",
+view:"✨ Geschenk ansehen",
+share:"🔗 Teilen",
+save:"💾 Speichern",
+print:"🖨️ Drucken",
+preview:"Live-Vorschau",
+privacy:"Entwürfe werden nur in diesem Browser gespeichert. Jeder mit dem Link kann die Nachricht lesen.",
+footer:"Träumen. Gestalten. Teilen.",
+types:["Geburtstag","Liebe","Einladung","Dankeschön"],
+themes:["Nebel","Romantik","Sonnenaufgang","Ozean"],
+titles:["Alles Gute zum Geburtstag!","Du bist etwas Besonderes!","Du bist eingeladen!","Vielen lieben Dank!"],
+examples:[
+"Ich wünsche dir einen Tag voller Freude und Überraschungen!",
+"Mit dir wird meine Welt heller und schöner.",
+"Ein besonderer Moment steht bevor. Sei dabei!",
+"Danke, dass du die Welt ein Stück schöner machst."
+],
+kicker:"NUR FÜR DICH",
+by:"Von",
+gift:"Ein magischer Moment wartet auf dich",
+tap:"✦ TIPPE, UM DIE ÜBERRASCHUNG ZU ÖFFNEN ✦",
+create:"✦ Eigenes Geschenk erstellen",
+copied:"Link kopiert! Jetzt kannst du ihn verschicken.",
+copyFailed:"Kopiere den Link aus dem Fenster.",
+saved:"Entwurf gespeichert.",
+saveFailed:"Speichern nicht möglich."
+},
+
+es:{
+tag:"✦ TU IMAGINACIÓN NO TIENE LÍMITES",
+sub:"Crea un momento inolvidable",
+desc:"Convierte tus palabras en un regalo digital mágico.",
+start:"✦ Crear magia",
+demo:"🎁 Ver la magia",
+scroll:"↓ Descubre un nuevo mundo",
+title:"Crea momentos mágicos",
+intro:"Elige la ocasión, escribe tu mensaje y comparte un regalo especial.",
+editor:"Crea tu regalo",
+type:"Elige la ocasión",
+to:"Para quién",
+toPH:"Nombre",
+message:"Tu mensaje",
+messagePH:"Escribe desde el corazón...",
+from:"De parte de",
+fromPH:"Tu nombre",
+theme:"Estilo mágico",
+view:"✨ Ver regalo",
+share:"🔗 Compartir",
+save:"💾 Guardar",
+print:"🖨️ Imprimir",
+preview:"Vista previa",
+privacy:"Los borradores se guardan en este navegador. Cualquiera con el enlace puede leer el mensaje.",
+footer:"Sueña. Crea. Comparte.",
+types:["Cumpleaños","Amor","Invitación","Gracias"],
+themes:["Nebulosa","Romance","Amanecer","Océano"],
+titles:["¡Feliz cumpleaños!","¡Eres especial!","¡Estás invitado!","¡Muchas gracias!"],
+examples:[
+"¡Que tu día brille de alegría!",
+"Haces que mi mundo sea más bonito.",
+"¡Quiero compartir contigo un momento especial!",
+"Gracias por hacer el mundo mejor."
+],
+kicker:"CREADO PARA TI",
+by:"De",
+gift:"Te espera un momento mágico",
+tap:"✦ TOCA PARA ABRIR LA SORPRESA ✦",
+create:"✦ Crea tu regalo",
+copied:"¡Enlace copiado!",
+copyFailed:"Copia el enlace.",
+saved:"Borrador guardado.",
+saveFailed:"No se pudo guardar."
+},
+
+fr:{
+tag:"✦ VOTRE IMAGINATION EST SANS LIMITES",
+sub:"Créez un moment inoubliable",
+desc:"Transformez vos mots en un cadeau numérique magique.",
+start:"✦ Créer la magie",
+demo:"🎁 Voir la magie",
+scroll:"↓ Découvrez un nouveau monde",
+title:"Créez des moments magiques",
+intro:"Choisissez une occasion, écrivez votre message et partagez votre cadeau.",
+editor:"Créez votre cadeau",
+type:"Choisir une occasion",
+to:"Pour qui",
+toPH:"Prénom",
+message:"Votre message",
+messagePH:"Écrivez avec le cœur...",
+from:"De la part de",
+fromPH:"Votre nom",
+theme:"Style magique",
+view:"✨ Voir le cadeau",
+share:"🔗 Partager",
+save:"💾 Enregistrer",
+print:"🖨️ Imprimer",
+preview:"Aperçu",
+privacy:"Les brouillons restent dans ce navigateur. Toute personne ayant le lien peut lire le message.",
+footer:"Rêvez. Créez. Partagez.",
+types:["Anniversaire","Amour","Invitation","Merci"],
+themes:["Nébuleuse","Romance","Aurore","Océan"],
+titles:["Joyeux anniversaire !","Tu es unique !","Tu es invité(e) !","Merci beaucoup !"],
+examples:[
+"Que cette journée soit remplie de joie !",
+"Tu rends mon monde plus lumineux.",
+"J'aimerais partager ce moment avec toi !",
+"Merci de rendre ce monde plus beau."
+],
+kicker:"CRÉÉ POUR TOI",
+by:"De",
+gift:"Un moment magique vous attend",
+tap:"✦ TOUCHEZ POUR OUVRIR LA SURPRISE ✦",
+create:"✦ Créer votre cadeau",
+copied:"Lien copié !",
+copyFailed:"Copiez le lien.",
+saved:"Brouillon enregistré.",
+saveFailed:"Enregistrement impossible."
+},
+
+pt:{
+tag:"✦ SUA IMAGINAÇÃO NÃO TEM LIMITES",
+sub:"Crie um momento inesquecível",
+desc:"Transforme palavras em um presente digital mágico.",
+start:"✦ Criar magia",
+demo:"🎁 Ver a magia",
+scroll:"↓ Descubra um novo mundo",
+title:"Crie momentos mágicos",
+intro:"Escolha a ocasião, escreva sua mensagem e compartilhe o presente.",
+editor:"Crie seu presente",
+type:"Escolha a ocasião",
+to:"Para quem",
+toPH:"Nome",
+message:"Sua mensagem",
+messagePH:"Escreva com o coração...",
+from:"De quem",
+fromPH:"Seu nome",
+theme:"Estilo mágico",
+view:"✨ Ver presente",
+share:"🔗 Compartilhar",
+save:"💾 Salvar",
+print:"🖨️ Imprimir",
+preview:"Prévia",
+privacy:"Os rascunhos ficam neste navegador. Qualquer pessoa com o link pode ler a mensagem.",
+footer:"Sonhe. Crie. Compartilhe.",
+types:["Aniversário","Amor","Convite","Obrigado"],
+themes:["Nebulosa","Romance","Nascer do sol","Oceano"],
+titles:["Feliz aniversário!","Você é especial!","Você está convidado!","Muito obrigado!"],
+examples:[
+"Que seu dia seja cheio de alegria!",
+"Você ilumina o meu mundo.",
+"Quero dividir este momento com você!",
+"Obrigado por tornar o mundo melhor."
+],
+kicker:"FEITO PARA VOCÊ",
+by:"De",
+gift:"Um momento mágico espera por você",
+tap:"✦ TOQUE PARA ABRIR A SURPRESA ✦",
+create:"✦ Crie seu presente",
+copied:"Link copiado!",
+copyFailed:"Copie o link.",
+saved:"Rascunho salvo.",
+saveFailed:"Não foi possível salvar."
+},
+
+zh:{
+tag:"✦ 想象力没有极限",
+sub:"创造令人难忘的时刻",
+desc:"把普通的话语变成神奇的数字礼物。",
+start:"✦ 创造魔法",
+demo:"🎁 体验魔法",
+scroll:"↓ 探索新世界",
+title:"创造美好时刻",
+intro:"选择主题，写下心意，分享特别的礼物。",
+editor:"制作你的礼物",
+type:"选择主题",
+to:"送给谁",
+toPH:"收件人姓名",
+message:"你的留言",
+messagePH:"写下真心话...",
+from:"来自",
+fromPH:"你的名字",
+theme:"选择风格",
+view:"✨ 预览礼物",
+share:"🔗 分享",
+save:"💾 保存",
+print:"🖨️ 打印",
+preview:"实时预览",
+privacy:"草稿仅保存在此浏览器中。拥有链接的人可以阅读留言。",
+footer:"梦想。创造。分享。",
+types:["生日","爱情","邀请","感谢"],
+themes:["星云","浪漫","日出","海洋"],
+titles:["生日快乐！","你很特别！","诚邀你参加！","衷心感谢！"],
+examples:[
+"愿你的每一天都充满快乐与惊喜！",
+"有你在，我的世界更加明亮。",
+"希望与你分享这个特别的时刻！",
+"谢谢你让世界变得更美好。"
+],
+kicker:"专门为你制作",
+by:"来自",
+gift:"一份神奇的礼物正在等你",
+tap:"✦ 点击打开惊喜 ✦",
+create:"✦ 制作你的礼物",
+copied:"链接已复制！",
+copyFailed:"请复制链接。",
+saved:"草稿已保存。",
+saveFailed:"保存失败。"
+},
+
+hi:{
+tag:"✦ आपकी कल्पना की कोई सीमा नहीं",
+sub:"एक यादगार पल बनाएं",
+desc:"अपने शब्दों को एक जादुई डिजिटल उपहार में बदलें।",
+start:"✦ जादू बनाएं",
+demo:"🎁 जादू देखें",
+scroll:"↓ नई दुनिया खोजें",
+title:"जादुई पल बनाएं",
+intro:"अवसर चुनें, संदेश लिखें और उपहार साझा करें।",
+editor:"अपना उपहार बनाएं",
+type:"अवसर चुनें",
+to:"किसके लिए",
+toPH:"नाम",
+message:"आपका संदेश",
+messagePH:"दिल से कुछ लिखें...",
+from:"किसकी ओर से",
+fromPH:"आपका नाम",
+theme:"शैली चुनें",
+view:"✨ उपहार देखें",
+share:"🔗 साझा करें",
+save:"💾 सहेजें",
+print:"🖨️ प्रिंट",
+preview:"पूर्वावलोकन",
+privacy:"ड्राफ्ट इसी ब्राउज़र में रहते हैं। लिंक वाला कोई भी व्यक्ति संदेश पढ़ सकता है।",
+footer:"सपने देखें। बनाएं। साझा करें।",
+types:["जन्मदिन","प्यार","निमंत्रण","धन्यवाद"],
+themes:["नीहारिका","रोमांस","सूर्योदय","समुद्र"],
+titles:["जन्मदिन मुबारक!","आप बहुत खास हैं!","आप आमंत्रित हैं!","बहुत धन्यवाद!"],
+examples:[
+"आपका दिन खुशियों से भरा हो!",
+"आप मेरी दुनिया को खूबसूरत बनाते हैं।",
+"इस खास पल में आपका स्वागत है!",
+"मेरी दुनिया बेहतर बनाने के लिए धन्यवाद।"
+],
+kicker:"खास आपके लिए",
+by:"की ओर से",
+gift:"आपके लिए एक जादुई पल है",
+tap:"✦ उपहार खोलने के लिए टैप करें ✦",
+create:"✦ अपना उपहार बनाएं",
+copied:"लिंक कॉपी हो गया!",
+copyFailed:"लिंक कॉपी करें।",
+saved:"ड्राफ्ट सहेजा गया।",
+saveFailed:"ड्राफ्ट सहेजा नहीं जा सका।"
+},
+
+ar:{
+tag:"✦ خيالك بلا حدود",
+sub:"اصنع لحظة لا تُنسى",
+desc:"حوّل كلماتك إلى هدية رقمية ساحرة.",
+start:"✦ اصنع السحر",
+demo:"🎁 شاهد السحر",
+scroll:"↓ اكتشف عالماً جديداً",
+title:"اصنع لحظات ساحرة",
+intro:"اختر المناسبة واكتب رسالتك وشارك الهدية.",
+editor:"اصنع هديتك",
+type:"اختر المناسبة",
+to:"إلى من",
+toPH:"اسم المستلم",
+message:"رسالتك",
+messagePH:"اكتب من قلبك...",
+from:"من",
+fromPH:"اسمك",
+theme:"اختر التصميم",
+view:"✨ معاينة الهدية",
+share:"🔗 مشاركة",
+save:"💾 حفظ",
+print:"🖨️ طباعة",
+preview:"معاينة مباشرة",
+privacy:"تُحفظ المسودات في هذا المتصفح فقط. يستطيع كل من لديه الرابط قراءة الرسالة.",
+footer:"احلم. أبدع. شارك.",
+types:["عيد ميلاد","حب","دعوة","شكر"],
+themes:["سديم","رومانسي","شروق","محيط"],
+titles:["عيد ميلاد سعيد!","أنت شخص مميز!","أنت مدعو!","شكراً جزيلاً!"],
+examples:[
+"أتمنى لك يوماً مليئاً بالسعادة!",
+"وجودك يجعل عالمي أجمل.",
+"يسعدني أن أشاركك هذه اللحظة!",
+"شكراً لأنك تجعل العالم أجمل."
+],
+kicker:"صُنعت خصيصاً لك",
+by:"من",
+gift:"لحظة ساحرة تنتظرك",
+tap:"✦ اضغط لفتح المفاجأة ✦",
+create:"✦ اصنع هديتك",
+copied:"تم نسخ الرابط!",
+copyFailed:"انسخ الرابط.",
+saved:"تم حفظ المسودة.",
+saveFailed:"تعذر حفظ المسودة."
+},
+
+ja:{
+tag:"✦ 想像力に限界はない",
+sub:"忘れられない瞬間を作ろう",
+desc:"あなたの言葉を魔法のデジタルギフトに。",
+start:"✦ 魔法を作る",
+demo:"🎁 魔法を体験",
+scroll:"↓ 新しい世界へ",
+title:"魔法の瞬間を作ろう",
+intro:"テーマを選び、メッセージを書いて贈りましょう。",
+editor:"ギフトを作成",
+type:"テーマを選択",
+to:"贈る相手",
+toPH:"相手の名前",
+message:"メッセージ",
+messagePH:"心を込めて書いてください...",
+from:"送り主",
+fromPH:"あなたの名前",
+theme:"デザインを選択",
+view:"✨ プレビュー",
+share:"🔗 共有",
+save:"💾 保存",
+print:"🖨️ 印刷",
+preview:"ライブプレビュー",
+privacy:"下書きはこのブラウザに保存されます。リンクを知っている人はメッセージを読めます。",
+footer:"夢見て。作って。シェア。",
+types:["誕生日","愛","招待","感謝"],
+themes:["星雲","ロマンス","日の出","海"],
+titles:["お誕生日おめでとう！","あなたは特別！","ご招待します！","本当にありがとう！"],
+examples:[
+"喜びと幸せにあふれる一日になりますように！",
+"あなたがいるだけで世界が輝きます。",
+"この特別な時間を一緒に過ごしましょう！",
+"いつも本当にありがとう。"
+],
+kicker:"あなたのために",
+by:"送り主",
+gift:"魔法の瞬間が待っています",
+tap:"✦ タップして開く ✦",
+create:"✦ ギフトを作成",
+copied:"リンクをコピーしました！",
+copyFailed:"リンクをコピーしてください。",
+saved:"下書きを保存しました。",
+saveFailed:"保存できませんでした。"
+},
+
+ko:{
+tag:"✦ 상상력에는 한계가 없어요",
+sub:"잊지 못할 순간을 만드세요",
+desc:"평범한 말을 마법 같은 디지털 선물로 바꿔보세요.",
+start:"✦ 마법 만들기",
+demo:"🎁 마법 체험",
+scroll:"↓ 새로운 세상으로",
+title:"마법 같은 순간을 만드세요",
+intro:"주제를 선택하고 메시지를 작성해 선물하세요.",
+editor:"선물 만들기",
+type:"주제 선택",
+to:"받는 사람",
+toPH:"이름",
+message:"메시지",
+messagePH:"진심을 담아 쓰세요...",
+from:"보내는 사람",
+fromPH:"당신의 이름",
+theme:"스타일 선택",
+view:"✨ 미리보기",
+share:"🔗 공유",
+save:"💾 저장",
+print:"🖨️ 인쇄",
+preview:"실시간 미리보기",
+privacy:"초안은 이 브라우저에만 저장됩니다. 링크가 있는 사람은 메시지를 읽을 수 있습니다.",
+footer:"꿈꾸고. 만들고. 나누세요.",
+types:["생일","사랑","초대","감사"],
+themes:["성운","로맨스","일출","바다"],
+titles:["생일 축하해요!","당신은 특별해요!","초대합니다!","정말 고마워요!"],
+examples:[
+"행복과 기쁨이 가득한 하루 되세요!",
+"당신은 내 세상을 더 밝게 해요.",
+"특별한 순간을 함께하고 싶어요!",
+"항상 고마워요."
+],
+kicker:"오직 당신을 위해",
+by:"보낸 사람",
+gift:"마법 같은 순간이 기다려요",
+tap:"✦ 눌러서 선물을 열어보세요 ✦",
+create:"✦ 나만의 선물 만들기",
+copied:"링크가 복사되었습니다!",
+copyFailed:"링크를 복사하세요.",
+saved:"초안이 저장되었습니다.",
+saveFailed:"저장할 수 없습니다."
+},
+
+id:{
+tag:"✦ IMAJINASIMU TANPA BATAS",
+sub:"Ciptakan momen tak terlupakan",
+desc:"Ubah kata-kata biasa menjadi hadiah digital ajaib.",
+start:"✦ Ciptakan keajaiban",
+demo:"🎁 Lihat keajaiban",
+scroll:"↓ Jelajahi dunia baru",
+title:"Ciptakan momen ajaib",
+intro:"Pilih acara, tulis pesan, dan bagikan hadiahmu.",
+editor:"Buat hadiahmu",
+type:"Pilih acara",
+to:"Untuk siapa",
+toPH:"Nama penerima",
+message:"Pesanmu",
+messagePH:"Tulis dari hati...",
+from:"Dari",
+fromPH:"Namamu",
+theme:"Pilih gaya",
+view:"✨ Lihat hadiah",
+share:"🔗 Bagikan",
+save:"💾 Simpan",
+print:"🖨️ Cetak",
+preview:"Pratinjau langsung",
+privacy:"Draf disimpan hanya di browser ini. Siapa pun dengan tautan dapat membaca pesan.",
+footer:"Bermimpi. Berkarya. Berbagi.",
+types:["Ulang tahun","Cinta","Undangan","Terima kasih"],
+themes:["Nebula","Romantis","Matahari terbit","Laut"],
+titles:["Selamat ulang tahun!","Kamu istimewa!","Kamu diundang!","Terima kasih banyak!"],
+examples:[
+"Semoga harimu penuh kebahagiaan!",
+"Kamu membuat duniaku lebih indah.",
+"Ayo berbagi momen spesial ini!",
+"Terima kasih sudah membuat dunia lebih baik."
+],
+kicker:"KHUSUS UNTUKMU",
+by:"Dari",
+gift:"Momen ajaib menantimu",
+tap:"✦ KETUK UNTUK MEMBUKA KEJUTAN ✦",
+create:"✦ Buat hadiahmu",
+copied:"Tautan disalin!",
+copyFailed:"Salin tautan.",
+saved:"Draf tersimpan.",
+saveFailed:"Gagal menyimpan."
+},
+
+tr:{
+tag:"✦ HAYAL GÜCÜNÜN SINIRI YOK",
+sub:"Unutulmaz bir an yarat",
+desc:"Sözlerini büyülü bir dijital hediyeye dönüştür.",
+start:"✦ Sihir yarat",
+demo:"🎁 Sihri gör",
+scroll:"↓ Yeni bir dünya keşfet",
+title:"Büyülü anlar yarat",
+intro:"Bir etkinlik seç, mesajını yaz ve hediyeni paylaş.",
+editor:"Hediyeni oluştur",
+type:"Etkinlik seç",
+to:"Kime",
+toPH:"Alıcının adı",
+message:"Mesajın",
+messagePH:"İçinden geldiği gibi yaz...",
+from:"Kimden",
+fromPH:"Adın",
+theme:"Tasarım seç",
+view:"✨ Hediyeyi gör",
+share:"🔗 Paylaş",
+save:"💾 Kaydet",
+print:"🖨️ Yazdır",
+preview:"Canlı önizleme",
+privacy:"Taslaklar yalnızca bu tarayıcıda saklanır. Bağlantısı olan herkes mesajı okuyabilir.",
+footer:"Hayal et. Yarat. Paylaş.",
+types:["Doğum günü","Aşk","Davetiye","Teşekkür"],
+themes:["Nebula","Romantik","Gün doğumu","Okyanus"],
+titles:["İyi ki doğdun!","Sen özelsin!","Davetlisin!","Çok teşekkürler!"],
+examples:[
+"Mutluluk dolu bir gün geçirmeni dilerim!",
+"Sen dünyamı daha güzel yapıyorsun.",
+"Bu özel anı seninle paylaşmak isterim!",
+"Her şey için teşekkür ederim."
+],
+kicker:"SADECE SENİN İÇİN",
+by:"Gönderen",
+gift:"Seni büyülü bir an bekliyor",
+tap:"✦ SÜRPRİZİ AÇMAK İÇİN DOKUN ✦",
+create:"✦ Kendi hediyeni oluştur",
+copied:"Bağlantı kopyalandı!",
+copyFailed:"Bağlantıyı kopyala.",
+saved:"Taslak kaydedildi.",
+saveFailed:"Kaydedilemedi."
+},
+
+it:{
+tag:"✦ LA TUA IMMAGINAZIONE NON HA LIMITI",
+sub:"Crea un momento indimenticabile",
+desc:"Trasforma le tue parole in un regalo digitale magico.",
+start:"✦ Crea magia",
+demo:"🎁 Scopri la magia",
+scroll:"↓ Scopri un nuovo mondo",
+title:"Crea momenti magici",
+intro:"Scegli un'occasione, scrivi il messaggio e condividi il regalo.",
+editor:"Crea il tuo regalo",
+type:"Scegli l'occasione",
+to:"Per chi",
+toPH:"Nome del destinatario",
+message:"Il tuo messaggio",
+messagePH:"Scrivi con il cuore...",
+from:"Da chi",
+fromPH:"Il tuo nome",
+theme:"Scegli lo stile",
+view:"✨ Anteprima",
+share:"🔗 Condividi",
+save:"💾 Salva",
+print:"🖨️ Stampa",
+preview:"Anteprima dal vivo",
+privacy:"Le bozze sono salvate solo in questo browser. Chiunque abbia il link può leggere il messaggio.",
+footer:"Sogna. Crea. Condividi.",
+types:["Compleanno","Amore","Invito","Grazie"],
+themes:["Nebulosa","Romantico","Alba","Oceano"],
+titles:["Buon compleanno!","Sei speciale!","Sei invitato!","Grazie di cuore!"],
+examples:[
+"Che la tua giornata brilli di gioia!",
+"Rendi il mio mondo più luminoso.",
+"Vorrei condividere questo momento con te!",
+"Grazie per rendere il mondo più bello."
+],
+kicker:"CREATO SOLO PER TE",
+by:"Da",
+gift:"Ti aspetta un momento magico",
+tap:"✦ TOCCA PER APRIRE LA SORPRESA ✦",
+create:"✦ Crea il tuo regalo",
+copied:"Link copiato!",
+copyFailed:"Copia il link.",
+saved:"Bozza salvata.",
+saveFailed:"Impossibile salvare."
+}
+
 };
+
+/* ОСНОВНАЯ ЛОГИКА */
 
 const $ = id => document.getElementById(id);
-const types = ['birthday', 'love', 'invite', 'thanks'];
-const symbols = ['🎂', '💖', '🎉', '🌷'];
-const themes = ['cosmic', 'rose', 'gold'];
-const storageKey = 'dreamworld-studio-draft-v1';
 
-let lang = localStorage.getItem('dreamworld-language') || 'ru';
-if (!words[lang]) lang = 'ru';
+const types = ["birthday","love","invite","thanks"];
+const themes = ["nebula","love","sunrise","ocean"];
+const icons = ["🎂","💖","🎉","🌷"];
 
-let model = {
-  type: 'birthday',
-  theme: 'cosmic',
-  recipient: '',
-  message: '',
-  sender: ''
-};
+const DRAFT_KEY = "dreamworld-draft-v3";
+const LANGUAGE_KEY = "dreamworld-language";
 
-const safe = value =>
-  typeof value === 'string' ? value.slice(0, 1200) : '';
+const freshModel = () => ({
+  type:"birthday",
+  theme:"nebula",
+  recipient:"",
+  message:"",
+  sender:""
+});
 
-function readInputs() {
-  model.recipient = $('recipient').value.slice(0, 80);
-  model.message = $('message').value.slice(0, 1200);
-  model.sender = $('sender').value.slice(0, 80);
-  renderCard();
+let model = freshModel();
+let language = "ru";
+let experienceData = null;
+let sharedMode = false;
+
+function loadLocal(key){
+  try{
+    return localStorage.getItem(key);
+  }catch{
+    return null;
+  }
 }
 
-function renderCard() {
-  const t = words[lang];
-  const i = Math.max(0, types.indexOf(model.type));
+function saveLocal(key,value){
+  try{
+    localStorage.setItem(key,value);
+    return true;
+  }catch{
+    return false;
+  }
+}
 
-  $('greeting').className = 'greeting ' + model.theme;
-  $('cardSymbol').textContent = symbols[i];
-  $('cardKicker').textContent = t.kicker;
-  $('cardTitle').textContent = model.recipient
-    ? t.titles[i] + ' ' + model.recipient
-    : t.titles[i];
-  $('cardMessage').textContent = model.message || t.examples[i];
-  $('cardSender').textContent = model.sender
-    ? t.from + ': ' + model.sender
-    : '';
+function normalize(data){
+  if(
+    !data ||
+    typeof data !== "object" ||
+    !types.includes(data.type) ||
+    !themes.includes(data.theme)
+  ){
+    return null;
+  }
 
-  document.querySelectorAll('[data-type]').forEach(b => {
-    b.classList.toggle('active', b.dataset.type === model.type);
-    b.setAttribute('aria-pressed', String(b.dataset.type === model.type));
+  return {
+    type:data.type,
+    theme:data.theme,
+    recipient:typeof data.recipient==="string"
+      ?data.recipient.slice(0,70):"",
+    message:typeof data.message==="string"
+      ?data.message.slice(0,600):"",
+    sender:typeof data.sender==="string"
+      ?data.sender.slice(0,70):""
+  };
+}
+
+function readForm(){
+  model.recipient = $("recipient").value.slice(0,70);
+  model.message = $("message").value.slice(0,600);
+  model.sender = $("sender").value.slice(0,70);
+  renderCard($("previewCard"),model);
+}
+
+function fillForm(){
+  $("recipient").value = model.recipient;
+  $("message").value = model.message;
+  $("sender").value = model.sender;
+  renderCard($("previewCard"),model);
+  renderSelection();
+}
+
+function renderSelection(){
+  document.querySelectorAll("[data-type]").forEach(button=>{
+    button.setAttribute(
+      "aria-pressed",
+      String(button.dataset.type===model.type)
+    );
   });
 
-  document.querySelectorAll('[data-theme]').forEach(b => {
-    b.classList.toggle('active', b.dataset.theme === model.theme);
-    b.setAttribute('aria-pressed', String(b.dataset.theme === model.theme));
+  document.querySelectorAll("[data-theme]").forEach(button=>{
+    button.setAttribute(
+      "aria-pressed",
+      String(button.dataset.theme===model.theme)
+    );
   });
 }
 
-function translate() {
-  const t = words[lang];
-  document.documentElement.lang = lang;
-  $('language').value = lang;
+function renderCard(card,data){
+  const t = I18N[language];
+  const index = types.indexOf(data.type);
 
-  $('eyebrow').textContent = t.eyebrow;
+  card.className = "card "+data.theme;
 
-  $('heroTitle').replaceChildren(
-    document.createTextNode(t.heroA + ' '),
-    Object.assign(document.createElement('em'), {
-      textContent: t.heroB
-    })
-  );
+  card.querySelector(".card-icon").textContent = icons[index];
+  card.querySelector(".card-kicker").textContent = t.kicker;
 
-  $('heroDescription').textContent =
-    document.body.classList.contains('shared') ? t.shared : t.desc;
+  card.querySelector("h4").textContent =
+    t.titles[index]+
+    (data.recipient?" "+data.recipient:"");
 
-  $('startButton').textContent = t.start;
-  $('newButton').textContent = t.new;
+  card.querySelector(".card-message").textContent =
+    data.message || t.examples[index];
 
-  const ids = [
-    'sectionTitle',
-    'sectionDescription',
-    'editorTitle',
-    'typeLabel',
-    'recipientLabel',
-    'messageLabel',
-    'senderLabel',
-    'themeLabel',
-    'previewTitle',
-    'shareButton',
-    'saveButton',
-    'printButton',
-    'privacyNote',
-    'footerText'
-  ];
+  card.querySelector(".card-from").textContent =
+    data.sender ? t.by+": "+data.sender : "";
+}
 
-  const keys = [
-    'section',
-    'sectionDesc',
-    'editor',
-    'type',
-    'recipient',
-    'message',
-    'sender',
-    'theme',
-    'preview',
-    'share',
-    'save',
-    'print',
-    'note',
-    'footer'
-  ];
+function translate(){
+  const t = I18N[language];
 
-  ids.forEach((id, i) => {
-    $(id).textContent = t[keys[i]];
+  document.documentElement.lang =
+    language==="zh"?"zh-CN":
+    language==="pt"?"pt-BR":language;
+
+  document.documentElement.dir =
+    language==="ar"?"rtl":"ltr";
+
+  $("language").value = language;
+
+  const ids = {
+    heroTag:"tag",
+    heroSubtitle:"sub",
+    heroDescription:"desc",
+    startLink:"start",
+    demoButton:"demo",
+    scrollHint:"scroll",
+    studioTitle:"title",
+    studioDescription:"intro",
+    editorTitle:"editor",
+    typeLabel:"type",
+    toLabel:"to",
+    messageLabel:"message",
+    fromLabel:"from",
+    themeLabel:"theme",
+    viewButton:"view",
+    shareButton:"share",
+    saveButton:"save",
+    printButton:"print",
+    previewTitle:"preview",
+    privacy:"privacy",
+    footerNote:"footer",
+    giftInstruction:"tap",
+    createOwn:"create"
+  };
+
+  for(const id in ids){
+    $(id).textContent = t[ids[id]];
+  }
+
+  $("recipient").placeholder = t.toPH;
+  $("message").placeholder = t.messagePH;
+  $("sender").placeholder = t.fromPH;
+
+  document.querySelectorAll("[data-type] span").forEach((el,i)=>{
+    el.textContent = t.types[i];
   });
 
-  $('recipient').placeholder = t.recipientPH;
-  $('message').placeholder = t.messagePH;
-  $('sender').placeholder = t.senderPH;
+  document.querySelectorAll("[data-theme] span:last-child").forEach((el,i)=>{
+    el.textContent = t.themes[i];
+  });
 
-  document.querySelectorAll('[data-type] span')
-    .forEach((el, i) => el.textContent = t.types[i]);
+  $("giftName").textContent =
+    experienceData?.recipient || t.gift;
 
-  document.querySelectorAll('[data-theme] span')
-    .forEach((el, i) => el.textContent = t.themes[i]);
+  renderCard($("previewCard"),model);
 
-  renderCard();
+  if(experienceData){
+    renderCard($("experienceCard"),experienceData);
+  }
 }
 
-function fillInputs() {
-  $('recipient').value = model.recipient;
-  $('message').value = model.message;
-  $('sender').value = model.sender;
-  renderCard();
+function startExperience(data){
+  experienceData = {...data};
+
+  $("experience").classList.remove("opened");
+  $("experience").classList.add("visible");
+
+  $("giftName").textContent =
+    data.recipient || I18N[language].gift;
+
+  renderCard($("experienceCard"),data);
+
+  document.body.style.overflow = "hidden";
+  $("giftButton").focus();
 }
 
-document.querySelectorAll('[data-type]').forEach(button => {
-  button.addEventListener('click', () => {
+function closeExperience(){
+  $("experience").classList.remove("visible","opened");
+  document.body.style.overflow = "";
+
+  if(sharedMode){
+    window.location.href = window.location.pathname;
+  }else{
+    $("demoButton").focus();
+  }
+}
+
+function showSparks(){
+  if(
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ){
+    return;
+  }
+
+  const x = innerWidth/2;
+  const y = innerHeight/2;
+
+  for(let i=0;i<42;i++){
+    const spark = document.createElement("div");
+    const angle = Math.random()*Math.PI*2;
+    const distance =
+      80+Math.random()*Math.min(innerWidth,innerHeight)*.48;
+
+    const size = 5+Math.random()*13;
+
+    spark.className = "spark";
+
+    spark.style.cssText =
+      "left:"+x+"px;"+
+      "top:"+y+"px;"+
+      "width:"+size+"px;"+
+      "height:"+size+"px;"+
+      "--dx:"+(Math.cos(angle)*distance)+"px;"+
+      "--dy:"+(Math.sin(angle)*distance)+"px;";
+
+    document.body.appendChild(spark);
+
+    setTimeout(()=>spark.remove(),1600);
+  }
+}
+
+/* СОБЫТИЯ РЕДАКТОРА */
+
+document.querySelectorAll("[data-type]").forEach(button=>{
+  button.addEventListener("click",()=>{
     model.type = button.dataset.type;
-    renderCard();
+    renderSelection();
+    renderCard($("previewCard"),model);
   });
 });
 
-document.querySelectorAll('[data-theme]').forEach(button => {
-  button.addEventListener('click', () => {
+document.querySelectorAll("[data-theme]").forEach(button=>{
+  button.addEventListener("click",()=>{
     model.theme = button.dataset.theme;
-    renderCard();
+    renderSelection();
+    renderCard($("previewCard"),model);
   });
 });
 
-['recipient', 'message', 'sender'].forEach(id => {
-  $(id).addEventListener('input', readInputs);
+["recipient","message","sender"].forEach(id=>{
+  $(id).addEventListener("input",readForm);
 });
 
-$('language').addEventListener('change', e => {
-  lang = e.target.value;
-  localStorage.setItem('dreamworld-language', lang);
+$("language").addEventListener("change",event=>{
+  language = event.target.value;
+  saveLocal(LANGUAGE_KEY,language);
   translate();
 });
 
-$('saveButton').addEventListener('click', () => {
-  readInputs();
+$("demoButton").addEventListener("click",()=>{
+  startExperience({
+    type:"birthday",
+    theme:"sunrise",
+    recipient:"Dreamer ✨",
+    message:"",
+    sender:"Dreamworld"
+  });
+});
 
-  try {
-    localStorage.setItem(storageKey, JSON.stringify(model));
-    $('status').textContent = words[lang].saved;
-  } catch {
-    $('status').textContent = 'Browser storage unavailable.';
+$("viewButton").addEventListener("click",()=>{
+  readForm();
+  startExperience(model);
+});
+
+$("giftButton").addEventListener("click",()=>{
+  $("experience").classList.add("opened");
+  showSparks();
+  $("createOwn").focus();
+});
+
+$("closeExperience").addEventListener("click",closeExperience);
+
+$("experience").addEventListener("keydown",event=>{
+  if(event.key==="Escape"){
+    closeExperience();
   }
 });
 
-$('shareButton').addEventListener('click', async () => {
-  readInputs();
-
-  const url = new URL(window.location.href);
-  url.search = '';
-  url.hash = '';
-  url.searchParams.set('d', JSON.stringify(model));
-
-  const link = url.toString();
-
-  try {
-    await navigator.clipboard.writeText(link);
-    $('status').textContent = words[lang].copied;
-  } catch {
-    window.prompt(words[lang].copyFallback, link);
-  }
+$("createOwn").addEventListener("click",event=>{
+  event.preventDefault();
+  $("experience").classList.remove("visible","opened");
+  document.body.style.overflow = "";
+  sharedMode = false;
+  history.replaceState(null,"",window.location.pathname+"#studio");
+  $("studio").scrollIntoView({behavior:"smooth"});
 });
 
-$('printButton').addEventListener('click', () => {
+$("saveButton").addEventListener("click",()=>{
+  readForm();
+
+  const success = saveLocal(
+    DRAFT_KEY,
+    JSON.stringify(model)
+  );
+
+  $("status").textContent = success
+    ?I18N[language].saved
+    :I18N[language].saveFailed;
+});
+
+$("printButton").addEventListener("click",()=>{
   window.print();
 });
 
-$('newButton').addEventListener('click', () => {
-  window.location.href = window.location.pathname;
+$("shareButton").addEventListener("click",async()=>{
+  readForm();
+
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.hash = "";
+
+  url.searchParams.set("gift",JSON.stringify(model));
+
+  const link = url.toString();
+
+  try{
+    await navigator.clipboard.writeText(link);
+    $("status").textContent = I18N[language].copied;
+  }catch{
+    window.prompt(I18N[language].copyFailed,link);
+  }
 });
 
-$('year').textContent = new Date().getFullYear();
+$("year").textContent = new Date().getFullYear();
 
-let shared = false;
-const data = new URLSearchParams(window.location.search).get('d');
+/* ЯЗЫК ПОЛЬЗОВАТЕЛЯ */
 
-if (data && data.length < 8000) {
-  try {
-    const incoming = JSON.parse(data);
+const preferred = (
+  loadLocal(LANGUAGE_KEY) ||
+  navigator.language.slice(0,2) ||
+  "en"
+).toLowerCase();
 
-    if (
-      incoming &&
-      types.includes(incoming.type) &&
-      themes.includes(incoming.theme)
-    ) {
-      model = {
-        type: incoming.type,
-        theme: incoming.theme,
-        recipient: safe(incoming.recipient).slice(0, 80),
-        message: safe(incoming.message),
-        sender: safe(incoming.sender).slice(0, 80)
-      };
-      shared = true;
-    }
-  } catch {
-    // Invalid link: open normal editor.
+language = Object.prototype.hasOwnProperty.call(I18N,preferred)
+  ?preferred
+  :"en";
+
+/* ВОССТАНОВЛЕНИЕ ПОДАРКА ИЛИ ЧЕРНОВИКА */
+
+const giftParameter =
+  new URLSearchParams(window.location.search).get("gift");
+
+let sharedData = null;
+
+if(giftParameter && giftParameter.length<=6500){
+  try{
+    sharedData = normalize(JSON.parse(giftParameter));
+  }catch{
+    sharedData = null;
   }
 }
 
-if (shared) {
-  document.body.classList.add('shared');
-  $('newButton').hidden = false;
-  fillInputs();
-} else {
-  try {
-    const draft = JSON.parse(
-      localStorage.getItem(storageKey) || 'null'
-    );
-
-    if (
-      draft &&
-      types.includes(draft.type) &&
-      themes.includes(draft.theme)
-    ) {
-      model = {
-        type: draft.type,
-        theme: draft.theme,
-        recipient: safe(draft.recipient).slice(0, 80),
-        message: safe(draft.message),
-        sender: safe(draft.sender).slice(0, 80)
-      };
-    }
-  } catch {
-    // Empty or invalid draft.
+if(sharedData){
+  sharedMode = true;
+  model = sharedData;
+}else{
+  try{
+    const draft = JSON.parse(loadLocal(DRAFT_KEY)||"null");
+    model = normalize(draft)||freshModel();
+  }catch{
+    model = freshModel();
   }
-
-  fillInputs();
 }
 
+fillForm();
 translate();
+
+if(sharedData){
+  startExperience(sharedData);
+}
+
+/* ЖИВЫЕ ЗВЁЗДЫ */
+
+(function initStars(){
+  const canvas = $("stars");
+  const context = canvas.getContext("2d");
+
+  if(!context)return;
+
+  const reduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const points = Array.from({length:100},()=>({
+    x:Math.random(),
+    y:Math.random(),
+    r:.4+Math.random()*1.65,
+    phase:Math.random()*6.28,
+    speed:.2+Math.random()*.55
+  }));
+
+  let width=0;
+  let height=0;
+  let last=0;
+
+  function resize(){
+    width=innerWidth;
+    height=innerHeight;
+
+    const dpr=Math.min(devicePixelRatio||1,1.5);
+
+    canvas.width=Math.round(width*dpr);
+    canvas.height=Math.round(height*dpr);
+
+    context.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  addEventListener("resize",resize,{passive:true});
+  resize();
+
+  function paint(time){
+    if(!reduced && time-last<33){
+      requestAnimationFrame(paint);
+      return;
+    }
+
+    last=time;
+    context.clearRect(0,0,width,height);
+
+    for(const point of points){
+      const glow=reduced
+        ?1
+        :.52+.48*Math.sin(
+          time*.001*point.speed+point.phase
+        );
+
+      context.beginPath();
+      context.fillStyle=
+        "rgba(255,255,255,"+(.25+.7*glow)+")";
+
+      context.arc(
+        point.x*width,
+        point.y*height,
+        point.r*(.75+.3*glow),
+        0,
+        Math.PI*2
+      );
+
+      context.fill();
+    }
+
+    if(!reduced){
+      requestAnimationFrame(paint);
+    }
+  }
+
+  requestAnimationFrame(paint);
+})();
+
+/* ЭФФЕКТ ГЛУБИНЫ ПРИ ДВИЖЕНИИ МЫШИ */
+
+if(window.matchMedia(
+  "(pointer:fine) and (prefers-reduced-motion:no-preference)"
+).matches){
+
+  let frame=0;
+
+  addEventListener("pointermove",event=>{
+    if(frame)return;
+
+    frame=requestAnimationFrame(()=>{
+      const x=(event.clientX/innerWidth-.5)*22;
+      const y=(event.clientY/innerHeight-.5)*18;
+
+      $("heroLight").style.marginLeft=x+"px";
+      $("heroLight").style.marginTop=y+"px";
+
+      frame=0;
+    });
+  },{passive:true});
+}
 </script>
+
 </body>
 </html>
